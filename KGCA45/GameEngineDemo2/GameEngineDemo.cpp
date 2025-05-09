@@ -7,6 +7,9 @@
 
 int main()
 {
+    // 한글 출력
+    std::wcout.imbue(std::locale("kor"));
+
     std::wcout << UActorComponent::GetNumInstance() << std::endl;
     
     UActorComponent* comp[2];
@@ -31,5 +34,5 @@ int main()
     }
     //delete timer;
     //delete input;
-    std::wcout << UActorComponent::GetNumInstance() << std::endl;
+    std::wcout << L"현재 인스턴스 갯수 : " << UActorComponent::GetNumInstance() << std::endl;
 }
