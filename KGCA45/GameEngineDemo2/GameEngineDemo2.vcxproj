@@ -134,15 +134,14 @@
     <ClCompile Include="GameEngineDemo.cpp" />
     <ClCompile Include="UActorComponent.cpp" />
     <ClCompile Include="UInputComponent.cpp" />
+    <ClCompile Include="UObject.cpp" />
     <ClCompile Include="UTimerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UActorComponent.h" />
     <ClInclude Include="UInputComponent.h" />
+    <ClInclude Include="UObject.h" />
     <ClInclude Include="UTimerComponent.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -10,7 +10,7 @@ class UTimerComponent : public UActorComponent
 public:	
 	float   GetGameGlobalTimer() const;
 public:
-	virtual void    Frame();
+	virtual void    TickComponent();
 public:
 	UTimerComponent(std::wstring name);
 	UTimerComponent();
