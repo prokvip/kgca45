@@ -1,4 +1,4 @@
-﻿
+﻿#include "UWorld.h"
 #include "UInputComponent.h"
 #include "UTimerComponent.h"
 #include "USoundComponent.h"
@@ -54,30 +54,70 @@ bool  GameLoop(UInputComponent* input)
 
 int main()
 {
-    // 복사생성자, 대입연산자 오버로딩
-    UTimerComponent time0(L"test");
-    UTimerComponent time1 = time0;
-    UTimerComponent time2;
-    time2 = time0;
-
+    UWorld world;
+    for (int i = 0; i < 1; i++)
+    {
+        std::wstring name = L"AActor";
+        name += std::to_wstring(i);// 정수가 스크링이 된다.
+        AActor* actor = new AActor(name);
+        actor->SetRect({ 0.0f, 0.0f }, { 100.0f,100.0f });
+        world.m_ActorList.push_back(actor);
+    }
+    for (int i = 0; i < 1; i++)
+    {
+        std::wstring name = L"APawn";
+        name += std::to_wstring(i);// 정수가 스크링이 된다.
+        auto pawn = new APawn;
+        pawn->SetName(name);
+        pawn->SetRect({ 400.0f, 300.0f }, { 100.0f,100.0f });
+        world.m_ActorList.push_back(pawn);
+    }
+    for (int i = 0; i < 1; i++)
+    {
+        std::wstring name = L"ACharacer";
+        name += std::to_wstring(i);// 정수가 스크링이 된다.
+        auto character = new ACharacter;
+        character->SetName(name);
+        character->SetRect({ 400.0f, 0.0f }, { 100.0f,100.0f });
+        world.m_ActorList.push_back(character);
+    }
+    for (int i = 0; i < world.m_ActorList.size(); i++)
+    {
+        AActor* actor = world.m_ActorList[i];// 인덱싱 지원
+        actor->Show();
+    }
+    for (int i = 0; i < world.m_ActorList.size(); i++)
+    {
+        AActor* actor = world.m_ActorList[i];// 인덱싱 지원
+        actor->Move(10.0f, 10.0f);
+        actor->Show();
+    }
+    for (int i = 0; i < world.m_ActorList.size(); i++)
+    {
+        AActor* actor = world.m_ActorList[i];// 인덱싱 지원
+       actor->Tick();
+    }
+    /*for (std::vector<AActor*>::iterator pNode =
+        world.m_ActorList.begin();
+        pNode != world.m_ActorList.end();
+        pNode++)
+    {
+        std::wcout << (*pNode)->GetName() << std::endl;
+    }*/
 
     // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
 
     std::wcout << UActorComponent::GetNumInstance() << std::endl;
     
-      // 게임생성
+    // 게임생성
     std::list< UActorComponent*> compList;
     compList.push_back(new UTimerComponent(L"GameTimer"));
     UTimerComponent* timer = dynamic_cast<UTimerComponent*>(compList.back());
     compList.push_back(new UInputComponent(L"GameInput"));
     UInputComponent* input = dynamic_cast<UInputComponent*>(compList.back());
     compList.push_back(new USoundComponent(L"GameSound"));
-    //UActorComponent* compList[3];
-    //compList[0] = new UTimerComponent(L"GameTimer");
-    //compList[1] = new UInputComponent(L"GameInput"); 
-    //compList[2] = new USoundComponent(L"GameSound");   
-    
+
     if (timer == nullptr)
     {
         for (std::list<UActorComponent*>::iterator pNode =
@@ -88,13 +128,6 @@ int main()
             delete *pNode;
         }
         compList.clear();
-
-        /*for (TNode* pNode = list.Head();
-            pNode != list.Tail();
-            pNode = pNode->pNext)
-        {
-
-        }*/       
         return 1;
     }
     // 게임로직
@@ -116,10 +149,16 @@ int main()
     std::wcout << timer->GetGameGlobalTimer() << std::endl;
     
     // 게임 종료
-    for (auto pNode : compList)
+    for (AActor* pActor : world.m_ActorList)
+    {
+        delete pActor;
+    }
+    for (UActorComponent* pNode : compList)
     {
         delete pNode;
     }
     compList.clear();
+    world.m_ActorList.clear();
+
     std::wcout << L"현재 인스턴스 갯수 : " << UActorComponent::GetNumInstance() << std::endl;
 }
