@@ -52,14 +52,25 @@ bool  GameLoop(UInputComponent* input)
     return false;
 }
 
+struct TCmp
+{
+    bool operator () (const AActor* src)
+    {
+        if (src->GetName() == L"AActor0")
+        {
+            return true;
+        }
+    }
+};
 int main()
 {
     UWorld world;
+    AActor* actor = nullptr;
     for (int i = 0; i < 1; i++)
     {
         std::wstring name = L"AActor";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
-        AActor* actor = new AActor(name);
+        actor = new AActor(name);
         actor->SetRect({ 0.0f, 0.0f }, { 100.0f,100.0f });
         world.m_ActorList.push_back(actor);
     }
@@ -81,6 +92,32 @@ int main()
         character->SetRect({ 400.0f, 0.0f }, { 100.0f,100.0f });
         world.m_ActorList.push_back(character);
     }
+    //auto find1 = std::find(world.m_ActorList.begin(),
+    //    world.m_ActorList.end(),
+    //    actor);
+    auto find2 = std::find_if(  world.m_ActorList.begin(), 
+                world.m_ActorList.end(),
+                TCmp());
+    if (find2 != world.m_ActorList.end())
+    {
+        AActor* actor = *find2;
+        std::wcout << L"Find : " << actor->GetName() << std::endl;
+    }
+    auto find3 = std::find_if(world.m_ActorList.begin(),
+        world.m_ActorList.end(),
+        [](AActor* actor)
+        {
+            if (actor->GetName() == L"AActor0")
+            {
+                return actor;
+            }
+        });
+    if (find3 != world.m_ActorList.end())
+    {
+        AActor* actor = *find3;
+        std::wcout << L"Find : " << actor->GetName() << std::endl;;
+    }
+
     for (int i = 0; i < world.m_ActorList.size(); i++)
     {
         AActor* actor = world.m_ActorList[i];// 인덱싱 지원

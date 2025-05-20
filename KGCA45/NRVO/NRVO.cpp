@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 /// <summary>
-/// "/Zc:nrvo-"
+/// "/Zc:nrvo-" 속성->c++->명령줄에 추가
 /// </summary>
 class AObject
 {

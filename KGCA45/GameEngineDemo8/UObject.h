@@ -3,11 +3,13 @@
 #include <string>
 #include <list>
 #include <vector>
-#include <algorithm>
+#include <map>
+#include <memory> // smart point
 
 
 class UObject
-{
+{	
+	
 private:
 	std::wstring  m_szName;
 	static int    m_iNumInstance;
