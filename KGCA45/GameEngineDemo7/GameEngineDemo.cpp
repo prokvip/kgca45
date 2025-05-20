@@ -66,24 +66,74 @@ class AObject {
 public:
     AObject() {
         this->name = L"Default";
+        pData = new int;
+        *pData = 3;
         std::wcout << L"This is " << name << L" constructor." << std::endl;
     }
     AObject(const std::wstring& name) {
-        this->name = name;
+        this->name = name;        
+        pData = new int;
+        *pData = 3;
         std::wcout << L"This is " << name << L" constructor." << std::endl;
     }
     ~AObject() {
+        delete pData;
+        pData = nullptr;
         std::wcout << L"This is " << this->name << " desstructor." << std::endl;
     }
-    AObject(const AObject& rhs) {
-        this->name = rhs.name;
-        std::wcout << L"This is " << rhs.name << L" copy constructor." << std::endl;
+    // lhs(Left Hand Side) / rhs(Right Hand Side) 
+    //AObject(const AObject& rhs) //= delete;
+    //{
+    //    this->name = rhs.name;
+    //    if (pData != nullptr)
+    //    {
+    //        delete pData;
+    //        pData = nullptr;
+    //    }
+    //    pData = new int;
+    //    *pData = *rhs.pData;
+    //    std::wcout << L"This is " << rhs.name << L" copy constructor." << std::endl;
+    //}
+    //AObject& operator=(const AObject& rhs)// = delete;
+    //{
+    //    this->name = rhs.name;
+    //    if (pData != nullptr)
+    //    {
+    //        delete pData;
+    //        pData = nullptr;
+    //    }
+    //    pData = new int;
+    //    *pData = *rhs.pData;
+    //    std::wcout << L"This is " << this->name << L" copy operator." << std::endl;
+    //    return *this;
+    //}
+    //noexcept : 예외를 던지지 않는다.
+    AObject( AObject&& rhs) noexcept : name(rhs.name), pData(rhs.pData)
+    {        
+        //this->name = rhs.name;       
+        pData = rhs.pData;
+        rhs.pData = nullptr;
+        std::wcout << L"This is " << rhs.name << L" move constructor." << std::endl;
     }
-    AObject& operator=(const AObject& rhs) {
-        std::wcout << L"This is " << this->name << L" copy operator." << std::endl;
+    AObject& operator=( AObject&& rhs) noexcept
+    {
+        if (this != &rhs)
+        {
+            this->name = rhs.name;
+            if (pData != nullptr)
+            {
+                delete pData;
+                this->pData = rhs.pData;
+                rhs.pData = nullptr;
+            }
+            pData = new int;
+            *pData = *rhs.pData;            
+        }
+        std::wcout << L"This is " << this->name << L" move = operator." << std::endl;
         return *this;
     }
     std::wstring name;
+    int* pData = nullptr;
 };
 //NRVO
 AObject NewObject()
@@ -91,17 +141,16 @@ AObject NewObject()
     AObject aa(L"aa1");
     return aa;
 }
-AObject& NewObjectRef()
-{
-    AObject aa(L"aa2");
-    return aa;
+AObject&& NewObjectRVOMove()
+{    
+    return std::move(AObject());
 }
-AObject&& NewObjectMove()
+AObject&& NewObjectNRVOMove()
 {
-    AObject aa(L"aa3");
+    AObject aa;
     return std::move(aa);
 }
-//NRVO에 대한 제한 사항()
+//NRVO에 대한 제한 사항(반환 슬롯)
 //복사 생략은 반환 슬롯에 반환될 객체를 생성한다. 
 //하지만 WhichShouldIReturn함수는 두 경로 모두에 대해 복사 생략을 수행할 방법은 없다.
 AObject WhichShouldIReturn(bool condition)
@@ -125,35 +174,85 @@ AObject MakeObjectRVO(const std::wstring& name)
 {
     return AObject(name);
 }
+
+struct Copyable
+{
+    int val;
+};
+struct NotCopyable
+{
+    NotCopyable(const NotCopyable&) = delete;
+    int val;
+};
+
 int main()
 {     
     // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
 
+    std::cout << "is_copy_constructible<Copyable> == " << std::boolalpha     << std::is_copy_constructible<Copyable>::value << std::endl;
+    std::cout << "is_copy_constructible<NotCopyable> == " << std::boolalpha  << std::is_copy_constructible<NotCopyable>::value << std::endl;
+
+    // 복사생성자의 생성이 불가능하면 어설션이 발생한다.
+    static_assert(!std::is_copy_constructible<AObject>::value, "is not copy constructible");
+    static_assert(!std::is_copy_assignable<AObject>::value, "is not copy assignable");
+    static_assert(std::is_move_constructible<AObject>::value, "is move constructible");
+    static_assert(std::is_move_assignable<AObject>::value, "is move assignable");
+
+    AObject moveable{};
+    AObject moved{ std::move(moveable) };
+    AObject moved_again{ std::move(moved) };
+    //AObject moved_againFun = NewObjectRVOMove(); // 해제자 호출. 주의
+
     {
         auto nrvo = MakeObjectNRVO(L"NRVO");
         auto rvo = MakeObjectRVO(L"RVO");
+        std::wcout << nrvo.name << std::endl;
+        std::wcout << rvo.name << std::endl;
     }
 
-    AActor a;       // 기본생성자 호출    
-    AActor b = a;   // 복사생성자 호출
-    AActor c;       // 기본생성자 호출
-    c = a;          // 대입연산자 호출      
-    
+    {
+        AActor a;       // 기본생성자 호출    
+        AActor b = a;   // 복사생성자 호출
+        AActor c;       // 기본생성자 호출
+        c = a;          // 대입연산자 호출      
+    }
     std::wcout << std::endl;
     // 임시 객체는 이동 생성자로 newObj에서 사용되고 NewObject()함수의 aa 지역객체는 소멸한다.
-    std::wcout << L"NewObject " << std::endl;
-    AObject     newobj0     = NewObject();
-    std::wcout << L"NewObject " << std::endl;
-    AObject&&   newobj1     = NewObject();
-    std::wcout << L"NewObjectRef " << std::endl;
-    AObject&    newobj2     = NewObjectRef();  
-    std::wcout << L"NewObjectMove " << std::endl;
-    AObject&&   newobj3     = NewObjectMove();
-    //newobj2.name = L"aa"; // error
-    //newobj3.name = L"aa"; //error
-    std::wcout << L"WhichShouldIReturn " << std::endl;
-    AObject     newobj4     = WhichShouldIReturn(true);
+    std::wcout << L"newobj0 " << std::endl;
+    AObject     newobj0     = NewObject(); std::wcout << newobj0.name << std::endl;
+   
+    std::wcout << L"newobj1 " << std::endl;
+    AObject&&   newobj1     = NewObject(); std::wcout << newobj1.name << std::endl;
+    
+    std::wcout << L"newobj2 " << std::endl;
+    AObject&&    newobj2     = NewObjectRVOMove();  std::wcout << newobj2.name << std::endl;
+    
+    std::wcout << L"newobj3 " << std::endl;
+    AObject     newobj3     = NewObjectNRVOMove(); std::wcout << newobj3.name << std::endl;
+    
+    std::wcout << L"newobj4 " << std::endl;
+    AObject&&   newobj4     = NewObjectNRVOMove(); std::wcout << newobj4.name << std::endl;
+    newobj2.name = L"aaa1"; // empty
+    newobj3.name = L"aaa2"; // empty
+    //newobj4.name = L"aa"; // error
+
+    std::wcout << L"newobj5 " << std::endl;
+    AObject     newobj5     = WhichShouldIReturn(true);
+    std::wcout << newobj5.name << std::endl;
+
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    // 개체 수명 및 리소스 관리 자동화, 누수방지, 안전성 확보를 RAII라 한다.
+    // RAII패턴은 다음 기능을 가져야 한다.  1, 생성자, 소멸자, 필요한 메서드    
+    // RAII(Resource acquisition is initialization) : 리소스 획득은 초기화이다.
+    // 
+    // 최신 C++는 스택에 개체를 선언하여 힙 메모리를 최대한 사용하지 않도록 방지합니다.
+    // 리소스가 스택에 비해 너무 크면 개체가 소유해야 합니다.개체가 초기화되면 소유하는 리소스를 획득합니다.
+    // 그런 다음, 개체는 소멸자에서 리소스를 해제합니다.소유 개체 자체는 스택에 선언됩니다.
+    // 개체가 리소스를 소유한다는 원칙을 "리소스 획득은 초기화입니다" 또는 RAII라고도 합니다.
+    // 리소스 소유 스택 개체가 범위를 벗어나면 소멸자가 자동으로 호출됩니다.
+    // 이러한 방식으로 C++의 가비지 수집은 개체 수명과 밀접한 관련이 있으며 리소스는 안전하게 해제된다.
 
 
     UWorld world;
@@ -161,6 +260,7 @@ int main()
     {
         std::wstring name = L"AActor";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
+        
         auto actor = std::make_shared<AActor>(name);
         actor->SetRect({ 0.0f, 0.0f }, { 100.0f,100.0f });
         world.m_ActorList.push_back(actor);
