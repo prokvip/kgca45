@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineDemo6", "GameEngi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineDemo7", "GameEngineDemo7\GameEngineDemo7.vcxproj", "{119276F0-AA0D-4F2B-9681-83056C8E5FF0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NRVO", "NRVO\NRVO.vcxproj", "{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{119276F0-AA0D-4F2B-9681-83056C8E5FF0}.Release|x64.Build.0 = Release|x64
 		{119276F0-AA0D-4F2B-9681-83056C8E5FF0}.Release|x86.ActiveCfg = Release|Win32
 		{119276F0-AA0D-4F2B-9681-83056C8E5FF0}.Release|x86.Build.0 = Release|Win32
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Debug|x64.ActiveCfg = Debug|x64
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Debug|x64.Build.0 = Debug|x64
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Debug|x86.ActiveCfg = Debug|Win32
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Debug|x86.Build.0 = Debug|Win32
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Release|x64.ActiveCfg = Release|x64
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Release|x64.Build.0 = Release|x64
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Release|x86.ActiveCfg = Release|Win32
+		{1BF73DD5-3301-486F-8D3F-8E8B59DF751F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

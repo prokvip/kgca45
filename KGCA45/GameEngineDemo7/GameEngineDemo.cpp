@@ -152,7 +152,8 @@ AObject&& NewObjectNRVOMove()
 }
 //NRVO에 대한 제한 사항(반환 슬롯)
 //복사 생략은 반환 슬롯에 반환될 객체를 생성한다. 
-//하지만 WhichShouldIReturn함수는 두 경로 모두에 대해 복사 생략을 수행할 방법은 없다.
+//하지만 WhichShouldIReturn함수는 두 경로 모두에 대해 
+//복사 생략을 수행할 방법은 없다.
 AObject WhichShouldIReturn(bool condition)
 {
     AObject resultA(L"aa4");
@@ -190,6 +191,13 @@ int main()
     // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
 
+    {
+        AActor a;       // 기본생성자 호출    
+        AActor b = a;   // 복사생성자 호출
+        AActor c;       // 기본생성자 호출
+        c = a;          // 대입연산자 호출      
+    }
+
     std::cout << "is_copy_constructible<Copyable> == " << std::boolalpha     << std::is_copy_constructible<Copyable>::value << std::endl;
     std::cout << "is_copy_constructible<NotCopyable> == " << std::boolalpha  << std::is_copy_constructible<NotCopyable>::value << std::endl;
 
@@ -202,8 +210,6 @@ int main()
     AObject moveable{};
     AObject moved{ std::move(moveable) };
     AObject moved_again{ std::move(moved) };
-    //AObject moved_againFun = NewObjectRVOMove(); // 해제자 호출. 주의
-
     {
         auto nrvo = MakeObjectNRVO(L"NRVO");
         auto rvo = MakeObjectRVO(L"RVO");
@@ -211,12 +217,7 @@ int main()
         std::wcout << rvo.name << std::endl;
     }
 
-    {
-        AActor a;       // 기본생성자 호출    
-        AActor b = a;   // 복사생성자 호출
-        AActor c;       // 기본생성자 호출
-        c = a;          // 대입연산자 호출      
-    }
+   
     std::wcout << std::endl;
     // 임시 객체는 이동 생성자로 newObj에서 사용되고 NewObject()함수의 aa 지역객체는 소멸한다.
     std::wcout << L"newobj0 " << std::endl;
