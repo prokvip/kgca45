@@ -131,10 +131,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="TWinodw.h" />
+    <ClInclude Include="Sample.h" />
+    <ClInclude Include="TStd.h" />
+    <ClInclude Include="TWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TWinodw.cpp" />
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="TWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
