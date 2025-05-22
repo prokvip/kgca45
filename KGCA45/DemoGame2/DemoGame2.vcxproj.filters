@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DemoGame2.cpp" />
+    <ClCompile Include="TWindow.cpp" />
+    <ClCompile Include="AActor.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ACharacter.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="APawn.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TRect.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UActorComponent.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UInputComponent.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="USoundComponent.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UTimerComponent.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UWorld.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TWindow.h" />
+    <ClInclude Include="AActor.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ACharacter.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="APawn.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TRect.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TStd.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UActorComponent.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UInputComponent.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UObject.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="USoundComponent.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UTimerComponent.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UWorld.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{befdb3d2-9658-4108-8d21-eda3a899fdfc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
