@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FirstWindow", "FirstWindow\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoGame", "DemoGame\DemoGame.vcxproj", "{0CD0D542-EBEB-4753-8773-B0BA6B311C21}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoGame1", "DemoGame1\DemoGame1.vcxproj", "{F13FCDB5-C321-43CA-B794-1C4E7D827D92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -141,6 +143,14 @@ Global
 		{0CD0D542-EBEB-4753-8773-B0BA6B311C21}.Release|x64.Build.0 = Release|x64
 		{0CD0D542-EBEB-4753-8773-B0BA6B311C21}.Release|x86.ActiveCfg = Release|Win32
 		{0CD0D542-EBEB-4753-8773-B0BA6B311C21}.Release|x86.Build.0 = Release|Win32
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Debug|x64.ActiveCfg = Debug|x64
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Debug|x64.Build.0 = Debug|x64
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Debug|x86.ActiveCfg = Debug|Win32
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Debug|x86.Build.0 = Debug|Win32
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Release|x64.ActiveCfg = Release|x64
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Release|x64.Build.0 = Release|x64
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Release|x86.ActiveCfg = Release|Win32
+		{F13FCDB5-C321-43CA-B794-1C4E7D827D92}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

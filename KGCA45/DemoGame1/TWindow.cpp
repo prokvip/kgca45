@@ -52,7 +52,6 @@ bool   TWindow::SetConsole()
 }
 bool   TWindow::SetWindow(HINSTANCE hInstance)
 {
-   
     m_hInstance = hInstance;
     MyRegisterClass();
     if (InitInstance() == FALSE)
@@ -130,9 +129,10 @@ bool TWindow::Run()
             Sleep(100);
         }
     }
-    P(L"%s\n", L"Game Running Finish!");
+    P(L"\n%s", L"Game Running Finish!");
     return true;
 }
+
 TWindow::~TWindow()
 {
     ::UnregisterClassW(m_szClassName.c_str(), m_hInstance);

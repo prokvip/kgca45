@@ -2,5 +2,7 @@
 #include "TWindow.h"
 class Sample :  public TWindow
 {
+public:
+	Sample();
 };
 
