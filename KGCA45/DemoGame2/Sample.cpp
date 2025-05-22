@@ -1,34 +1,26 @@
 #include "Sample.h"
 void Sample::GameRun()
 {
-    //TWindow::GameRun();
-    // 게임로직
-    //while (timer->GetGameGlobalTimer() < 60.0f)
+    for (auto pNode = m_CompList.begin();pNode != m_CompList.end();pNode++)
     {
-        for (auto pNode = compList.begin();
-            pNode != compList.end();
-            pNode++)
-        {
-            (*pNode)->TickComponent();
-        }
-        if (GameLoop(input.get()))
-        {  
-        }
+        (*pNode)->TickComponent();
     }
-	
+    if (GameLoop())
+    {  
+    }	
 }
 void Sample::InitGame()
 {
     // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 1; i++)
     {
         std::wstring name = L"AActor";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
         auto actor = std::make_shared<AActor>(name);
         actor->SetRect({ 0.0f, 0.0f }, { 100.0f,100.0f });
-        world.m_ActorList.insert(std::make_pair(name, actor));
+        m_World.m_ActorList.insert(std::make_pair(name, actor));
     }
     for (int i = 0; i < 1; i++)
     {
@@ -37,7 +29,7 @@ void Sample::InitGame()
         auto pawn = std::make_shared<APawn>(name);
         pawn->SetName(name);
         pawn->SetRect({ 400.0f, 300.0f }, { 100.0f,100.0f });
-        world.m_ActorList.insert(std::make_pair(name, pawn));
+        m_World.m_ActorList.insert(std::make_pair(name, pawn));
     }
     for (int i = 0; i < 1; i++)
     {
@@ -46,83 +38,68 @@ void Sample::InitGame()
         auto character = std::make_shared<ACharacter>(name);
         character->SetName(name);
         character->SetRect({ 400.0f, 0.0f }, { 100.0f,100.0f });
-        world.m_ActorList.insert( std::make_pair(name, character));
+        m_World.m_ActorList.insert( std::make_pair(name, character));
     }
-    for (auto& p : world.m_ActorList)
-    {
-        p.second->Tick();
-        p.second->Move(10.0f, 10.0f);
-        p.second->Show();
-    }
+
+    std::wstring name = L"Player";    
+    m_Player = std::make_shared<ACharacter>(name);
+    m_Player->SetName(name);
+    m_Player->SetRect({ 400.0f, 0.0f }, { 100.0f,100.0f });
+    m_World.m_ActorList.insert(std::make_pair(name, m_Player));
 
     std::wcout << UActorComponent::GetNumInstance() << std::endl;
     // 게임생성
     using CompPtr = std::shared_ptr<UActorComponent>;
-    compList.push_back(std::make_shared<UTimerComponent>(L"GameTimer"));
-    timer = std::dynamic_pointer_cast<UTimerComponent>(compList.back());
+    m_CompList.push_back(std::make_shared<UTimerComponent>(L"GameTimer"));
+    m_Timer = std::dynamic_pointer_cast<UTimerComponent>(m_CompList.back());
 
-    compList.push_back(std::make_shared<UInputComponent>(L"GameInput"));
-    input = std::dynamic_pointer_cast<UInputComponent>(compList.back());
+    m_CompList.push_back(std::make_shared<UInputComponent>(L"GameInput"));
+    m_Input = std::dynamic_pointer_cast<UInputComponent>(m_CompList.back());
 
-    compList.push_back(std::make_shared <USoundComponent>(L"GameSound"));
+    m_CompList.push_back(std::make_shared <USoundComponent>(L"GameSound"));
 
-    if (timer == nullptr)
+    if (m_Timer == nullptr)
     {
-        compList.clear();
+        m_CompList.clear();
         return;
     }
 }
-bool Sample::GameLoop(UInputComponent* input)
+bool Sample::GameLoop()
 {
-    if (input->GetKey(VK_LBUTTON) == KEY_PUSH)
-    {
-        std::wcout << L"VK_LBUTTON key" << std::endl;
+    if (m_Input->GetKey('W') == KEY_PUSH)
+    {        
+        m_Player->Move(0.0f, -1.0f);
+        m_Player->Show();
     }
-    if (input->GetKey(VK_MBUTTON) == KEY_PUSH)
-    {
-        std::wcout << L"VK_MBUTTON key" << std::endl;
+    if (m_Input->GetKey('S') == KEY_PUSH)
+    {        
+        m_Player->Move(0.0f, 1.0f);
+        m_Player->Show();
     }
-    if (input->GetKey(VK_RBUTTON) == KEY_PUSH)
-    {
-        std::wcout << L"VK_RBUTTON key" << std::endl;
+    if (m_Input->GetKey('A') == KEY_PUSH)
+    {        
+        m_Player->Move(-1.0f, 0.0f);
+        m_Player->Show();
     }
-    if (input->GetKey('W') == KEY_PUSH)
-    {
-        std::wcout << L"W key" << std::endl;
+    if (m_Input->GetKey('D') == KEY_PUSH)
+    {       
+        m_Player->Move(1.0f, 0.0f);
+        m_Player->Show();
     }
-    if (input->GetKey('S') == KEY_PUSH)
+   
+    for (auto& p : m_World.m_ActorList)
     {
-        std::wcout << L"S key" << std::endl;
-    }
-    if (input->GetKey('A') == KEY_PUSH)
-    {
-        std::wcout << L"A key" << std::endl;
-    }
-    if (input->GetKey('D') == KEY_PUSH)
-    {
-        std::wcout << L"D key" << std::endl;
-    }
-    if (input->GetKey(VK_SPACE) == KEY_PUSH)
-    {
-        std::wcout << L"VK_SPACE key" << std::endl;
-    }
-    if (input->GetKey(VK_RETURN) == KEY_PUSH)
-    {
-        std::wcout << L"VK_RETURN key" << std::endl;
-    }
-
-    if (input->GetKey('X') == KEY_UP)
-    {
-        return true;
+        p.second->Tick();
+        //p.second->Show();
     }
     return false;
 }
 void Sample::ReleaseGame()
 {
-    std::wcout << timer->GetGameGlobalTimer() << std::endl;
+    std::wcout << m_Timer->GetGameGlobalTimer() << std::endl;
 
-    compList.clear();
-    world.m_ActorList.clear();
+    m_CompList.clear();
+    m_World.m_ActorList.clear();
 
     std::wcout << L"현재 인스턴스 갯수 : " << UActorComponent::GetNumInstance() << std::endl;
 }

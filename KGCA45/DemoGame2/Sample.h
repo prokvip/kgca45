@@ -7,14 +7,15 @@
 class Sample :  public TWindow
 {
 	using CompPtr = std::shared_ptr<UActorComponent>;
-	UWorld world;
-	std::list< CompPtr> compList;
-	std::shared_ptr<UTimerComponent> timer = nullptr;
-	std::shared_ptr<UInputComponent> input = nullptr;
+	UWorld								m_World;
+	std::list< CompPtr>					m_CompList;
+	std::shared_ptr<UTimerComponent>	m_Timer = nullptr;
+	std::shared_ptr<UInputComponent>	m_Input = nullptr;
+	std::shared_ptr< ACharacter>		m_Player = nullptr;
 public:
 	void InitGame();
 	void ReleaseGame();
-	bool GameLoop(UInputComponent* input);
+	bool GameLoop();
 public:
 	virtual void GameRun() override;
 };

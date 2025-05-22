@@ -28,6 +28,9 @@ private:
 	TPoint    m_tPos; //  m_fLeft,m_fTop
 	TPoint    m_tSize;//  m_fWidth, m_fHeight
 public:
+	const TPoint GetPos() { return m_tPos; }
+	const TPoint GetSize() { return m_tSize; }
+
 	const TRect* Get() const { return this; }
 	const TRect& GetRef() const { return *this; }
 	/////////////////////////////////////////////////////////////
