@@ -1,4 +1,16 @@
 #include "Sample.h"
+LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{   
+    /*switch (message)
+    {
+    case WM_LBUTTONDOWN:
+    {
+        int kk = 0;
+    }break;
+    }*/
+    TWindow::MsgProc(hWnd, message, wParam, lParam);
+    return 1;
+}
 void Sample::GameRun()
 {
     for (auto pNode = m_CompList.begin();pNode != m_CompList.end();pNode++)

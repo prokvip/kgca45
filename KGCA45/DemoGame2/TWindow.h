@@ -14,7 +14,7 @@ public:
 	BOOL	InitInstance();
 public:
 	virtual void GameRun();
-	LRESULT MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 public:
 	TWindow();
 	virtual ~TWindow();

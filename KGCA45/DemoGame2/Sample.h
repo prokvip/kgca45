@@ -18,5 +18,6 @@ public:
 	bool GameLoop();
 public:
 	virtual void GameRun() override;
+	virtual LRESULT MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 };
 

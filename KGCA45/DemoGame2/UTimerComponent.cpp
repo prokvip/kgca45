@@ -1,5 +1,5 @@
 #include "UTimerComponent.h"
-float   UTimerComponent::Reset()
+void   UTimerComponent::Reset()
 {
     m_Start = m_End = system_clock::now();
 }
