@@ -1,4 +1,5 @@
 #include "TWindow.h"
+TWindow* g_pWindow = nullptr;
 void TestMessageBox()
 {
     int iRet = MessageBox(NULL, L"처음 시작하는 윈도우",
@@ -14,19 +15,36 @@ void TestMessageBox()
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    // 메시지 핸드링
+    return g_pWindow->MsgProc(hWnd, message, wParam, lParam);
+}
+LRESULT TWindow::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
     switch (message)
     {
-        //case WM_RBUTTONDOWN:
+        //case WM_ACTIVATEAPP:
         //{
-        //    PostQuitMessage(0);// WM_QUIT
+        //    int k = 0;
         //}break;
+    case WM_ACTIVATE:
+    {
+        if (wParam == WA_ACTIVE || WA_CLICKACTIVE)
+        {
+            m_bActive = true;
+            //timer->Reset();
+        }
+        if (wParam == WA_INACTIVE)
+        {
+            m_bActive = false;
+        }
+    }break;
     case WM_DESTROY:
         PostQuitMessage(0);// WM_QUIT
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
-    return 0;
+    return 1;
 }
 bool   TWindow::SetConsole()
 {
@@ -124,7 +142,10 @@ bool TWindow::Run()
         }
         else
         {
-            GameRun();
+            if (m_bActive)
+            {
+                GameRun();
+            }
         }
     }
     P(L"\n%s", L"Game Running Finish!");
@@ -135,6 +156,10 @@ void  TWindow::GameRun()
     // 게임로직을 돌린다.(프레임)
     P(L"%s", L".");
     //Sleep(100);    
+}
+TWindow::TWindow()
+{
+    g_pWindow = this;
 }
 TWindow::~TWindow()
 {

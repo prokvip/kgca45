@@ -2,9 +2,10 @@
 #include "TStd.h"
 class TWindow
 {
-	HINSTANCE m_hInstance;
-	HWND      m_hWnd;
-	std::wstring   m_szClassName= L"KGCAWindow";
+	bool			m_bActive = false;
+	HINSTANCE		m_hInstance;
+	HWND			m_hWnd;
+	std::wstring	m_szClassName= L"KGCAWindow";
 public:
 	bool    SetConsole();
 	bool    SetWindow(HINSTANCE hInstance);
@@ -13,7 +14,9 @@ public:
 	BOOL	InitInstance();
 public:
 	virtual void GameRun();
+	LRESULT MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 public:
+	TWindow();
 	virtual ~TWindow();
 };
 

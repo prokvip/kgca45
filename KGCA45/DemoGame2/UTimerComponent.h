@@ -11,6 +11,7 @@ public:
 	float   GetGameGlobalTimer() const;
 public:
 	virtual void    TickComponent() override;
+	virtual float   Reset();
 public:
 	void operator=(const UTimerComponent& comp);
 	// 복사 생성자(디폴트)

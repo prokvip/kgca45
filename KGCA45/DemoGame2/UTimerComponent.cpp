@@ -1,4 +1,8 @@
 #include "UTimerComponent.h"
+float   UTimerComponent::Reset()
+{
+    m_Start = m_End = system_clock::now();
+}
 float   UTimerComponent::GetGameGlobalTimer() const
 {
     return m_fGameTimer;
