@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DemoGame3.cpp" />
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="TDevice.cpp" />
+    <ClCompile Include="AActor.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="ACharacter.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="APawn.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="TRect.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="TWindow.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="UActorComponent.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="UInputComponent.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="UObject.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="USoundComponent.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="UTimerComponent.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="UWorld.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="UBackground.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sample.h" />
+    <ClInclude Include="TDevice.h" />
+    <ClInclude Include="AActor.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="ACharacter.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="APawn.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TRect.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TStd.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TWindow.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="UActorComponent.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="UInputComponent.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="UObject.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="USoundComponent.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="UTimerComponent.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="UWorld.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="UBackground.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{02ddf7a0-4214-42d0-a738-5ad21031fd82}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -2,8 +2,15 @@
 #include <Windows.h>
 #include <iostream>
 #include <conio.h>//getch
+#include <string>
+#include <list>
+#include <vector>
+#include <map>
+#include <memory> // smart point
+
 
 using namespace std;
+using TString = std::wstring;
 
 static void ConsolePrintW(const wchar_t* fmt, ...)
 {

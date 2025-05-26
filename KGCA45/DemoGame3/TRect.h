@@ -28,6 +28,7 @@ private:
 	TPoint    m_tPos; //  m_fLeft,m_fTop
 	TPoint    m_tSize;//  m_fWidth, m_fHeight
 public:
+	float    operator[] (int iIndex);
 	const TPoint GetPos() { return m_tPos; }
 	const TPoint GetSize() { return m_tSize; }
 

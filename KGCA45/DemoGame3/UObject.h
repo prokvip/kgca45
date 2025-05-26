@@ -1,11 +1,6 @@
 #pragma once
+#include "TStd.h"
 #include "TRect.h"
-#include <string>
-#include <list>
-#include <vector>
-#include <map>
-#include <memory> // smart point
-
 
 class UObject
 {	

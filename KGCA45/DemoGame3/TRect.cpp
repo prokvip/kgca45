@@ -1,5 +1,12 @@
 #include "TRect.h"
-
+float    TRect::operator[] (int iIndex)
+{
+	float fRet = m_fLeft;
+	if (iIndex == 1) fRet = m_fTop;
+	if (iIndex == 2) fRet = m_fRight;
+	if (iIndex == 3) fRet = m_fBottom;
+	return fRet;
+}
 TRect::TRect(void)
 {
 	SetRect(0, 0, 0, 0);	

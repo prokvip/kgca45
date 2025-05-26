@@ -1,13 +1,28 @@
 #include "TDevice.h"
-TDevice::TDevice() 
-{
+#include "TStd.h"
 
+ID3D11Device* TDevice::m_pd3dDevice = nullptr;
+ID3D11DeviceContext* TDevice::m_pContext = nullptr;
+IDXGISwapChain* TDevice::m_pSwapChain = nullptr;
+ID3D11RenderTargetView* TDevice::m_pRTV = nullptr;
+
+void TDevice::DX_CHECK(HRESULT hr, const TCHAR* function)
+{
+    if (FAILED(hr))
+    {
+        LPWSTR output;
+        WCHAR buffer[256] = { 0, };
+        FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+            NULL, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&output, 0, NULL);
+        wsprintf(buffer, L"File=%ls\nLine=%d\nFuction=%ls", _T(__FILE__), __LINE__, function);
+        //MessageBox(NULL, buffer, output, MB_OK);
+
+        P(L"%s:%s\n", buffer, output);
+    }
 }
 bool     TDevice::CreateDevice(HWND hWnd)
 {
 	HRESULT hr;
-    m_hWnd = hWnd;
-
     UINT                Flags = 0;
     D3D_FEATURE_LEVEL   pFeatureLevels[] =
     {           
@@ -25,7 +40,7 @@ bool     TDevice::CreateDevice(HWND hWnd)
     scd.BufferDesc.RefreshRate.Numerator = 60;
     scd.BufferDesc.RefreshRate.Denominator = 1;
     scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    scd.OutputWindow = m_hWnd;
+    scd.OutputWindow = hWnd;
     scd.SampleDesc.Count = 1;
     scd.Windowed = TRUE;
     // 주 디스플레이(그래픽카드)의 DX11가속 버전으로 디바이스 생성한다.
@@ -40,7 +55,7 @@ bool     TDevice::CreateDevice(HWND hWnd)
             &scd,
             &m_pSwapChain,
             &m_pd3dDevice,
-            &m_pFeatureLevel,
+            nullptr,
             &m_pContext );
     if (FAILED(hr)) { return false;  }
     //if( SUCCEEDED( hr)) { return true }

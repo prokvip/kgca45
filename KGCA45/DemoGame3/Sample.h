@@ -5,6 +5,7 @@
 #include "USoundComponent.h"
 #include "TWindow.h"
 #include "TDevice.h"
+#include "UBackground.h"
 class Sample :  public TWindow
 {
 	TDevice m_dxDevice;
