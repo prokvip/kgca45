@@ -5,6 +5,7 @@ ID3D11Device* TDevice::m_pd3dDevice = nullptr;
 ID3D11DeviceContext* TDevice::m_pContext = nullptr;
 IDXGISwapChain* TDevice::m_pSwapChain = nullptr;
 ID3D11RenderTargetView* TDevice::m_pRTV = nullptr;
+D3D11_VIEWPORT		TDevice::m_ViewPort = {0,};
 
 void TDevice::DX_CHECK(HRESULT hr, const TCHAR* function)
 {
@@ -81,10 +82,27 @@ bool     TDevice::CreateRenderTargetView()
     m_pContext->OMSetRenderTargets(1, &m_pRTV, NULL);
 	return true;
 }
-void     TDevice::Render()
+void TDevice::SetViewPort()
 {
-    float color[4] = { 1.0f, 0.5f, 1.0f, 1.0f };
+    DXGI_SWAP_CHAIN_DESC Desc;
+    m_pSwapChain->GetDesc(&Desc);
+    // Setup the viewport    
+    m_ViewPort.Width = Desc.BufferDesc.Width;
+    m_ViewPort.Height = Desc.BufferDesc.Height;
+    m_ViewPort.MinDepth = 0.0f;
+    m_ViewPort.MaxDepth = 1.0f;
+    m_ViewPort.TopLeftX = 0;
+    m_ViewPort.TopLeftY = 0;
+    m_pContext->RSSetViewports(1, &m_ViewPort);
+}
+void     TDevice::PreRender()
+{
+    float color[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
     m_pContext->ClearRenderTargetView(m_pRTV, color);
+   
+}
+void     TDevice::PostRender()
+{
     m_pSwapChain->Present(0, 0);
 }
 void     TDevice::Release()

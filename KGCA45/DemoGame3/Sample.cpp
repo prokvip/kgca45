@@ -19,7 +19,13 @@ void Sample::GameRun()
     }
     if (GameLoop())
     {  
-        m_dxDevice.Render();
+        m_dxDevice.PreRender();
+            for (auto& p : m_World.m_ActorList)
+            {
+                p.second->Tick();
+                p.second->Show();
+            }
+        m_dxDevice.PostRender();
     }	
 }
 void Sample::InitGame()
@@ -27,7 +33,7 @@ void Sample::InitGame()
     P(L"%s\n", L"Create DirectX  : true");
     m_dxDevice.CreateDevice(GetHwnd());
     m_dxDevice.CreateRenderTargetView();
-
+    m_dxDevice.SetViewPort();
     // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
 

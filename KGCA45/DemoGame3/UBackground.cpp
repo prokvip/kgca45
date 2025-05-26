@@ -14,15 +14,91 @@ UBackground::~UBackground()
 	if (m_pVertexShader) m_pVertexShader->Release();
 	if (m_pPixelShader) m_pPixelShader->Release();
 }
-bool      UBackground::CreateVertexLayout()
+bool		UBackground::CreateVertexLayout()
 {
+	const D3D11_INPUT_ELEMENT_DESC layout[] =
+	{
+		{ "POSITION",  0, DXGI_FORMAT_R32G32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	};
+	HRESULT hr = TDevice::m_pd3dDevice->CreateInputLayout(
+		layout, 1, m_pVSBuf->GetBufferPointer(), m_pVSBuf->GetBufferSize(),
+		&m_pVertexLayout);
+	if (FAILED(hr))
+	{
+		return false;
+	}
 	return true;
 }
-bool      UBackground::CreateVertexShader() {
+HRESULT		UBackground::D3DX11CompileFromFile(LPCWSTR pSrcFile, CONST D3D_SHADER_MACRO* pDefines, LPD3DINCLUDE pInclude,
+	LPCSTR pFunctionName, LPCSTR pProfile, UINT Flags1, UINT Flags2,
+	/*ID3DX11ThreadPump* pPump, */ID3DBlob** ppShader, ID3DBlob** ppErrorMsgs, HRESULT* pHResult)
+{
+	HRESULT hr = S_OK;
+	hr = D3DCompileFromFile(pSrcFile, pDefines, pInclude, pFunctionName, pProfile, Flags1, Flags2, ppShader, ppErrorMsgs);
+	return hr;
+}
+bool		UBackground::CreateVertexShader() 
+{
+	HRESULT hr=S_OK;
+	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
+	ID3DBlob* pBufferErrors = NULL;
+	if (FAILED(hr =D3DX11CompileFromFile(L"hlsl.txt", NULL, 
+		D3D_COMPILE_STANDARD_FILE_INCLUDE, "VS", "vs_5_0", 
+		dwShaderFlags, NULL, &m_pVSBuf, &pBufferErrors, NULL)))
+	{
+		TDevice::DX_CHECK(hr, L"UBackground::CreateVertexShader() ");
+		return false;
+	}
+	hr = TDevice::m_pd3dDevice->CreateVertexShader(
+		(DWORD*)m_pVSBuf->GetBufferPointer(), 
+		m_pVSBuf->GetBufferSize(), NULL,
+		&m_pVertexShader);
+	if (FAILED(hr))
+	{
+		TDevice::DX_CHECK(hr, L"UBackground::CreateVertexShader() ");
+		return false;
+	}
 	return true;
 }
-bool      UBackground::CreatePixelShader() {
+bool		 UBackground::CreatePixelShader() 
+{
+	HRESULT hr = S_OK;
+	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
+	ID3DBlob* pBufferErrors = NULL;
+	ID3DBlob* pPSBuf = NULL;
+	if (FAILED(hr = D3DX11CompileFromFile(L"hlsl.txt", NULL,
+		D3D_COMPILE_STANDARD_FILE_INCLUDE, "PS", "ps_5_0",
+		dwShaderFlags, NULL, &pPSBuf, &pBufferErrors, NULL)))
+	{
+		TDevice::DX_CHECK(hr, L"UBackground::D3DX11CompileFromFile() ");
+		return false;
+	}
+	hr = TDevice::m_pd3dDevice->CreatePixelShader(
+		(DWORD*)pPSBuf->GetBufferPointer(), 
+		pPSBuf->GetBufferSize(), NULL, 
+		&m_pPixelShader);
+	if (FAILED(hr))
+	{
+		TDevice::DX_CHECK(hr, L"UBackground::CreatePixelShader() ");
+		return false;
+	}
 	return true;
+}
+
+TPoint UBackground::ScreenToNDC(TPoint& p)
+{
+	// NDC
+	// screen x:0 ~ 800, y=0 ~ 600
+	// screen x:0 ~ 1,   y=0 ~ 1
+	// ndc    x:-1 ~ +1, y=-1 ~ +1
+	// 
+	// ndc    x:-1 ~ +1, y=-1 ~ +1
+	TPoint tRet;
+	tRet.x = p.x / 800.0f;
+	tRet.y = p.y / 600.0f;
+	tRet.x = tRet.x * 2.0f - 1.0f;
+	tRet.y = (tRet.y * 2.0f - 1.0f) * -1.0f;
+	return tRet;
 }
 // 시스템메모리에 할당 및 저장한다.
 void     UBackground::CreateVertexData()
@@ -47,6 +123,12 @@ void     UBackground::CreateVertexData()
 	m_VertexList[4].p.y = rt[1];
 	m_VertexList[5].p.x = rt[2];
 	m_VertexList[5].p.y = rt[3];
+
+	// NDC
+	for (auto& v : m_VertexList)
+	{
+		v.p = ScreenToNDC(v.p);
+	}
 }
 // GPU 메모리에 할당 및 저장한다.
 bool     UBackground::CreateVertexBuffer()

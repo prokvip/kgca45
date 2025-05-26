@@ -85,4 +85,7 @@
       <UniqueIdentifier>{02ddf7a0-4214-42d0-a738-5ad21031fd82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="hlsl.txt" />
+  </ItemGroup>
 </Project>
