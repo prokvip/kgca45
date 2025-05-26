@@ -13,6 +13,7 @@ class UBackground :  public AActor
 	ID3D11PixelShader*	m_pPixelShader = nullptr;
 
 	ID3DBlob*			m_pVSBuf = NULL;
+	ID3DBlob*			m_pPSBuf = NULL;
 	std::vector<TVertex>  m_VertexList;	
 
 public:

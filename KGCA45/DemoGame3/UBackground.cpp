@@ -9,6 +9,8 @@ UBackground::UBackground(TString name) : AActor(name)
 }
 UBackground::~UBackground()
 {
+	if (m_pVSBuf) m_pVSBuf->Release();
+	if (m_pPSBuf) m_pPSBuf->Release();
 	if (m_pVertexBuffer) m_pVertexBuffer->Release();
 	if (m_pVertexLayout) m_pVertexLayout->Release();
 	if (m_pVertexShader) m_pVertexShader->Release();
@@ -46,7 +48,9 @@ bool		UBackground::CreateVertexShader()
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, "VS", "vs_5_0", 
 		dwShaderFlags, NULL, &m_pVSBuf, &pBufferErrors, NULL)))
 	{
-		TDevice::DX_CHECK(hr, L"UBackground::CreateVertexShader() ");
+		PrintDetailA("%s:%s\n", (char*)pBufferErrors->GetBufferPointer(),
+										L"UBackground::CreateVertexShader()");
+		if (pBufferErrors)pBufferErrors->Release();
 		return false;
 	}
 	hr = TDevice::m_pd3dDevice->CreateVertexShader(
@@ -55,33 +59,34 @@ bool		UBackground::CreateVertexShader()
 		&m_pVertexShader);
 	if (FAILED(hr))
 	{
-		TDevice::DX_CHECK(hr, L"UBackground::CreateVertexShader() ");
+		TDevice::DX_CHECK(hr, L"UBackground::CreatePixelShader() ");
 		return false;
 	}
 	return true;
 }
-bool		 UBackground::CreatePixelShader() 
+bool		UBackground::CreatePixelShader() 
 {
 	HRESULT hr = S_OK;
 	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 	ID3DBlob* pBufferErrors = NULL;
-	ID3DBlob* pPSBuf = NULL;
 	if (FAILED(hr = D3DX11CompileFromFile(L"hlsl.txt", NULL,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, "PS", "ps_5_0",
-		dwShaderFlags, NULL, &pPSBuf, &pBufferErrors, NULL)))
+		dwShaderFlags, NULL, &m_pPSBuf, &pBufferErrors, NULL)))
 	{
-		TDevice::DX_CHECK(hr, L"UBackground::D3DX11CompileFromFile() ");
+		PrintDetailA("%s:%s\n", (char*)pBufferErrors->GetBufferPointer(),
+								L"UBackground::CreateVertexShader()");
+		if (pBufferErrors)pBufferErrors->Release();
 		return false;
 	}
 	hr = TDevice::m_pd3dDevice->CreatePixelShader(
-		(DWORD*)pPSBuf->GetBufferPointer(), 
-		pPSBuf->GetBufferSize(), NULL, 
+		(DWORD*)m_pPSBuf->GetBufferPointer(),
+		m_pPSBuf->GetBufferSize(), NULL,
 		&m_pPixelShader);
 	if (FAILED(hr))
 	{
 		TDevice::DX_CHECK(hr, L"UBackground::CreatePixelShader() ");
 		return false;
-	}
+	}	
 	return true;
 }
 
