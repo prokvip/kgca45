@@ -37,12 +37,26 @@ void Sample::InitGame()
     // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
 
-    for (int i = 0; i < 1; i++)
+    std::wstring name = L"Background";
+    name += std::to_wstring(0);// 정수가 스크링이 된다.
+    auto actor = std::make_shared<UBackground>(name);
+    actor->SetRect({ 0.0f, 0.0f }, { 800.0f,600.0f });
+    actor->SetRect({ 0.0f, 0.0f }, { 800.0f,600.0f });
+    actor->CreateVertexData();
+    actor->CreateVertexBuffer();
+
+    actor->CreateVertexShader();
+    actor->CreatePixelShader();
+    actor->CreateVertexLayout();
+    m_World.m_ActorList.insert(std::make_pair(name, actor));
+
+    for (int i = 0; i < 8; i++)
     {
-        std::wstring name = L"Background";
+        std::wstring name = L"UUI";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
-        auto actor = std::make_shared<UBackground>(name);
-        actor->SetRect({ 0.0f, 0.0f }, { 800.0f,600.0f });
+        auto actor = std::make_shared<UUI1>(name);
+        actor->SetRect({ i*100.0f+10.0f, 10.0f }, { 80.0f,50.0f });
+        
         actor->CreateVertexData();
         actor->CreateVertexBuffer();   
 
