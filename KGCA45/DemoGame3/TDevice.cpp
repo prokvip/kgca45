@@ -79,7 +79,7 @@ bool     TDevice::CreateRenderTargetView()
     {
         return false;
     }
-    m_pContext->OMSetRenderTargets(1, &m_pRTV, NULL);
+    
 	return true;
 }
 void TDevice::SetViewPort()
@@ -92,14 +92,14 @@ void TDevice::SetViewPort()
     m_ViewPort.MinDepth = 0.0f;
     m_ViewPort.MaxDepth = 1.0f;
     m_ViewPort.TopLeftX = 0;
-    m_ViewPort.TopLeftY = 0;
-    m_pContext->RSSetViewports(1, &m_ViewPort);
+    m_ViewPort.TopLeftY = 0;    
 }
 void     TDevice::PreRender()
 {
     float color[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
     m_pContext->ClearRenderTargetView(m_pRTV, color);
-   
+    m_pContext->RSSetViewports(1, &m_ViewPort);
+    m_pContext->OMSetRenderTargets(1, &m_pRTV, NULL);
 }
 void     TDevice::PostRender()
 {

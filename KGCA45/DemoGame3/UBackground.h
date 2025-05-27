@@ -1,9 +1,17 @@
 #pragma once
 #include "AActor.h"
 #include "TDevice.h"
+struct TColor
+{
+	float  r;
+	float  g;
+	float  b;
+	float  a;
+};
 struct TVertex
 {
 	TPoint p;
+	TColor c;
 };
 class UBackground :  public AActor
 {

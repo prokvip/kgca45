@@ -20,10 +20,14 @@ bool		UBackground::CreateVertexLayout()
 {
 	const D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
-		{ "POSITION",  0, DXGI_FORMAT_R32G32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "POS",   0, DXGI_FORMAT_R32G32_FLOAT,		    0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR",  0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0, 8,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
+	UINT iNumElement = sizeof(layout) / sizeof(layout[0]);
 	HRESULT hr = TDevice::m_pd3dDevice->CreateInputLayout(
-		layout, 1, m_pVSBuf->GetBufferPointer(), m_pVSBuf->GetBufferSize(),
+		layout, iNumElement,
+		m_pVSBuf->GetBufferPointer(), 
+		m_pVSBuf->GetBufferSize(),
 		&m_pVertexLayout);
 	if (FAILED(hr))
 	{
@@ -33,15 +37,19 @@ bool		UBackground::CreateVertexLayout()
 }
 HRESULT		UBackground::D3DX11CompileFromFile(LPCWSTR pSrcFile, CONST D3D_SHADER_MACRO* pDefines, LPD3DINCLUDE pInclude,
 	LPCSTR pFunctionName, LPCSTR pProfile, UINT Flags1, UINT Flags2,
-	/*ID3DX11ThreadPump* pPump, */ID3DBlob** ppShader, ID3DBlob** ppErrorMsgs, HRESULT* pHResult)
+	ID3DBlob** ppShader, ID3DBlob** ppErrorMsgs, HRESULT* pHResult)
 {
 	HRESULT hr = S_OK;
 	hr = D3DCompileFromFile(pSrcFile, pDefines, pInclude, pFunctionName, pProfile, Flags1, Flags2, ppShader, ppErrorMsgs);
 	return hr;
 }
+// C++ : MSVC 컴파일러로 컴파일한다.
+// HLSL(Hight Level Shader Language) : 고급쉐이더 언어(컴파일)
 bool		UBackground::CreateVertexShader() 
 {
 	HRESULT hr=S_OK;
+	// L"hlsl.txt"을 로딩하여 "VS" 함수를 vs_5_0컴파일러로 컴파일한다.
+	// 컴파일 결과(오브젝트파일)가 m_pVSBuf에 저장된다.
 	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 	ID3DBlob* pBufferErrors = NULL;
 	if (FAILED(hr =D3DX11CompileFromFile(L"hlsl.txt", NULL, 
@@ -117,18 +125,35 @@ void     UBackground::CreateVertexData()
 	// v2(l,b),v3          v5(r,b)
 	m_VertexList[0].p.x = rt[0];
 	m_VertexList[0].p.y = rt[1];
+	m_VertexList[0].c.r = 1.0f;
+	m_VertexList[0].c.g = 0.0f;
+	m_VertexList[0].c.b = 0.0f;
+	m_VertexList[0].c.a = 1.0f;
 	m_VertexList[1].p.x = rt[2];
 	m_VertexList[1].p.y = rt[1];
+	m_VertexList[1].c.r = 0.0f;
+	m_VertexList[1].c.g = 1.0f;
+	m_VertexList[1].c.b = 0.0f;
+	m_VertexList[1].c.a = 1.0f;
 	m_VertexList[2].p.x = rt[0];
 	m_VertexList[2].p.y = rt[3];
-
+	m_VertexList[2].c.r = 0.0f;
+	m_VertexList[2].c.g = 0.0f;
+	m_VertexList[2].c.b = 0.0f;
+	m_VertexList[2].c.a = 1.0f;
 	m_VertexList[3].p.x = rt[0];
 	m_VertexList[3].p.y = rt[3];
+	m_VertexList[2].c = m_VertexList[2].c;
+	m_VertexList[4].c = m_VertexList[1].c;
 	m_VertexList[4].p.x = rt[2];
 	m_VertexList[4].p.y = rt[1];
+	
 	m_VertexList[5].p.x = rt[2];
 	m_VertexList[5].p.y = rt[3];
-
+	m_VertexList[5].c.r = 1.0f;
+	m_VertexList[5].c.g = 1.0f;
+	m_VertexList[5].c.b = 1.0f;
+	m_VertexList[5].c.a = 1.0f;
 	// NDC
 	for (auto& v : m_VertexList)
 	{

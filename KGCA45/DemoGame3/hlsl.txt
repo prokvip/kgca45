@@ -1,15 +1,33 @@
 //--------------------------------------------------------------------------------------
 // Vertex Shader
 //--------------------------------------------------------------------------------------
-float4 VS( in float2 p : POSITION ) : SV_POSITION
+struct VS_INPUT
 {
-    return float4(p.x, p.y, 0.0f, 1.0f);
+	float4 p   : POS;
+	float4 c   : COLOR;
+};
+struct VS_OUTPUT
+{
+	float4 pos   : SV_POSITION;
+	float4 color : COLOR0;
+};
+VS_OUTPUT VS( VS_INPUT vsInput ) 
+{
+	VS_OUTPUT ret = (VS_OUTPUT)0;
+	ret.pos = float4(vsInput.p.x, vsInput.p.y, 0.0f, 1.0f);
+	ret.color = vsInput.c;
+    return ret;
 }
+/*float4 VS( in float2 p : POS, in float4 c : COLOR ) : SV_POSITION
+{
+	float4 ret = float4(p.x, p.y, 0.0f, 1.0f);
+    return ret;
+}*/
 
 //--------------------------------------------------------------------------------------
 // Pixel Shader
 //--------------------------------------------------------------------------------------
-float4 PS( in float4 p : SV_POSITION ) : SV_Target
+float4 PS( VS_OUTPUT psInput ) : SV_Target
 {	
-	return float4(1,1,0,1);
+	return psInput.color;
 }
