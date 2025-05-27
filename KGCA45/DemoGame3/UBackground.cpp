@@ -123,37 +123,15 @@ void     UBackground::CreateVertexData()
 
 
 	// v2(l,b),v3          v5(r,b)
-	m_VertexList[0].p.x = rt[0];
-	m_VertexList[0].p.y = rt[1];
-	m_VertexList[0].c.r = 1.0f;
-	m_VertexList[0].c.g = 0.0f;
-	m_VertexList[0].c.b = 0.0f;
-	m_VertexList[0].c.a = 1.0f;
-	m_VertexList[1].p.x = rt[2];
-	m_VertexList[1].p.y = rt[1];
-	m_VertexList[1].c.r = 0.0f;
-	m_VertexList[1].c.g = 1.0f;
-	m_VertexList[1].c.b = 0.0f;
-	m_VertexList[1].c.a = 1.0f;
-	m_VertexList[2].p.x = rt[0];
-	m_VertexList[2].p.y = rt[3];
-	m_VertexList[2].c.r = 0.0f;
-	m_VertexList[2].c.g = 0.0f;
-	m_VertexList[2].c.b = 0.0f;
-	m_VertexList[2].c.a = 1.0f;
-	m_VertexList[3].p.x = rt[0];
-	m_VertexList[3].p.y = rt[3];
-	m_VertexList[2].c = m_VertexList[2].c;
-	m_VertexList[4].c = m_VertexList[1].c;
-	m_VertexList[4].p.x = rt[2];
-	m_VertexList[4].p.y = rt[1];
-	
-	m_VertexList[5].p.x = rt[2];
-	m_VertexList[5].p.y = rt[3];
-	m_VertexList[5].c.r = 1.0f;
-	m_VertexList[5].c.g = 1.0f;
-	m_VertexList[5].c.b = 1.0f;
-	m_VertexList[5].c.a = 1.0f;
+	m_VertexList[0].p	= { rt[0], rt[1] };
+	m_VertexList[0].c	= { 1.0f,0.0f,0.0f,1.0f };
+	m_VertexList[1]		= { { rt[2], rt[1] },{ 0.0f,1.0f,0.0f,1.0f } };
+	m_VertexList[2]		= {	TPoint(rt[0],rt[3]),
+							TColor(0.0f,0.0f,1.0f,1.0f) };	
+	m_VertexList[5].p	= TPoint(rt[2], rt[3]);
+	m_VertexList[5].c	= TColor(1.0f,1.0f,1.0f,1.0f);
+	m_VertexList[3] = m_VertexList[2];
+	m_VertexList[4] = m_VertexList[1];
 	// NDC
 	/*for (auto& v : m_VertexList)
 	{

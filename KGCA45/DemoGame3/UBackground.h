@@ -7,11 +7,23 @@ struct TColor
 	float  g;
 	float  b;
 	float  a;
+	TColor() : r(1.0f), g(1.0f), b(1.0f), a(1.0f) {}
+	TColor(float r, float g, float b, float a) 
+	{
+		this->r = r; this->g = g; this->b = b; this->a = a;
+	}
 };
 struct TVertex
 {
 	TPoint p;
 	TColor c;
+	TVertex() : p{ 0,0 }, c{ 1.0f,1.0f,1.0f,1.0f } {}
+	TVertex(TPoint p1, TColor c1) : p(p1), c(c1) {}
+	TVertex(float x, float y, float r, float g, float b, float a)
+	{
+		p.x = x; p.y = y;
+		c.r = r; c.g = g; c.b = b; c.a = a;
+	}
 };
 class UBackground :  public AActor
 {

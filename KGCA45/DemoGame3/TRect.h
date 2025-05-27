@@ -5,6 +5,12 @@ struct TPoint
 {
 	float   x;
 	float   y;
+	TPoint() : x(0.0f), y(0.0f){}
+	TPoint(float x, float y)
+	{
+		this->x = x; 
+		this->y = y; 
+	}
 };
 // 화면상단좌측이 원점
 // [l,t]0,0        ->X축         [r,t]800,0
