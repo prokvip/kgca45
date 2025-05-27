@@ -1,0 +1,25 @@
+struct VS_INPUT
+{
+	float4 p   : POS;
+	float4 c   : COLOR;
+};
+struct VS_OUTPUT
+{
+	float4 pos   : SV_POSITION;
+	float4 color : COLOR0;
+};
+float2 ScreenToNDC(float2 p)
+{
+	// NDC
+	// screen x:0 ~ 800, y=0 ~ 600
+	// screen x:0 ~ 1,   y=0 ~ 1
+	// ndc    x:-1 ~ +1, y=-1 ~ +1
+	// 
+	// ndc    x:-1 ~ +1, y=-1 ~ +1
+	float2 vNDC;
+	vNDC.x = p.x / 800.0f;
+	vNDC.y = p.y / 600.0f;
+	vNDC.x = vNDC.x * 2.0f - 1.0f;
+	vNDC.y = (vNDC.y * 2.0f - 1.0f) * -1.0f;
+	return vNDC;
+}

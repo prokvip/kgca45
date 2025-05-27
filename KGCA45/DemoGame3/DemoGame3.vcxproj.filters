@@ -84,8 +84,19 @@
     <Filter Include="core">
       <UniqueIdentifier>{02ddf7a0-4214-42d0-a738-5ad21031fd82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hlsl">
+      <UniqueIdentifier>{cb48ae30-ed8e-4069-b762-0589d18a4f20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="hlsl.txt" />
+    <Text Include="hlsl.txt">
+      <Filter>hlsl</Filter>
+    </Text>
+    <Text Include="DefaultShader.txt">
+      <Filter>hlsl</Filter>
+    </Text>
+    <Text Include="ShaderHeader.txt">
+      <Filter>hlsl</Filter>
+    </Text>
   </ItemGroup>
 </Project>

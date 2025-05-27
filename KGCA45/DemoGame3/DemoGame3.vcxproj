@@ -166,7 +166,9 @@
     <ClInclude Include="UWorld.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="DefaultShader.txt" />
     <Text Include="hlsl.txt" />
+    <Text Include="ShaderHeader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

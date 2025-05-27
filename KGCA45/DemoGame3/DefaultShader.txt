@@ -2,19 +2,14 @@
 //--------------------------------------------------------------------------------------
 // Vertex Shader
 //--------------------------------------------------------------------------------------
-VS_OUTPUT VS( VS_INPUT vsInput ) 
+VS_OUTPUT VS( VS_INPUT vScreen ) 
 {
-	VS_OUTPUT ret = (VS_OUTPUT)0;
-	ret.pos = float4(vsInput.p.x, vsInput.p.y, 0.0f, 1.0f);
-	ret.color = vsInput.c;
+	VS_OUTPUT ret = (VS_OUTPUT)0;	
+	float2 vNDC = ScreenToNDC(vScreen.p);
+	ret.pos = float4(vNDC.x, vNDC.y, 0.0f, 1.0f);
+	ret.color = vScreen.c;
     return ret;
 }
-/*float4 VS( in float2 p : POS, in float4 c : COLOR ) : SV_POSITION
-{
-	float4 ret = float4(p.x, p.y, 0.0f, 1.0f);
-    return ret;
-}*/
-
 //--------------------------------------------------------------------------------------
 // Pixel Shader
 //--------------------------------------------------------------------------------------

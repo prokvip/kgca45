@@ -52,7 +52,7 @@ bool		UBackground::CreateVertexShader()
 	// 컴파일 결과(오브젝트파일)가 m_pVSBuf에 저장된다.
 	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 	ID3DBlob* pBufferErrors = NULL;
-	if (FAILED(hr =D3DX11CompileFromFile(L"hlsl.txt", NULL, 
+	if (FAILED(hr =D3DX11CompileFromFile(L"DefaultShader.txt", NULL, 
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, "VS", "vs_5_0", 
 		dwShaderFlags, NULL, &m_pVSBuf, &pBufferErrors, NULL)))
 	{
@@ -155,10 +155,10 @@ void     UBackground::CreateVertexData()
 	m_VertexList[5].c.b = 1.0f;
 	m_VertexList[5].c.a = 1.0f;
 	// NDC
-	for (auto& v : m_VertexList)
+	/*for (auto& v : m_VertexList)
 	{
 		v.p = ScreenToNDC(v.p);
-	}
+	}*/
 }
 // GPU 메모리에 할당 및 저장한다.
 bool     UBackground::CreateVertexBuffer()
