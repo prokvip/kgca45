@@ -37,9 +37,13 @@ protected:
 	ID3D11PixelShader*	m_pPixelShader = nullptr;
 	ID3DBlob*			m_pVSBuf = NULL;
 	ID3DBlob*			m_pPSBuf = NULL;	
+	ID3D11Texture2D*			m_pTexture = nullptr;
+	ID3D11ShaderResourceView*	m_pSRV = nullptr;
+	D3D11_TEXTURE2D_DESC		m_TexDesc;
 public:
 	std::vector<TVertex>  m_VertexList;
 	ID3D11Buffer* GetVB() { return m_pVertexBuffer; }
+	virtual bool   SetTexture(TString filename);
 	virtual void   UpdatePositionVertexData();
 	virtual void   UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3);
 	virtual void   UpdateUVVertexData(TPoint p, TPoint s);

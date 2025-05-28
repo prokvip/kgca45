@@ -8,10 +8,7 @@ class AActor : public UObject
 {
 protected:
 	TPoint						m_Position;
-	TRect						m_rt;
-	ID3D11Texture2D*			m_pTexture = nullptr;
-	ID3D11ShaderResourceView*	m_pSRV = nullptr;
-	D3D11_TEXTURE2D_DESC		m_TexDesc;
+	TRect						m_rt;	
 	float 						m_fSpeed = 100.0f;
 public:
 	virtual TPoint GetPosition() {
@@ -20,7 +17,6 @@ public:
 	virtual TRect  GetRect() {
 		return m_rt;
 	};
-	virtual bool   SetTexture(TString filename);
 	virtual void   SetPosition(TPoint pos);
 	virtual void   SetPosition(float x, float y);
 	virtual void   SetRect(TPoint pos, TPoint size);

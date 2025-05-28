@@ -1,29 +1,6 @@
 #include "AActor.h"
 #include "TDevice.h"
-bool   AActor::SetTexture(TString filename)
-{
-    HRESULT hr = DirectX::CreateWICTextureFromFile(
-        TDevice::m_pd3dDevice,
-        filename.c_str(),
-        (ID3D11Resource**)&m_pTexture,
-        &m_pSRV
-    );
-    if (FAILED(hr))
-    {
-        hr = DirectX::CreateDDSTextureFromFile(
-            TDevice::m_pd3dDevice,
-            filename.c_str(),
-            (ID3D11Resource**)&m_pTexture,
-            &m_pSRV
-        );
-        if (FAILED(hr))
-        {
-            return false;
-        }
-    }
-    m_pTexture->GetDesc(&m_TexDesc);
-    return true;
-}
+
 void   AActor::SetPosition(TPoint pos)
 {
 	SetPosition(pos.x, pos.y);
@@ -75,6 +52,5 @@ AActor::AActor()
 }
 AActor::~AActor()
 {
-    if (m_pTexture) m_pTexture->Release();
-    if (m_pSRV) m_pSRV->Release();
+   
 }

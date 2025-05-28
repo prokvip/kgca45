@@ -9,12 +9,38 @@ UBackground::UBackground(TString name) : AActor(name)
 }
 UBackground::~UBackground()
 {
+	if (m_pTexture) m_pTexture->Release();
+	if (m_pSRV) m_pSRV->Release();
 	if (m_pVSBuf) m_pVSBuf->Release();
 	if (m_pPSBuf) m_pPSBuf->Release();
 	if (m_pVertexBuffer) m_pVertexBuffer->Release();
 	if (m_pVertexLayout) m_pVertexLayout->Release();
 	if (m_pVertexShader) m_pVertexShader->Release();
 	if (m_pPixelShader) m_pPixelShader->Release();
+}
+bool   UBackground::SetTexture(TString filename)
+{
+	HRESULT hr = DirectX::CreateWICTextureFromFile(
+		TDevice::m_pd3dDevice,
+		filename.c_str(),
+		(ID3D11Resource**)&m_pTexture,
+		&m_pSRV
+	);
+	if (FAILED(hr))
+	{
+		hr = DirectX::CreateDDSTextureFromFile(
+			TDevice::m_pd3dDevice,
+			filename.c_str(),
+			(ID3D11Resource**)&m_pTexture,
+			&m_pSRV
+		);
+		if (FAILED(hr))
+		{
+			return false;
+		}
+	}
+	m_pTexture->GetDesc(&m_TexDesc);
+	return true;
 }
 void   UBackground::UpdateVertexBuffer()
 {
