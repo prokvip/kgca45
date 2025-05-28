@@ -18,7 +18,7 @@ UBackground::~UBackground()
 }
 void   UBackground::UpdateVertexBuffer()
 {
-	UpdateVertexData();
+	UpdatePositionVertexData();
 	// vertexbuffer 갱신한다.
 	if (m_pVertexBuffer)
 	{
@@ -175,7 +175,7 @@ void     UBackground::CreateVertexData()
 		v.p = ScreenToNDC(v.p);
 	}*/
 }
-void     UBackground::UpdateVertexData()
+void     UBackground::UpdatePositionVertexData()
 {
 	if (m_VertexList.size() == 0)
 	{
@@ -188,6 +188,12 @@ void     UBackground::UpdateVertexData()
 	m_VertexList[3].p = { rt[0], rt[3] };
 	m_VertexList[4].p = { rt[2], rt[1] };
 	m_VertexList[5].p = { rt[2], rt[3] };
+}
+void   UBackground::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v2)
+{
+}
+void   UBackground::UpdateUVVertexData(TPoint p, TPoint s)
+{
 }
 // GPU 메모리에 할당 및 저장한다.
 bool     UBackground::CreateVertexBuffer()

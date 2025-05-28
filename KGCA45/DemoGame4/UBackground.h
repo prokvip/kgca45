@@ -40,7 +40,9 @@ protected:
 public:
 	std::vector<TVertex>  m_VertexList;
 	ID3D11Buffer* GetVB() { return m_pVertexBuffer; }
-	virtual void   UpdateVertexData();
+	virtual void   UpdatePositionVertexData();
+	virtual void   UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v2);
+	virtual void   UpdateUVVertexData(TPoint p, TPoint s);
 	virtual void   UpdateVertexBuffer() override;
 	TPoint	 ScreenToNDC(TPoint& p);
 	virtual	bool     Create(
