@@ -189,11 +189,31 @@ void     UBackground::UpdatePositionVertexData()
 	m_VertexList[4].p = { rt[2], rt[1] };
 	m_VertexList[5].p = { rt[2], rt[3] };
 }
-void   UBackground::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v2)
+void   UBackground::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3)
 {
+	if (m_VertexList.size() == 0)
+	{
+		return;
+	}
+	m_VertexList[0].c = v0;
+	m_VertexList[1].c = v1;
+	m_VertexList[2].c = v2;	
+	m_VertexList[5].c = v3;
+	m_VertexList[3].c = m_VertexList[2].c;
+	m_VertexList[4].c = m_VertexList[1].c;
 }
 void   UBackground::UpdateUVVertexData(TPoint p, TPoint s)
 {
+	if (m_VertexList.size() == 0)
+	{
+		return;
+	}
+	m_VertexList[0].t = { p.x / (float)m_TexDesc.Width, p.y / (float)m_TexDesc.Height };
+	m_VertexList[1].t = { (p.x+s.x) / (float)m_TexDesc.Width, m_VertexList[0].t.y };
+	m_VertexList[2].t = { m_VertexList[0].t.x, (p.y+s.y) / (float)m_TexDesc.Height };
+	m_VertexList[5].t = { m_VertexList[1].t.x, m_VertexList[2].t.y };
+	m_VertexList[3].t = m_VertexList[2].t;
+	m_VertexList[4].t = m_VertexList[1].t;
 }
 // GPU 메모리에 할당 및 저장한다.
 bool     UBackground::CreateVertexBuffer()

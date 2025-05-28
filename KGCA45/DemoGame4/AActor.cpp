@@ -21,6 +21,7 @@ bool   AActor::SetTexture(TString filename)
             return false;
         }
     }
+    m_pTexture->GetDesc(&m_TexDesc);
     return true;
 }
 void   AActor::SetPosition(TPoint pos)

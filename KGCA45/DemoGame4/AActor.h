@@ -11,6 +11,7 @@ protected:
 	TRect						m_rt;
 	ID3D11Texture2D*			m_pTexture = nullptr;
 	ID3D11ShaderResourceView*	m_pSRV = nullptr;
+	D3D11_TEXTURE2D_DESC		m_TexDesc;
 	float 						m_fSpeed = 100.0f;
 public:
 	virtual TPoint GetPosition() {
