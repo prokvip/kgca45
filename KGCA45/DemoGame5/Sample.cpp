@@ -23,6 +23,12 @@ void Sample::GameRun()
     if (GameLoop())
     {  
         m_dxDevice.PreRender();
+            m_MapObj->Tick();
+            m_MapObj->Render();
+            m_TimerObj.Tick();
+            m_TimerObj.Render();
+
+            m_EffectObj.Render();
             for (auto& p : m_World.m_ActorList)
             {
                 p.second->Tick();
@@ -43,14 +49,23 @@ void Sample::InitGame()
 
     std::wstring name = L"Background";
     name += std::to_wstring(0);// 정수가 스크링이 된다.
-    auto actor = std::make_shared<UBackground>(name);
-    if (actor->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
+    m_MapObj = std::make_shared<UBackground>(name);
+    if (m_MapObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
         L"../../data/texture/kgcabk.bmp",
         L"../../data/shader/DefaultShader.txt"))
-    {
-        m_World.m_ActorList.insert(std::make_pair(name, actor));
+    {       
     }
-
+    if (m_TimerObj.Create({ 700.0f, 0.0f }, { 50.0f,50.0f },
+        L"../../data/texture/0.png",
+        L"../../data/shader/DefaultShader.txt"))
+    {       
+    }
+    if (m_EffectObj.Create({ 400.0f, 0.0f }, { 100.0f,100.0f },
+        L"../../data/texture/get_item_03.dds",
+        L"../../data/shader/DefaultShader.txt"))
+    {
+    }
+        
     for (int i = 0; i < 10; i++)
     {
         TString name = L"UUI";
@@ -59,7 +74,7 @@ void Sample::InitGame()
         TString texPath = L"../../data/texture/";
         texPath += std::to_wstring(i);
         texPath += L".png";
-        if (actor->Create({ i * 80.0f + 5.0f, 10.0f }, { 70.0f,50.0f },
+        if (actor->Create({ i * 80.0f + 5.0f, 500.0f }, { 70.0f,50.0f },
             texPath, L"../../data/shader/DefaultShader.txt"))
         {
             m_World.m_ActorList.insert(std::make_pair(name, actor));

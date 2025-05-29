@@ -164,7 +164,7 @@ TPoint UBackground::ScreenToNDC(TPoint& p)
 	return tRet;
 }
 // 시스템메모리에 할당 및 저장한다.
-void   UBackground::CreateVertexData()
+void     UBackground::CreateVertexData()
 {
 	if (m_VertexList.size() == 0)
 	{
@@ -200,7 +200,7 @@ void   UBackground::CreateVertexData()
 		v.p = ScreenToNDC(v.p);
 	}*/
 }
-void   UBackground::UpdatePositionVertexData()
+void     UBackground::UpdatePositionVertexData()
 {
 	if (m_VertexList.size() == 0)
 	{
