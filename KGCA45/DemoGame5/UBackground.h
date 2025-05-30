@@ -65,8 +65,7 @@ public:
 	{
 		TVector2 pos = GetPosition();		
 		m_vDirection.Normalized();
-		auto ret = m_vDirection * m_fSpeed * g_fSPF;
-		pos = pos + ret;
+		pos = pos + m_vDirection * m_fSpeed * g_fSPF;
 		
 
 		if (pos.x > 800.0f) { 

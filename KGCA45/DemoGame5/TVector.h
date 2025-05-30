@@ -34,18 +34,18 @@ public:
 	TVector2(float x, float y);
 	TVector2(const TVector2& v);
 public:
-	TVector2 operator + (TVector2& v);
-	TVector2 operator - (TVector2& v);
+	TVector2 operator + (const TVector2& v);
+	TVector2 operator - (const TVector2& v);
 	TVector2 operator * (float s);
 	TVector2 operator / (float s);
-	TVector2 operator += (TVector2& v);
-	TVector2 operator -= (TVector2& v);
+	TVector2 operator += (const TVector2& v);
+	TVector2 operator -= (const TVector2& v);
 	TVector2 operator *= (float s);
 	TVector2 operator /= (float s);
-	bool operator == (TVector2& v);
-	bool operator != (TVector2& v);
-	bool operator < (TVector2& v);
-	bool operator > (TVector2& v);
+	bool operator == (const TVector2& v);
+	bool operator != (const TVector2& v);
+	bool operator < (const TVector2& v);
+	bool operator > (const TVector2& v);
 
 	float length();		// 크기
 	void  Normalized(); // 정규화

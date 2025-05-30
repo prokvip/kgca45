@@ -28,11 +28,11 @@ TVector2::TVector2(const TVector2& v)
 {
 	*this = v;
 }
-TVector2 TVector2::operator + (TVector2& v)
+TVector2 TVector2::operator + (const TVector2& v)
 {
 	return TVector2(x + v.x, y + v.y);
 }
-TVector2 TVector2::operator - (TVector2& v)
+TVector2 TVector2::operator - (const TVector2& v)
 {
 	return TVector2(x - v.x, y - v.y);
 }
@@ -45,13 +45,13 @@ TVector2 TVector2::operator / (float s)
 	return TVector2(x / s, y / s);
 }
 // a += b;
-TVector2 TVector2::operator += (TVector2& v)
+TVector2 TVector2::operator += (const TVector2& v)
 {	
 	x += v.x;
 	y += v.y;
 	return *this;
 }
-TVector2 TVector2::operator -= (TVector2& v)
+TVector2 TVector2::operator -= (const TVector2& v)
 {
 	x -= v.x;
 	y -= v.y;
@@ -69,7 +69,7 @@ TVector2 TVector2::operator /= (float s)
 	y /= s;
 	return *this;
 }
-bool TVector2::operator == (TVector2& v)
+bool TVector2::operator == (const TVector2& v)
 {
 	// 0.99999 == 1.0f
 	if (fabs(x-v.x) < T_EPSILON )
@@ -81,11 +81,11 @@ bool TVector2::operator == (TVector2& v)
 	}
 	return false;
 }
-bool TVector2::operator != (TVector2& v)
+bool TVector2::operator != (const TVector2& v)
 {
 	return !(*this == v);
 }
-bool TVector2::operator < (TVector2& v)
+bool TVector2::operator < (const TVector2& v)
 {
 	if (x < v.x)
 	{
@@ -96,7 +96,7 @@ bool TVector2::operator < (TVector2& v)
 	}
 	return false;
 }
-bool TVector2::operator > (TVector2& v)
+bool TVector2::operator > (const TVector2& v)
 {
 	return !(*this < v);
 }
