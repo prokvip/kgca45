@@ -142,6 +142,7 @@
     <ClCompile Include="TDevice.cpp" />
     <ClCompile Include="TRect.cpp" />
     <ClCompile Include="TTimerEffect.cpp" />
+    <ClCompile Include="TVector.cpp" />
     <ClCompile Include="TWindow.cpp" />
     <ClCompile Include="UActorComponent.cpp" />
     <ClCompile Include="UBackground.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="TRect.h" />
     <ClInclude Include="TStd.h" />
     <ClInclude Include="TTimerEffect.h" />
+    <ClInclude Include="TVector.h" />
     <ClInclude Include="TWindow.h" />
     <ClInclude Include="UActorComponent.h" />
     <ClInclude Include="UBackground.h" />

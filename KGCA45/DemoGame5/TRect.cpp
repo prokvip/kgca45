@@ -1,4 +1,6 @@
 #include "TRect.h"
+#include <Windows.h>
+#include <iostream>
 float    TRect::operator[] (int iIndex)
 {
 	float fRet = m_fLeft;
@@ -11,7 +13,7 @@ TRect::TRect(void)
 {
 	SetRect(0, 0, 0, 0);	
 }
-TRect::TRect(TPoint pos, TPoint size)
+TRect::TRect(TVector2 pos, TVector2 size)
 {
 	SetRect(pos.x, pos.y, size.x, size.y);	
 }
@@ -19,7 +21,7 @@ TRect::TRect(float l, float t, float r, float b)
 {
 	SetRect(l, t, r, b);	// 영역을 주어진 값으로 초기화
 }
-void TRect::SetRect(TPoint pos, TPoint size)
+void TRect::SetRect(TVector2 pos, TVector2 size)
 {
 	SetRect(pos.x, pos.y, pos.x+size.x, pos.y+size.y);
 }

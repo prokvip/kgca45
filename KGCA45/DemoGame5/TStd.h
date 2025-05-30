@@ -30,11 +30,11 @@ struct TColor
 
 struct TVertex
 {
-	TPoint p;
+	TVector2 p;
 	TColor c;
-	TPoint t;
+	TVector2 t;
 	TVertex() : p{ 0,0 }, c{ 1.0f,1.0f,1.0f,1.0f }, t{ 0.0f,0.0f } {}
-	TVertex(TPoint p1, TColor c1, TPoint t1) : p(p1), c(c1), t(t1) {}
+	TVertex(TVector2 p1, TColor c1, TVector2 t1) : p(p1), c(c1), t(t1) {}
 	TVertex(float x, float y, float r, float g, float b, float a, float u, float v)
 	{
 		p.x = x; p.y = y;
@@ -55,7 +55,7 @@ static void ConsolePrintW(const wchar_t* fmt, ...)
 
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD dwBytesWriten;
-	WriteConsoleW(handle, buf, wcslen(buf), &dwBytesWriten, 0);
+	WriteConsoleW(handle, buf, (DWORD)wcslen(buf), &dwBytesWriten, 0);
 }
 
 static void ConsolePrintA(const char* fmt, ...)
@@ -69,7 +69,7 @@ static void ConsolePrintA(const char* fmt, ...)
 
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD dwBytesWriten;
-	WriteConsoleA(handle, buf, strlen(buf), &dwBytesWriten, 0);
+	WriteConsoleA(handle, buf, (DWORD)strlen(buf), &dwBytesWriten, 0);
 }
 
 #define PrintA(fmt,...)         ConsolePrintA( fmt, __VA_ARGS__ )

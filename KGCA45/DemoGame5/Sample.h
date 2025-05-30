@@ -22,10 +22,12 @@ class Sample :  public TWindow
 	std::list< CompPtr>					m_CompList;
 	std::shared_ptr<UTimerComponent>	m_Timer = nullptr;
 	std::shared_ptr<UInputComponent>	m_Input = nullptr;
-	std::shared_ptr<UBackground>		m_Player = nullptr;
+	std::shared_ptr<UPlayer>			m_Player = nullptr;
 	std::shared_ptr<UBackground>		m_MapObj = nullptr;
 	TTimerEffect						m_TimerObj;
 	UBackground							m_EffectObj;
+
+
 public:
 	void InitGame();
 	void ReleaseGame();

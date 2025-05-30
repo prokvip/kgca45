@@ -52,7 +52,7 @@ void   UBackground::UpdateVertexBuffer()
 			&m_VertexList.at(0), 0, 0);
 	}
 }
-bool     UBackground::Create(TPoint pos, TPoint size, 
+bool     UBackground::Create(TVector2 pos, TVector2 size, 
 			TString texfilepath, 
 			TString shaderfilepath)
 {
@@ -148,7 +148,7 @@ bool		UBackground::CreatePixelShader(TString filename)
 	return true;
 }
 
-TPoint UBackground::ScreenToNDC(TPoint& p)
+TVector2 UBackground::ScreenToNDC(TVector2& p)
 {
 	// NDC
 	// screen x:0 ~ 800, y=0 ~ 600
@@ -156,7 +156,7 @@ TPoint UBackground::ScreenToNDC(TPoint& p)
 	// ndc    x:-1 ~ +1, y=-1 ~ +1
 	// 
 	// ndc    x:-1 ~ +1, y=-1 ~ +1
-	TPoint tRet;
+	TVector2 tRet;
 	tRet.x = p.x / 800.0f;
 	tRet.y = p.y / 600.0f;
 	tRet.x = tRet.x * 2.0f - 1.0f;
@@ -186,12 +186,12 @@ void     UBackground::CreateVertexData()
 	m_VertexList[0].c	= { 1.0f,1.0f,1.0f,1.0f };
 	m_VertexList[0].t	= { 0.0f,0.0f };
 	m_VertexList[1]		= { { rt[2], rt[1] },{ 1.0f,1.0f,1.0f,1.0f }, {1.0f,0.0f} };
-	m_VertexList[2]		= {	TPoint(rt[0],rt[3]),
+	m_VertexList[2]		= {	TVector2(rt[0],rt[3]),
 							TColor(1.0f,1.0f,1.0f,1.0f),
-						    TPoint(0.0f, 1.0f)};
-	m_VertexList[5].p	= TPoint(rt[2], rt[3]);
+						    TVector2(0.0f, 1.0f)};
+	m_VertexList[5].p	= TVector2(rt[2], rt[3]);
 	m_VertexList[5].c	= TColor(1.0f,1.0f,1.0f,1.0f);
-	m_VertexList[5].t   = TPoint(1.0f, 1.0f);
+	m_VertexList[5].t   = TVector2(1.0f, 1.0f);
 	m_VertexList[3] = m_VertexList[2];
 	m_VertexList[4] = m_VertexList[1];
 	// NDC
@@ -229,7 +229,7 @@ void   UBackground::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColo
 	m_VertexList[4].c = m_VertexList[1].c;
 	UpdateVertexBuffer();
 }
-void   UBackground::UpdateUVVertexData(TPoint p, TPoint s)
+void   UBackground::UpdateUVVertexData(TVector2 p, TVector2 s)
 {
 	if (m_VertexList.size() == 0)
 	{

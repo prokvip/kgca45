@@ -87,8 +87,8 @@ void TDevice::SetViewPort()
     DXGI_SWAP_CHAIN_DESC Desc;
     m_pSwapChain->GetDesc(&Desc);
     // Setup the viewport    
-    m_ViewPort.Width = Desc.BufferDesc.Width;
-    m_ViewPort.Height = Desc.BufferDesc.Height;
+    m_ViewPort.Width =  (float)Desc.BufferDesc.Width;
+    m_ViewPort.Height = (float)Desc.BufferDesc.Height;
     m_ViewPort.MinDepth = 0.0f;
     m_ViewPort.MaxDepth = 1.0f;
     m_ViewPort.TopLeftX = 0;

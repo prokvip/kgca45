@@ -20,12 +20,12 @@ public:
 	virtual bool   SetTexture(TString filename);
 	virtual void   UpdatePositionVertexData();
 	virtual void   UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3);
-	virtual void   UpdateUVVertexData(TPoint p, TPoint s);
+	virtual void   UpdateUVVertexData(TVector2 p, TVector2 s);
 	virtual void   UpdateVertexBuffer() override;
-	TPoint	 ScreenToNDC(TPoint& p);
+	TVector2	 ScreenToNDC(TVector2& p);
 	virtual	bool     Create(
-		TPoint pos, 
-		TPoint size,
+		TVector2 pos, 
+		TVector2 size,
 		TString texfilepath,
 		TString shaderfilepath);
 	virtual void     CreateVertexData();
@@ -44,59 +44,51 @@ public:
 	UBackground(TString name);
 	~UBackground();
 };
+class UPlayer : public UBackground
+{
+public:
+	virtual void   Tick() override
+	{		
+		auto pos = GetPosition();
+		auto rt = GetRect();
+	}
+public:
+	UPlayer() {};
+	UPlayer(TString name) :UBackground(name) {}
+	~UPlayer() {};
+};
+class UNpc : public UBackground
+{
 
-class UUI1 : public UBackground
-{
 public:
-	/*virtual void     CreateVertexData() override
+	virtual void   Tick() override
 	{
-		m_VertexList.resize(6);
-		TRect  rt = GetRect();
-		m_VertexList[0].p = { rt[0], rt[1] };
-		m_VertexList[0].c = { 1.0f,1.0f,1.0f,1.0f };
-		m_VertexList[0].t = { 0.0f,0.0f };
-		m_VertexList[1].p = { rt[2], rt[1] };
-		m_VertexList[1].c = { 1.0f,1.0f,1.0f,1.0f };
-		m_VertexList[1].t = { 1.0f,0.0f };
-		m_VertexList[2].p = { rt[0],rt[3] };
-		m_VertexList[2].c = { 1.0f, 1.0f, 1.0f, 1.0f };
-		m_VertexList[2].t = { 0.0f, 1.0f };
-		m_VertexList[5].p = { rt[2], rt[3] };
-		m_VertexList[5].c = { 1.0f, 1.0f, 1.0f, 1.0f };
-		m_VertexList[5].t = { 1.0f, 1.0f };
-		m_VertexList[3] = m_VertexList[2];
-		m_VertexList[4] = m_VertexList[1];	
-	}*/
+		TVector2 pos = GetPosition();		
+		m_vDirection.Normalized();
+		auto ret = m_vDirection * m_fSpeed * g_fSPF;
+		pos = pos + ret;
+		
+
+		if (pos.x > 800.0f) { 
+			pos.x = 800.0f; 
+			m_vDirection.x *= -1.0f;
+		}
+		if (pos.x < 0.0f) {
+			pos.x = 0.0f;
+			m_vDirection.x *= -1.0f;
+		}
+		if (pos.y > 600.0f) {
+			pos.y = 600.0f;
+			m_vDirection.y *= -1.0f;
+		}
+		if (pos.y < 0.0f) {
+			pos.y = 0.0f;
+			m_vDirection.y *= -1.0f;
+		}
+		SetPosition(pos);
+	}
 public:
-	UUI1() {};
-	UUI1(TString name) :UBackground(name) {}
-	~UUI1() {};
-};
-class UUI2 : public UBackground
-{
-public:
-	UUI2() {};
-	UUI2(TString name) :UBackground(name) {}
-	~UUI2() {};
-};
-class UUI3 : public UBackground
-{
-public:
-	UUI3() {};
-	UUI3(TString name) :UBackground(name) {}
-	~UUI3() {};
-};
-class UUI4 : public UBackground
-{
-public:
-	UUI4() {};
-	UUI4(TString name) :UBackground(name) {}
-	~UUI4() {};
-};
-class UUI5 : public UBackground
-{
-public:
-	UUI5() {};
-	UUI5(TString name) :UBackground(name) {}
-	~UUI5() {};
+	UNpc() {  };
+	UNpc(TString name) :UBackground(name) {}
+	~UNpc() {};
 };

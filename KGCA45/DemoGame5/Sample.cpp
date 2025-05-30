@@ -23,17 +23,34 @@ void Sample::GameRun()
     if (GameLoop())
     {  
         m_dxDevice.PreRender();
-            m_MapObj->Tick();
-            m_MapObj->Render();
-            m_TimerObj.Tick();
-            m_TimerObj.Render();
-
-            m_EffectObj.Render();
+            m_MapObj->Tick();                               
+            m_Player->Tick();
             for (auto& p : m_World.m_ActorList)
             {
+                if (p.second->m_bDraw == false)
+                {
+                    continue;
+                }
                 p.second->Tick();
+            }
+            m_TimerObj.Tick();    
+            m_EffectObj.Tick();
+            m_World.Tick();
+
+            m_MapObj->Render();
+            m_Player->Render();
+            for (auto& p : m_World.m_ActorList)
+            {
+                if (p.second->m_bDraw == false)
+                {
+                    continue;
+                }
                 p.second->Render();
             }
+            m_TimerObj.Render();
+            m_EffectObj.Render();
+
+            m_World.Render();
         m_dxDevice.PostRender();
     }	
 }
@@ -55,10 +72,30 @@ void Sample::InitGame()
         L"../../data/shader/DefaultShader.txt"))
     {       
     }
+
+    
+    UWorld::g_listA.reserve(10);
+    for (int i = 0; i < 10; i++)
+    {
+        TString texPath = L"../../data/texture/";
+        texPath += std::to_wstring(i);
+        texPath += L".png";
+        UWorld::g_listA.emplace_back(texPath);
+    }
+    UWorld::g_listB.reserve(10);
+    for (int i = 0; i < 10; i++)
+    {
+        TString texPath = L"../../data/texture/lot_wik0";
+        texPath += std::to_wstring(i);
+        texPath += L".dds";
+        UWorld::g_listB.emplace_back(texPath);
+    }
+
     if (m_TimerObj.Create({ 700.0f, 0.0f }, { 50.0f,50.0f },
         L"../../data/texture/0.png",
         L"../../data/shader/DefaultShader.txt"))
     {       
+        m_TimerObj.SetTextureList(UWorld::g_listA);
     }
     if (m_EffectObj.Create({ 400.0f, 0.0f }, { 100.0f,100.0f },
         L"../../data/texture/get_item_03.dds",
@@ -68,16 +105,23 @@ void Sample::InitGame()
         
     for (int i = 0; i < 10; i++)
     {
-        TString name = L"UUI";
+        TString name = L"NPC";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
-        auto actor = std::make_shared<UUI1>(name);
+        auto npc = std::make_shared<UNpc>(name);
         TString texPath = L"../../data/texture/";
         texPath += std::to_wstring(i);
         texPath += L".png";
-        if (actor->Create({ i * 80.0f + 5.0f, 500.0f }, { 70.0f,50.0f },
+      /*  if (npc->Create(
+            { i * 80.0f + 5.0f, 500.0f },
+            { 70.0f,50.0f },*/
+        float x = randstep(0.0f, 800.0f);
+        float y = randstep(0.0f, 600.0f);
+        npc->m_vDirection.x = randstep(-1.0f, +1.0f);
+        npc->m_vDirection.y = randstep(-1.0f, +1.0f);
+        if (npc->Create({ x, y },{ 70.0f,50.0f },
             texPath, L"../../data/shader/DefaultShader.txt"))
         {
-            m_World.m_ActorList.insert(std::make_pair(name, actor));
+            m_World.m_ActorList.insert(std::make_pair(name, npc));
         }
     }
     //for (int i = 0; i < 1; i++)
@@ -101,19 +145,19 @@ void Sample::InitGame()
 
     name.clear();
     name = L"Player";    
-    m_Player = std::make_shared<UBackground>(name);
+    m_Player = std::make_shared<UPlayer>(name);
     m_Player->SetName(name);
 
     if (m_Player->Create({ 400.0f, 300.0f }, { 43.0f,62.0f },
         L"../../data/texture/bitmap1Alpha.bmp", 
         L"../../data/shader/DefaultShader.txt"))
     {        
-        TPoint p = {91.0f, 2.0f};
-        TPoint s = {40.0f, 58.0f};
+        TVector2 p = {91.0f, 2.0f};
+        TVector2 s = {40.0f, 58.0f};
         m_Player->UpdateUVVertexData(p,s);
-        m_Player->UpdateVertexBuffer(); 
-        m_World.m_ActorList.insert(std::make_pair(name, m_Player));
+        m_Player->UpdateVertexBuffer();         
     }
+    m_World.m_pPlayer = m_Player;
 
     std::wcout << UActorComponent::GetNumInstance() << std::endl;
     // 게임생성

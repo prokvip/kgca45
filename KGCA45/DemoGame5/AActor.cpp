@@ -1,7 +1,7 @@
 #include "AActor.h"
 #include "TDevice.h"
 
-void   AActor::SetPosition(TPoint pos)
+void   AActor::SetPosition(TVector2 pos)
 {
 	SetPosition(pos.x, pos.y);
 }
@@ -14,7 +14,7 @@ void   AActor::SetPosition(float x, float y)
 		m_Position.y + m_rt.GetHeight());
 	UpdatePositionVertexData();
 }
-void   AActor::SetRect(TPoint pos, TPoint size)
+void   AActor::SetRect(TVector2 pos, TVector2 size)
 {		
 	SetRect(pos.x, pos.y, pos.x+size.x, pos.y+size.y);
 }
@@ -36,7 +36,7 @@ void   AActor::Move(float x, float y)
 void   AActor::UpdateVertexBuffer(){}
 void   AActor::UpdatePositionVertexData() {}
 void   AActor::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3) {}
-void   AActor::UpdateUVVertexData(TPoint p, TPoint s) {}
+void   AActor::UpdateUVVertexData(TVector2 p, TVector2 s) {}
 void   AActor::Render()
 {
 }

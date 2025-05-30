@@ -24,22 +24,26 @@ bool   TTexture::Load(TString filename)
 	m_pTexture->GetDesc(&m_TexDesc);
 	return true;
 }
+void    TTimerEffect::SetTextureList(std::vector< TTexture>& list)
+{
+	m_texlist = list;
+}
 bool    TTimerEffect::Create(
-	TPoint pos,
-	TPoint size,
+	TVector2 pos,
+	TVector2 size,
 	TString texfilepath,
 	TString shaderfilepath)
 {
 	m_pInitPos = pos;
 	m_pInitSize = size;
-	m_texlist.reserve(10);
+	/*m_texlist.reserve(10);
     for (int i = 0; i < 10; i++)
     {
         TString texPath = L"../../data/texture/";
         texPath += std::to_wstring(i);
         texPath += L".png";
 		m_texlist.emplace_back(texPath);
-    }
+    }*/
 	UBackground::Create(pos,size,texfilepath,shaderfilepath);
 	return true;
 }
@@ -77,9 +81,46 @@ void   TTimerEffect::Render()
 		&m_texlist[m_iSecond/10].m_pSRV);
 	TDevice::m_pContext->Draw(m_VertexList.size(), 0);
 
-	SetRect({ m_pInitPos.x+50.0f, 0.0f}, m_pInitSize);
+	SetRect({ m_pInitPos.x+50.0f, m_pInitPos.y }, m_pInitSize);
 	UpdatePositionVertexData();
 	TDevice::m_pContext->PSSetShaderResources(0, 1,
 		&m_texlist[m_iSecond%10].m_pSRV);
 	TDevice::m_pContext->Draw(m_VertexList.size(), 0);
+}
+
+
+void   TEffect::Tick()
+{
+	m_Timer += g_fSPF;
+	if (m_Timer >= m_fStep)
+	{
+		m_iCurrentIndex++;
+		m_Timer = m_Timer - m_fStep;
+		if (m_iCurrentIndex >= m_texlist.size())
+		{
+			m_iCurrentIndex = 0;
+		}
+		m_iSecond++;
+		if (m_iSecond >= 60)
+		{
+			m_iSecond = 0;
+		}
+	}
+}
+void   TEffect::Render()
+{
+	UINT stride = sizeof(TVertex);
+	UINT offset = 0;
+	TDevice::m_pContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+	TDevice::m_pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	TDevice::m_pContext->IASetInputLayout(m_pVertexLayout);
+	TDevice::m_pContext->VSSetShader(m_pVertexShader, nullptr, 0);
+	TDevice::m_pContext->PSSetShader(m_pPixelShader, nullptr, 0);
+
+	SetRect(m_pInitPos, m_pInitSize);
+	UpdatePositionVertexData();
+	TDevice::m_pContext->PSSetShaderResources(0, 1,
+		&m_texlist[m_iSecond % 10].m_pSRV);
+	TDevice::m_pContext->Draw(m_VertexList.size(), 0);
+	
 }

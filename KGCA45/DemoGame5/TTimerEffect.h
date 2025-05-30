@@ -25,20 +25,29 @@ public:
 };
 class TTimerEffect :  public UBackground
 {
+public:
+	float					m_fStep = 1.0f;
 	std::vector<TTexture>	m_texlist;
 	UINT					m_iCurrentIndex=0;
 	float					m_Timer= 0.0f;
 	UINT				    m_iSecond;
-	TPoint					m_pInitPos;
-	TPoint					m_pInitSize;
+	TVector2					m_pInitPos;
+	TVector2					m_pInitSize;
 	std::vector<std::shared_ptr<UBackground>> m_SecondObj;
 public:
+	void    SetTextureList(std::vector< TTexture>& list);
 	virtual	bool     Create(
-		TPoint pos,
-		TPoint size,
+		TVector2 pos,
+		TVector2 size,
 		TString texfilepath,
 		TString shaderfilepath) override;
 	virtual void   Tick()override;
 	virtual void   Render() override;
 };
 
+class TEffect : public TTimerEffect
+{
+public:
+	virtual void   Tick()override;
+	virtual void   Render() override;
+};
