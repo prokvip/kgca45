@@ -1,7 +1,7 @@
 #pragma once
-#include "AActor.h"
+#include "APawn.h"
 
-class ATimerEffect :  public AActor
+class ATimerEffect :  public APawn
 {
 public:
 	float					m_fStep = 1.0f;
@@ -22,7 +22,7 @@ public:
 	virtual void   Tick()override;
 	virtual void   Render() override;
 public:
-	ATimerEffect(std::wstring name) : AActor(name) {}
+	ATimerEffect(std::wstring name) : APawn(name) {}
 	ATimerEffect() {};
 	~ATimerEffect() {};
 };

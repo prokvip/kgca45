@@ -5,7 +5,6 @@
 #include "USoundComponent.h"
 using sharedActor	= std::shared_ptr<AActor>;
 using TArray		= std::vector<sharedActor>;
-// stl::map<key, value> list;
 using TMap			= std::map<std::wstring, sharedActor>;
 
 class ANpcCharacter;
