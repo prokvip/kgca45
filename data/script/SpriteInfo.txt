@@ -1,0 +1,121 @@
+#SPRITE 
+lot_wik 25 1 nullptr nullptr DefaultShader.txt
+0 ../../data/texture/lot_wik00.dds
+1 ../../data/texture/lot_wik01.dds
+2 ../../data/texture/lot_wik02.dds
+3 ../../data/texture/lot_wik03.dds
+4 ../../data/texture/lot_wik04.dds
+5 ../../data/texture/lot_wik05.dds
+6 ../../data/texture/lot_wik06.dds
+7 ../../data/texture/lot_wik07.dds
+8 ../../data/texture/lot_wik08.dds
+9 ../../data/texture/lot_wik09.dds
+10 ../../data/texture/lot_wik10.dds
+11 ../../data/texture/lot_wik11.dds
+12 ../../data/texture/lot_wik12.dds
+13 ../../data/texture/lot_wik13.dds
+14 ../../data/texture/lot_wik14.dds
+15 ../../data/texture/lot_wik15.dds
+16 ../../data/texture/lot_wik16.dds
+17 ../../data/texture/lot_wik17.dds
+18 ../../data/texture/lot_wik18.dds
+19 ../../data/texture/lot_wik19.dds
+20 ../../data/texture/lot_wik20.dds
+21 ../../data/texture/lot_wik21.dds
+22 ../../data/texture/lot_wik22.dds
+23 ../../data/texture/lot_wik23.dds
+24 ../../data/texture/lot_wik24.dds
+rtSmoke 16 0 ../../data/texture/smoke.dds ../../data/texture/smoke.dds DefaultShader.txt
+0	0	0 128 128 
+1	128	0 128 128  
+2	256	0 128 128  
+3	384	0 128 128  
+4	0	128 128 128 
+5	128	128 128 128  
+6	256	128 128 128  
+7	384	128 128 128  
+8	0	256 128 128 
+9	128	256 128 128  
+10	256	256 128 128  
+11	384	256 128 128  
+12	0	384 128 128 
+13	128	384 128 128  
+14	256	384 128 128  
+15	384	384 128 128  
+GetIterm 16 0 ../../data/texture/get_item_03.dds ../../data/texture/get_item_03.dds DefaultShader.txt
+0	0	0 128 128 
+1	128	0 128 128  
+2	256	0 128 128  
+3	384	0 128 128  
+4	0	128 128 128 
+5	128	128 128 128  
+6	256	128 128 128  
+7	384	128 128 128  
+8	0	256 128 128 
+9	128	256 128 128  
+10	256	256 128 128  
+11	384	256 128 128  
+12	0	384 128 128 
+13	128	384 128 128  
+14	256	384 128 128  
+15	384	384 128 128  
+rtExplosion 12 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0	1	142 41 40 
+1	43 142 38 42 
+2	82 142 35 42 
+3	119 142 35 45
+4	155 142 34 45
+5	190 142 34 41
+6	225 142 33 37
+7	259 142 31 35
+8	291 142 29 31
+9	321 142 27 25
+10	349 142 24 23
+11	374 142 22 18	
+DefalultNumber 10 1 ../../data/ui/0.png nullptr DefaultShader.txt
+0 ../../data/ui/0.png
+1 ../../data/ui/1.png
+2 ../../data/ui/2.png
+3 ../../data/ui/3.png
+4 ../../data/ui/4.png
+5 ../../data/ui/5.png
+6 ../../data/ui/6.png
+7 ../../data/ui/7.png
+8 ../../data/ui/8.png
+9 ../../data/ui/9.png
+rtBomb 9 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0	161 85 11 12
+1	173 85 22 20
+2	196 85 26 24
+3	223 85 28 24
+4	252 85 30 24
+5	283 85 29 22
+6	313 85 22 20
+7	336 85 16 15
+8	353 85 4 6
+rtClash 6 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0 161 62 12 11
+1 174 62 20 20
+2 195 62 22 21
+3 219 62 18 19
+4 238 62 14 13
+5 253 62 11 10
+rtProjectile 6 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0 269 1 5 23
+1 276 1 8 23
+2 269 1 5 23
+3 276 1 8 23
+4 269 1 5 23
+5 276 1 8 23
+rtUserLeft 3 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0 1 1 28 60
+1 29 1 27 60
+2 56 1 36 60
+rtUserRight 3 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0 219 62 18 19
+1 238 62 14 13
+2 253 62 11 10
+rtUserFrontBack 2 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp DefaultShader.txt
+0 219 62 18 19
+1 219 62 18 19
+#END

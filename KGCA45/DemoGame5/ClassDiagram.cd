@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="UActorComponent" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAIAAAAIAAA=</HashCode>
+      <FileName>UActorComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UInputComponent" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAgAAAgAAAAAAABQAAAAACAAAAAAAQAAABAA=</HashCode>
+      <FileName>UInputComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTexture" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgCAAAKAAAAAgAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>URenderComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="URenderComponent" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAIBIAKFMQAAggABAEQCgASABkEEAARAAAQAEAAA=</HashCode>
+      <FileName>URenderComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="USoundComponent" Collapsed="true">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAQAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>USoundComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UTimerComponent" Collapsed="true">
+    <Position X="1.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAACAAgIABAAABAAAAAAgAAAAAgAQAAAgAAAAAAA=</HashCode>
+      <FileName>UTimerComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TDevice" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CRAABAAAAAAAICAAAAAAAAAAAAAAAEAAAAIACBACAAA=</HashCode>
+      <FileName>TDevice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TRect" Collapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAgAAACAIAAAIDgAAAIgAlSAAMEAAAAAggAyEGAAEg=</HashCode>
+      <FileName>TRect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TVector2" Collapsed="true">
+    <Position X="8" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAEAAAQAAAAIAAgAAAAAgAAAAAAA=</HashCode>
+      <FileName>TVector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TVector4" Collapsed="true">
+    <Position X="3.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAMAAAAAAAAAAEAAAQAAAAIAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>TVector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TWindow" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAgAAiAAACABAAAAAAAAAAAAAAQAIIAAAAgEAIY=</HashCode>
+      <FileName>TWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWorld" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABAQAAAAAgAAAAAAAABgAQABAgAAAAQAQ=</HashCode>
+      <FileName>UWorld.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AActor" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAIABCAKBAAAAAAAAAEUAAAAIEAlAAIBAAAAgAQAA=</HashCode>
+      <FileName>AActor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACharacter" Collapsed="true">
+    <Position X="13.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>ACharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANpcCharacter" Collapsed="true">
+    <Position X="12.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQCA=</HashCode>
+      <FileName>ANpcCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="APawn" Collapsed="true">
+    <Position X="14.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>APawn.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="APlayerCharacter" Collapsed="true">
+    <Position X="14.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAQIA=</HashCode>
+      <FileName>APlayerCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UObject" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAgAAAAAAACAAAAAAAAAAAAQQgAABAA=</HashCode>
+      <FileName>UObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAqAAACAQAAACAAAAQAEQAAAAACAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Sample.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ATimerEffect" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAIAAAJCAAAAAAACAAAAAFABAhAAAEAAQAQ=</HashCode>
+      <FileName>ATimerEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEffect" Collapsed="true">
+    <Position X="17" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAA=</HashCode>
+      <FileName>ATimerEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TColor" Collapsed="true">
+    <Position X="19.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAQQBAAAAAAA=</HashCode>
+      <FileName>TStd.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TVertex" Collapsed="true">
+    <Position X="21.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAEQAAAQAAAA=</HashCode>
+      <FileName>TStd.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="float2" Collapsed="true">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TVector.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="float4" Collapsed="true">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TVector.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="__unnamed_enum_0749_1" Collapsed="true">
+    <Position X="19.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAgAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UInputComponent.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

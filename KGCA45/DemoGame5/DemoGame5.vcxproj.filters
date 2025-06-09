@@ -122,4 +122,7 @@
       <UniqueIdentifier>{3d6e7d42-5cc4-4625-9b48-1bbac1111e03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>
