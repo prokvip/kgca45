@@ -136,18 +136,20 @@
   <ItemGroup>
     <ClCompile Include="AActor.cpp" />
     <ClCompile Include="ACharacter.cpp" />
+    <ClCompile Include="ANpcCharacter.cpp" />
     <ClCompile Include="APawn.cpp" />
+    <ClCompile Include="APlayerCharacter.cpp" />
     <ClCompile Include="DemoGame5.cpp" />
     <ClCompile Include="Sample.cpp" />
     <ClCompile Include="TDevice.cpp" />
     <ClCompile Include="TRect.cpp" />
-    <ClCompile Include="TTimerEffect.cpp" />
+    <ClCompile Include="ATimerEffect.cpp" />
     <ClCompile Include="TVector.cpp" />
     <ClCompile Include="TWindow.cpp" />
     <ClCompile Include="UActorComponent.cpp" />
-    <ClCompile Include="UBackground.cpp" />
     <ClCompile Include="UInputComponent.cpp" />
     <ClCompile Include="UObject.cpp" />
+    <ClCompile Include="URenderComponent.cpp" />
     <ClCompile Include="USoundComponent.cpp" />
     <ClCompile Include="UTimerComponent.cpp" />
     <ClCompile Include="UWorld.cpp" />
@@ -155,18 +157,20 @@
   <ItemGroup>
     <ClInclude Include="AActor.h" />
     <ClInclude Include="ACharacter.h" />
+    <ClInclude Include="ANpcCharacter.h" />
     <ClInclude Include="APawn.h" />
+    <ClInclude Include="APlayerCharacter.h" />
     <ClInclude Include="Sample.h" />
     <ClInclude Include="TDevice.h" />
     <ClInclude Include="TRect.h" />
     <ClInclude Include="TStd.h" />
-    <ClInclude Include="TTimerEffect.h" />
+    <ClInclude Include="ATimerEffect.h" />
     <ClInclude Include="TVector.h" />
     <ClInclude Include="TWindow.h" />
     <ClInclude Include="UActorComponent.h" />
-    <ClInclude Include="UBackground.h" />
     <ClInclude Include="UInputComponent.h" />
     <ClInclude Include="UObject.h" />
+    <ClInclude Include="URenderComponent.h" />
     <ClInclude Include="USoundComponent.h" />
     <ClInclude Include="UTimerComponent.h" />
     <ClInclude Include="UWorld.h" />

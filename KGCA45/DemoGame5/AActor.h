@@ -1,11 +1,14 @@
 #pragma once
-#include "UObject.h"
+#include "URenderComponent.h"
+
 /// <summary>
 /// 씬(게임화면)에 배치되는 오브젝트
 /// </summary>
 
 class AActor : public UObject
-{
+{	
+public:
+	std::shared_ptr<URenderComponent> m_pRenderComponent = nullptr;
 protected:
 	TVector2	m_Position;
 	TRect		m_rt;	
@@ -31,6 +34,11 @@ public:
 	virtual void   UpdatePositionVertexData();
 	virtual void   UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3);
 	virtual void   UpdateUVVertexData(TVector2 p, TVector2 s);
+	virtual	bool     Create(
+		TVector2 pos,
+		TVector2 size,
+		TString texfilepath,
+		TString shaderfilepath);
 public:
 	AActor(std::wstring name);
 	AActor();

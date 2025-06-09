@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DemoGame5.cpp" />
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="ATimerEffect.cpp" />
+    <ClCompile Include="UActorComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="UInputComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="USoundComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="UTimerComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TWindow.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="TDevice.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="TVector.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="TRect.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="AActor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="ACharacter.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="APawn.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="UObject.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="UWorld.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="URenderComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="APlayerCharacter.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="ANpcCharacter.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sample.h" />
+    <ClInclude Include="ATimerEffect.h" />
+    <ClInclude Include="UActorComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="UInputComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="USoundComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="UTimerComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TWindow.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TDevice.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TVector.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TStd.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TRect.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="AActor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ACharacter.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="APawn.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="UObject.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="UWorld.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="URenderComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="APlayerCharacter.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ANpcCharacter.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\data\shader\DefaultShader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Component">
+      <UniqueIdentifier>{050410d6-cec8-44a2-81c6-4f85d95fabf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{9c53af24-6b9c-4e91-887b-518b6115cdee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{3d6e7d42-5cc4-4625-9b48-1bbac1111e03}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

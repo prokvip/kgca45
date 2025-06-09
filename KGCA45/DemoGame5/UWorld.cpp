@@ -1,8 +1,12 @@
 #include "UWorld.h"
-#include "TTimerEffect.h"
+#include "ATimerEffect.h"
+#include "ANpcCharacter.h"
+#include "APlayerCharacter.h"
 
 std::vector<TTexture> UWorld::g_listA;
 std::vector<TTexture> UWorld::g_listB;
+std::shared_ptr<UTimerComponent>	 UWorld::m_Timer= nullptr;
+std::shared_ptr<UInputComponent>	 UWorld::m_Input= nullptr;
 
 void UWorld::Tick()
 {
@@ -34,7 +38,7 @@ void   UWorld::AddEffect(TVector2 pos)
 {
 	std::wstring name = L"effect";
 	name += std::to_wstring(m_ActorList.size());
-	auto effect = std::make_shared<TEffect>();
+	auto effect = std::make_shared<AEffect>();
 	if (effect->Create(pos, { 50.0f,50.0f },
 		L"../../data/texture/get_item_03.dds",
 		L"../../data/shader/DefaultShader.txt"))
