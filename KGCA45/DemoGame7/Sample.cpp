@@ -1,8 +1,9 @@
 #include "Sample.h"
 #include "APlayerCharacter.h"
 #include "ANpcCharacter.h"
-// 리소스 메니저(에셋메니저) : 중복된 리소스를 관리하는 클래스
-// 텍스처, 쉐이더, 사운드, 폰트 등등
+#include "TAssetManager.h"
+#include "UInputComponent.h"
+#include "UTimerComponent.h"
 LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {   
     TWindow::MsgProc(hWnd, message, wParam, lParam);
@@ -10,7 +11,7 @@ LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 void Sample::GameRun()
 {
-    for (auto pNode = m_World.m_CompList.begin();pNode != m_World.m_CompList.end();pNode++)
+    for (auto pNode = m_Engine.m_CompList.begin();pNode != m_Engine.m_CompList.end();pNode++)
     {
         (*pNode)->TickComponent();
     }
@@ -58,8 +59,9 @@ void Sample::InitGame()
     P(L"%s\n", L"Create DirectX  : true");
     m_dxDevice.CreateDevice(GetHwnd());
     m_dxDevice.CreateRenderTargetView();
-    m_dxDevice.SetViewPort();
+    m_dxDevice.SetViewPort();    
 
+    m_Engine.Init();
 	m_World.Init();
    
     std::wstring name = L"Background";
@@ -69,31 +71,15 @@ void Sample::InitGame()
         L"../../data/ui/kgcabk.bmp",
         L"../../data/shader/DefaultShader.txt"))
     {       
-    }
-
-    
-    UWorld::g_listA.reserve(10);
-    for (int i = 0; i < 10; i++)
-    {
-        TString texPath = L"../../data/ui/";
-        texPath += std::to_wstring(i);
-        texPath += L".png";
-        UWorld::g_listA.emplace_back(texPath);
-    }
-    UWorld::g_listB.reserve(10);
-    for (int i = 0; i < 10; i++)
-    {
-        TString texPath = L"../../data/texture/lot_wik0";
-        texPath += std::to_wstring(i);
-        texPath += L".dds";
-        UWorld::g_listB.emplace_back(texPath);
-    }
+    }    
+   
 	m_TimerObj = std::make_shared<ATimerEffect>(L"GameTimer");
     if (m_TimerObj->Create({ 700.0f, 0.0f }, { 50.0f,50.0f },
         L"../../data/ui/0.png",
         L"../../data/shader/DefaultShader.txt"))
     {       
-        m_TimerObj->SetTextureList(UWorld::g_listA);
+        auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
+        m_TimerObj->SetTextureList(sprite->m_texlist);
     }
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
     if (m_EffectObj->Create({ 400.0f, 0.0f }, { 100.0f,100.0f },
@@ -160,21 +146,7 @@ void Sample::InitGame()
 
     std::wcout << UActorComponent::GetNumInstance() << std::endl;
   
-    // 게임생성
-    using CompPtr = std::shared_ptr<UActorComponent>;
-    m_World.m_CompList.push_back(std::make_shared<UTimerComponent>(L"GameTimer"));
-    m_World.m_Timer = std::dynamic_pointer_cast<UTimerComponent>(m_World.m_CompList.back());
-
-    m_World.m_CompList.push_back(std::make_shared<UInputComponent>(L"GameInput"));
-    m_World.m_Input = std::dynamic_pointer_cast<UInputComponent>(m_World.m_CompList.back());
-
-    m_World.m_CompList.push_back(std::make_shared <USoundComponent>(L"GameSound"));
-
-    if (m_World.m_Timer == nullptr)
-    {
-        m_World.m_CompList.clear();
-        return;
-    }
+    
 }
 bool Sample::GameLoop()
 {   
@@ -186,9 +158,9 @@ void Sample::ReleaseGame()
     m_dxDevice.Release();
 
     std::wcout << std::endl;
-    std::wcout << m_World.m_Timer->GetGameGlobalTimer() << std::endl;
+    std::wcout << TEngine::gTimer->GetGameGlobalTimer() << std::endl;
 
-    m_World.m_CompList.clear();
+    m_Engine.m_CompList.clear();
     m_World.m_ActorList.clear();
 
     std::wcout << L"현재 인스턴스 갯수 : " << UActorComponent::GetNumInstance() << std::endl;
