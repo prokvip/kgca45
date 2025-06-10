@@ -5,11 +5,12 @@ class ASprite : public APawn
 public:
 	float					m_fStep = 1.0f;
 	std::vector<TTexture>	m_texlist;
+	std::vector<TVector4>	m_uvlist;
 	UINT					m_iCurrentIndex = 0;
-	float					gTimer = 0.0f;
+	float					m_fTimer = 0.0f;
 	UINT				    m_iSecond = 0;
-	TVector2					m_pInitPos;
-	TVector2					m_pInitSize;
+	TVector2				m_pInitPos;
+	TVector2				m_pInitSize;
 	std::vector<std::shared_ptr<URenderComponent>> m_SecondObj;
 public:
 	void    SetTextureList(std::vector< TTexture>& list);

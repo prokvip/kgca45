@@ -91,32 +91,42 @@ void	TEngine::Init()
 	{
 		if (sprite.m_iType == TSpriteInfo::UV_Animation)
 		{			
+			TVector2 pos = { 0.0f, 0.0f };
 			std::unique_ptr<ASprite> asset = std::make_unique<AEffectUV>();
-			/*if (asset->Create(pos, { 50.0f,50.0f },
-				L"../../data/texture/get_item_03.dds",
-				L"../../data/shader/DefaultShader.txt"))
+			asset->SetName(sprite.m_Name);
+			if (asset->Create(pos, { 50.0f,50.0f },
+				sprite.m_szTextureFilePath,
+				sprite.m_szShaderFilePath))
 			{
 				asset->m_fStep = 0.1f;
-				asset->SetTextureList(UWorld::g_listB);
-
-			}*/
+			}
+			//auto texInfo = asset->m_pRenderComponent->m_TexDesc;
+			for (auto& data : sprite.m_uvArray)
+			{
+				TVector4 uv;
+				// p
+				uv.x = (float)data.left ;	uv.y = (float)data.top;
+				// s
+				uv.z = (float)data.right;	uv.w = (float)data.bottom;
+				asset->m_uvlist.emplace_back(uv);
+			}
 			gSpriteManager.AddAsset(sprite.m_Name, std::move(asset));
 		}
 		else if (sprite.m_iType == TSpriteInfo::TEX_Animation)
 		{
 			TVector2 pos = { 0.0f, 0.0f };
 			std::unique_ptr<ASprite> asset = std::make_unique<AEffectTex>();
+			asset->SetName(sprite.m_Name);
 			asset->m_texlist.reserve(sprite.m_texArray.size());
 			for (auto& tex : sprite.m_texArray)
 			{
 				asset->m_texlist.emplace_back(tex);
 			}
 			if (asset->Create(pos, { 50.0f,50.0f },
-				L"../../data/texture/get_item_03.dds",
-				L"../../data/shader/DefaultShader.txt"))
+				sprite.m_szTextureFilePath,
+				sprite.m_szShaderFilePath))
 			{
-				asset->m_fStep = 0.1f;
-				//asset->SetTextureList(UWorld::g_listB);
+				asset->m_fStep = 0.1f;				
 			}			
 			gSpriteManager.AddAsset(sprite.m_Name, std::move(asset));
 		}

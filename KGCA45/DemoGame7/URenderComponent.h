@@ -14,8 +14,8 @@ protected:
 	ID3DBlob* m_pPSBuf = NULL;
 	ID3D11Texture2D* m_pTexture = nullptr;
 	ID3D11ShaderResourceView* m_pSRV = nullptr;
-	D3D11_TEXTURE2D_DESC		m_TexDesc;
 public:
+	D3D11_TEXTURE2D_DESC		m_TexDesc;
 	ID3D11Buffer*		GetVB() {return m_pVertexBuffer;}
 	ID3D11InputLayout*	GetVL() { return m_pVertexLayout; }
 	ID3D11VertexShader* GetVS() { return m_pVertexShader; }

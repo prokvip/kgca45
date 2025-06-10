@@ -17,11 +17,11 @@ bool    ASprite::Create(
 }
 void   ASprite::Tick()
 {	
-	gTimer += g_fSPF;
-	if (gTimer >= m_fStep)
+	m_fTimer += g_fSPF;
+	if (m_fTimer >= m_fStep)
 	{
 		m_iCurrentIndex++;
-		gTimer = gTimer- m_fStep;
+		m_fTimer = m_fTimer- m_fStep;
 		if (m_iCurrentIndex >= m_texlist.size())
 		{
 			m_iCurrentIndex = 0;
@@ -38,24 +38,32 @@ void   ASprite::Render()
 	TDevice::m_pContext->IASetInputLayout(m_pRenderComponent->GetVL());
 	TDevice::m_pContext->VSSetShader(m_pRenderComponent->GetVS(), nullptr, 0);
 	TDevice::m_pContext->PSSetShader(m_pRenderComponent->GetPS(), nullptr, 0);
-	
+
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
-	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond/10].m_pSRV);
-	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
-
-	SetRect({ m_pInitPos.x+50.0f, m_pInitPos.y }, m_pInitSize);
-	UpdatePositionVertexData();
-	TDevice::m_pContext->PSSetShaderResources(0, 1,	&m_texlist[m_iSecond%10].m_pSRV);
+	if (m_uvlist.size())
+	{
+		UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
+			{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
+	}
+	if (m_texlist.size())
+	{
+		TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iCurrentIndex].m_pSRV);
+	}
+	else
+	{
+		auto srv = m_pRenderComponent->GetSRV();
+		TDevice::m_pContext->PSSetShaderResources(0, 1, &srv);
+	}
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 }
 void   ATimerEffect::Tick()
 {
-	gTimer += g_fSPF;
-	if (gTimer >= 1.0f)
+	m_fTimer += g_fSPF;
+	if (m_fTimer >= 1.0f)
 	{
 		m_iCurrentIndex++;
-		gTimer = gTimer - 1.0f;
+		m_fTimer = m_fTimer - 1.0f;
 		if (m_iCurrentIndex >= m_texlist.size())
 		{
 			m_iCurrentIndex = 0;
@@ -90,7 +98,8 @@ void   ATimerEffect::Render()
 }
 void   AEffectTex::Render()
 {
-	UINT stride = sizeof(TVertex);
+	ASprite::Render();
+	/*UINT stride = sizeof(TVertex);
 	UINT offset = 0;
 	auto vb = m_pRenderComponent->GetVB();
 	TDevice::m_pContext->IASetVertexBuffers(0, 1, &vb, &stride, &offset);
@@ -101,14 +110,15 @@ void   AEffectTex::Render()
 
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
-	TDevice::m_pContext->PSSetShaderResources(0, 1,&m_texlist[m_iSecond % 10].m_pSRV);
-	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
+	TDevice::m_pContext->PSSetShaderResources(0, 1,&m_texlist[m_iCurrentIndex].m_pSRV);
+	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);*/
 	
 }
 
 void   AEffectUV::Render()
 {
-	UINT stride = sizeof(TVertex);
+	ASprite::Render();
+	/*UINT stride = sizeof(TVertex);
 	UINT offset = 0;
 	auto vb = m_pRenderComponent->GetVB();
 	TDevice::m_pContext->IASetVertexBuffers(0, 1, &vb, &stride, &offset);
@@ -119,8 +129,10 @@ void   AEffectUV::Render()
 
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
+	UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
+						{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
 	auto srv = m_pRenderComponent->GetSRV();
 	TDevice::m_pContext->PSSetShaderResources(0, 1, &srv);
-	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
+	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);*/
 
 }

@@ -22,20 +22,11 @@ struct TEffect
 	ASprite*				m_pEffect = nullptr; // Effect object pointer
 	void   Render()
 	{
-		UINT stride = sizeof(TVertex);
-		UINT offset = 0;
-		auto vb = m_pEffect->m_pRenderComponent->GetVB();
-		TDevice::m_pContext->IASetVertexBuffers(0, 1, &vb, &stride, &offset);
-		TDevice::m_pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		TDevice::m_pContext->IASetInputLayout(m_pEffect->m_pRenderComponent->GetVL());
-		TDevice::m_pContext->VSSetShader(m_pEffect->m_pRenderComponent->GetVS(), nullptr, 0);
-		TDevice::m_pContext->PSSetShader(m_pEffect->m_pRenderComponent->GetPS(), nullptr, 0);
-		m_pEffect->SetRect(m_pInitPos, m_pInitSize);
-		m_pEffect->UpdatePositionVertexData();
-		TDevice::m_pContext->PSSetShaderResources(0, 1, &m_pEffect->m_texlist[m_iCurrentIndex].m_pSRV);
-		TDevice::m_pContext->Draw(m_pEffect->m_pRenderComponent->m_VertexList.size(), 0);
+		m_pEffect->m_pInitPos = m_pInitPos;
+		m_pEffect->m_pInitSize = m_pInitSize;
+		m_pEffect->m_iCurrentIndex = m_iCurrentIndex;
+		m_pEffect->Render();
 	}
-
 
 	void   Tick()
 	{
@@ -44,10 +35,17 @@ struct TEffect
 		{
 			m_iCurrentIndex++;
 			gTimer = gTimer - m_fStep;
-			if (m_iCurrentIndex >= m_pEffect->m_texlist.size())
+
+			UINT iMaxCounter = m_pEffect->m_texlist.size();
+			if (iMaxCounter <= 0)
+			{
+				iMaxCounter = m_pEffect->m_uvlist.size();
+				
+			}
+			if (m_iCurrentIndex >= iMaxCounter)
 			{
 				m_iCurrentIndex = 0;
-			}			
+			}
 		}
 	}
 };
