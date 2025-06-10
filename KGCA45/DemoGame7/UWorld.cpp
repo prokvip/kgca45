@@ -70,8 +70,7 @@ void   UWorld::AddEffectUV(TVector2 pos)
 	auto sprite = std::make_shared<TEffect>();
 	
 	//auto sprite = TEngine::gSpriteManager.GetAsset(L"lot_wik");
-	//sprite->m_pEffect = effectListUV[m_iCurrentIndex++];	
-	sprite->m_pEffect = effectListUV[6];
+	sprite->m_pEffect = effectListUV[m_iCurrentIndex++];		
 	sprite->m_szName = sprite->m_pEffect->GetName();
 	sprite->m_pInitPos = pos;
 	sprite->m_pInitSize = { 50.0f,50.0f };
