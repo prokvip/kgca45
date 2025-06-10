@@ -3,7 +3,7 @@
 #include "TAssetManager.h"
 #include "TTexture.h"
 #include "TShader.h"
-#include "ATimerEffect.h"
+#include "TSprite.h"
 
 
 class UActorComponent;
@@ -33,7 +33,7 @@ public:
 public:
 	static TAssetManager<TTexture>			gTexManager;
 	static TAssetManager<TShader>			gShaderManager;	
-	static TAssetManager<ATimerEffect>		gSpriteManager;
+	static TAssetManager<ASprite>			gSpriteManager;
 
 	static std::shared_ptr<UTimerComponent>	gTimer;
 	static std::shared_ptr<UInputComponent>	gInput;

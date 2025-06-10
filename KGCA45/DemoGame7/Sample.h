@@ -3,7 +3,7 @@
 
 #include "TWindow.h"
 #include "TDevice.h"
-#include "ATimerEffect.h"
+
 
 //1)DirectXTK 다운로드 및 컴파일
 //2)bin->하위노드 DirectXTK.lib

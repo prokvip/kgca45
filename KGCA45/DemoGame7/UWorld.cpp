@@ -1,7 +1,7 @@
 #include "UWorld.h"
 #include "ANpcCharacter.h"
 #include "APlayerCharacter.h"
-#include "ATimerEffect.h"
+#include "TSprite.h"
 #include <tchar.h>
 
 void	UWorld::Init()

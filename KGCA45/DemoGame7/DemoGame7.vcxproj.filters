@@ -10,7 +10,6 @@
     <ClCompile Include="Sample.cpp" />
     <ClCompile Include="TDevice.cpp" />
     <ClCompile Include="TRect.cpp" />
-    <ClCompile Include="ATimerEffect.cpp" />
     <ClCompile Include="TVector.cpp" />
     <ClCompile Include="TWindow.cpp" />
     <ClCompile Include="UActorComponent.cpp" />
@@ -23,10 +22,10 @@
     <ClCompile Include="TShader.cpp">
       <Filter>NewFilter1</Filter>
     </ClCompile>
-    <ClCompile Include="TSprite.cpp">
+    <ClCompile Include="TTexture.cpp">
       <Filter>NewFilter1</Filter>
     </ClCompile>
-    <ClCompile Include="TTexture.cpp">
+    <ClCompile Include="TSprite.cpp">
       <Filter>NewFilter1</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,7 +39,6 @@
     <ClInclude Include="TDevice.h" />
     <ClInclude Include="TRect.h" />
     <ClInclude Include="TStd.h" />
-    <ClInclude Include="ATimerEffect.h" />
     <ClInclude Include="TVector.h" />
     <ClInclude Include="TWindow.h" />
     <ClInclude Include="UActorComponent.h" />
@@ -53,10 +51,10 @@
     <ClInclude Include="TShader.h">
       <Filter>NewFilter1</Filter>
     </ClInclude>
-    <ClInclude Include="TSprite.h">
+    <ClInclude Include="TTexture.h">
       <Filter>NewFilter1</Filter>
     </ClInclude>
-    <ClInclude Include="TTexture.h">
+    <ClInclude Include="TSprite.h">
       <Filter>NewFilter1</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,7 @@
 #include "UInputComponent.h"
 TAssetManager<TTexture> TEngine::gTexManager;
 TAssetManager<TShader>  TEngine::gShaderManager;
-TAssetManager<ATimerEffect>		TEngine::gSpriteManager;
+TAssetManager<ASprite>	TEngine::gSpriteManager;
 std::shared_ptr<UTimerComponent>	 TEngine::gTimer = nullptr;
 std::shared_ptr<UInputComponent>	 TEngine::gInput = nullptr;
 std::vector<TSpriteInfo>  TEngine::g_Sprite;
@@ -91,7 +91,7 @@ void	TEngine::Init()
 	{
 		if (sprite.m_iType == TSpriteInfo::UV_Animation)
 		{			
-			std::unique_ptr<ATimerEffect> asset = std::make_unique<AEffectUV>();
+			std::unique_ptr<ASprite> asset = std::make_unique<AEffectUV>();
 			/*if (asset->Create(pos, { 50.0f,50.0f },
 				L"../../data/texture/get_item_03.dds",
 				L"../../data/shader/DefaultShader.txt"))
@@ -105,7 +105,7 @@ void	TEngine::Init()
 		else if (sprite.m_iType == TSpriteInfo::TEX_Animation)
 		{
 			TVector2 pos = { 0.0f, 0.0f };
-			std::unique_ptr<ATimerEffect> asset = std::make_unique<AEffectTex>();
+			std::unique_ptr<ASprite> asset = std::make_unique<AEffectTex>();
 			asset->m_texlist.reserve(sprite.m_texArray.size());
 			for (auto& tex : sprite.m_texArray)
 			{

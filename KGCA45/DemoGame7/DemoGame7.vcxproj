@@ -145,9 +145,8 @@
     <ClCompile Include="TDevice.cpp" />
     <ClCompile Include="TEngine.cpp" />
     <ClCompile Include="TRect.cpp" />
-    <ClCompile Include="ATimerEffect.cpp" />
-    <ClCompile Include="TShader.cpp" />
     <ClCompile Include="TSprite.cpp" />
+    <ClCompile Include="TShader.cpp" />
     <ClCompile Include="TTexture.cpp" />
     <ClCompile Include="TVector.cpp" />
     <ClCompile Include="TWindow.cpp" />
@@ -171,9 +170,8 @@
     <ClInclude Include="TEngine.h" />
     <ClInclude Include="TRect.h" />
     <ClInclude Include="TShader.h" />
-    <ClInclude Include="TSprite.h" />
     <ClInclude Include="TStd.h" />
-    <ClInclude Include="ATimerEffect.h" />
+    <ClInclude Include="TSprite.h" />
     <ClInclude Include="TTexture.h" />
     <ClInclude Include="TVector.h" />
     <ClInclude Include="TWindow.h" />

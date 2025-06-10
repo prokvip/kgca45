@@ -19,7 +19,7 @@ struct TEffect
 	UINT				    m_iSecond = 0;
 	TVector2				m_pInitPos;
 	TVector2				m_pInitSize;
-	ATimerEffect* m_pEffect = nullptr; // Effect object pointer
+	ASprite*				m_pEffect = nullptr; // Effect object pointer
 	void   Render()
 	{
 		UINT stride = sizeof(TVertex);
@@ -58,8 +58,8 @@ class UWorld : public UObject
 public:
 	std::shared_ptr<APlayerCharacter> m_pPlayer = nullptr;
 
-	std::vector<ATimerEffect*>	effectListTex;
-	std::vector<ATimerEffect*>	effectListUV;
+	std::vector<ASprite*>	effectListTex;
+	std::vector<ASprite*>	effectListUV;
 	UINT			m_iCurrentIndex = 0;	
 	TMap			m_ActorList;
 	std::vector<std::shared_ptr<TEffect>>	m_EffectList;
