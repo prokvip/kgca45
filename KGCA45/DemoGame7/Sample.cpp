@@ -165,3 +165,13 @@ void Sample::ReleaseGame()
 
     std::wcout << L"현재 인스턴스 갯수 : " << UActorComponent::GetNumInstance() << std::endl;
 }
+
+int main()
+{
+    Sample game;
+    game.SetWindow(GetModuleHandle(nullptr));
+    game.InitGame();
+    game.Run();
+    game.ReleaseGame();
+    _getch();
+}

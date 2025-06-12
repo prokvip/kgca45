@@ -1,79 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AActor.cpp" />
-    <ClCompile Include="ACharacter.cpp" />
-    <ClCompile Include="ANpcCharacter.cpp" />
-    <ClCompile Include="APawn.cpp" />
-    <ClCompile Include="APlayerCharacter.cpp" />
-    <ClCompile Include="DemoGame5.cpp" />
     <ClCompile Include="Sample.cpp" />
-    <ClCompile Include="TDevice.cpp" />
-    <ClCompile Include="TRect.cpp" />
-    <ClCompile Include="TVector.cpp" />
-    <ClCompile Include="TWindow.cpp" />
-    <ClCompile Include="UActorComponent.cpp" />
-    <ClCompile Include="UInputComponent.cpp" />
-    <ClCompile Include="UObject.cpp" />
-    <ClCompile Include="URenderComponent.cpp" />
-    <ClCompile Include="USoundComponent.cpp" />
-    <ClCompile Include="UTimerComponent.cpp" />
-    <ClCompile Include="UWorld.cpp" />
-    <ClCompile Include="TShader.cpp">
-      <Filter>NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="TTexture.cpp">
-      <Filter>NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="TSprite.cpp">
-      <Filter>NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="TAssetManager.cpp" />
-    <ClCompile Include="TEngine.cpp" />
-    <ClCompile Include="AActorUI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AActor.h" />
-    <ClInclude Include="ACharacter.h" />
-    <ClInclude Include="ANpcCharacter.h" />
-    <ClInclude Include="APawn.h" />
-    <ClInclude Include="APlayerCharacter.h" />
     <ClInclude Include="Sample.h" />
-    <ClInclude Include="TDevice.h" />
-    <ClInclude Include="TRect.h" />
-    <ClInclude Include="TStd.h" />
-    <ClInclude Include="TVector.h" />
-    <ClInclude Include="TWindow.h" />
-    <ClInclude Include="UActorComponent.h" />
-    <ClInclude Include="UInputComponent.h" />
-    <ClInclude Include="UObject.h" />
-    <ClInclude Include="URenderComponent.h" />
-    <ClInclude Include="USoundComponent.h" />
-    <ClInclude Include="UTimerComponent.h" />
-    <ClInclude Include="UWorld.h" />
-    <ClInclude Include="TShader.h">
-      <Filter>NewFilter1</Filter>
-    </ClInclude>
-    <ClInclude Include="TTexture.h">
-      <Filter>NewFilter1</Filter>
-    </ClInclude>
-    <ClInclude Include="TSprite.h">
-      <Filter>NewFilter1</Filter>
-    </ClInclude>
-    <ClInclude Include="TAssetManager.h" />
-    <ClInclude Include="TEngine.h" />
-    <ClInclude Include="AActorUI.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\data\script\SpriteInfo.txt" />
-    <Text Include="..\..\data\shader\DefaultShader.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="NewFilter1">
-      <UniqueIdentifier>{8e855153-3e8b-49f3-9c89-d347317c4225}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

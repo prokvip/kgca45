@@ -108,13 +108,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../DirectXTK/Inc;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../DirectXTK/Inc;../../TGameCore/Inc;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../DirectXTK/lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../DirectXTK/lib;../../TGameCore/lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,63 +134,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AActor.cpp" />
-    <ClCompile Include="AActorUI.cpp" />
-    <ClCompile Include="ACharacter.cpp" />
-    <ClCompile Include="ANpcCharacter.cpp" />
-    <ClCompile Include="APawn.cpp" />
-    <ClCompile Include="APlayerCharacter.cpp" />
-    <ClCompile Include="DemoGame5.cpp" />
     <ClCompile Include="Sample.cpp" />
-    <ClCompile Include="TAssetManager.cpp" />
-    <ClCompile Include="TDevice.cpp" />
-    <ClCompile Include="TEngine.cpp" />
-    <ClCompile Include="TRect.cpp" />
-    <ClCompile Include="TSprite.cpp" />
-    <ClCompile Include="TShader.cpp" />
-    <ClCompile Include="TTexture.cpp" />
-    <ClCompile Include="TVector.cpp" />
-    <ClCompile Include="TWindow.cpp" />
-    <ClCompile Include="UActorComponent.cpp" />
-    <ClCompile Include="UInputComponent.cpp" />
-    <ClCompile Include="UObject.cpp" />
-    <ClCompile Include="URenderComponent.cpp" />
-    <ClCompile Include="USoundComponent.cpp" />
-    <ClCompile Include="UTimerComponent.cpp" />
-    <ClCompile Include="UWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AActor.h" />
-    <ClInclude Include="AActorUI.h" />
-    <ClInclude Include="ACharacter.h" />
-    <ClInclude Include="ANpcCharacter.h" />
-    <ClInclude Include="APawn.h" />
-    <ClInclude Include="APlayerCharacter.h" />
     <ClInclude Include="Sample.h" />
-    <ClInclude Include="TAssetManager.h" />
-    <ClInclude Include="TDevice.h" />
-    <ClInclude Include="TEngine.h" />
-    <ClInclude Include="TRect.h" />
-    <ClInclude Include="TShader.h" />
-    <ClInclude Include="TStd.h" />
-    <ClInclude Include="TSprite.h" />
-    <ClInclude Include="TTexture.h" />
-    <ClInclude Include="TVector.h" />
-    <ClInclude Include="TWindow.h" />
-    <ClInclude Include="UActorComponent.h" />
-    <ClInclude Include="UInputComponent.h" />
-    <ClInclude Include="UObject.h" />
-    <ClInclude Include="URenderComponent.h" />
-    <ClInclude Include="USoundComponent.h" />
-    <ClInclude Include="UTimerComponent.h" />
-    <ClInclude Include="UWorld.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\data\script\SpriteInfo.txt" />
-    <Text Include="..\..\data\shader\DefaultShader.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

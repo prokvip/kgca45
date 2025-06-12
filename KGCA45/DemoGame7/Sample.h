@@ -1,6 +1,6 @@
 #pragma once
+#pragma comment (lib, "TGameCore.lib")
 #include "UWorld.h"
-
 #include "TWindow.h"
 #include "TDevice.h"
 
