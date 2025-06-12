@@ -1,6 +1,7 @@
 #include "AActor.h"
 #include "TDevice.h"
 #include "URenderComponent.h"
+
 bool     AActor::Create(
 	TVector2 pos,
 	TVector2 size,

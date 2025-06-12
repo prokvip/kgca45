@@ -10,9 +10,9 @@ void	UWorld::Init()
 	{
 		auto sprite = data.second.get();	
 		if(sprite->m_texlist.size())
-			effectListTex.emplace_back(sprite);
+			m_EffectListTex.emplace_back(sprite);
 		else
-			effectListUV.emplace_back(sprite);
+			m_EffectListUV.emplace_back(sprite);
 	}
 }
 void UWorld::Tick()
@@ -44,13 +44,13 @@ void UWorld::Tick()
 }
 void   UWorld::AddEffectTex(TVector2 pos)
 {
-	if (m_iCurrentIndex >= effectListTex.size())
+	if (m_iCurrentIndex >= m_EffectListTex.size())
 	{
 		m_iCurrentIndex = 0;
 	}	
 	auto sprite = std::make_shared<TEffect>();
 	//auto sprite = TEngine::gSpriteManager.GetAsset(L"lot_wik");
-	sprite->m_pEffect = effectListTex[m_iCurrentIndex++];	
+	sprite->m_pEffect = m_EffectListTex[m_iCurrentIndex++];	
 	sprite->m_szName = sprite->m_pEffect->GetName();
 	sprite->m_pInitPos = pos;
 	sprite->m_pInitSize = { 50.0f,50.0f };
@@ -63,14 +63,14 @@ void   UWorld::AddEffectTex(TVector2 pos)
 }
 void   UWorld::AddEffectUV(TVector2 pos)
 {
-	if (m_iCurrentIndex >= effectListUV.size())
+	if (m_iCurrentIndex >= m_EffectListUV.size())
 	{
 		m_iCurrentIndex = 0;
 	}
 	auto sprite = std::make_shared<TEffect>();
 	
 	//auto sprite = TEngine::gSpriteManager.GetAsset(L"lot_wik");
-	sprite->m_pEffect = effectListUV[m_iCurrentIndex++];		
+	sprite->m_pEffect = m_EffectListUV[m_iCurrentIndex++];		
 	sprite->m_szName = sprite->m_pEffect->GetName();
 	sprite->m_pInitPos = pos;
 	sprite->m_pInitSize = { 50.0f,50.0f };

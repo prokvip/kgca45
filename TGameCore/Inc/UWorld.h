@@ -56,8 +56,8 @@ class UWorld : public UObject
 public:
 	std::shared_ptr<APlayerCharacter> m_pPlayer = nullptr;
 
-	std::vector<ASprite*>	effectListTex;
-	std::vector<ASprite*>	effectListUV;
+	std::vector<ASprite*>	m_EffectListTex;
+	std::vector<ASprite*>	m_EffectListUV;
 	UINT			m_iCurrentIndex = 0;	
 	TMap			m_ActorList;
 	std::vector<std::shared_ptr<TEffect>>	m_EffectList;

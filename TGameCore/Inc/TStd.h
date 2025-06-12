@@ -1,4 +1,6 @@
 #pragma once
+#pragma comment (lib, "DirectXTK.lib")
+#pragma comment (lib, "TGameCore.lib")
 #include <Windows.h>
 #include <iostream>
 #include <conio.h>//getch
@@ -10,7 +12,6 @@
 #include <WICTextureLoader.h>
 #include <DDSTextureLoader.h>
 #include "TRect.h"
-#pragma comment (lib, "DirectXTK.lib")
 
 using namespace std;
 using TString = std::wstring;

@@ -120,6 +120,10 @@
     <Lib>
       <AdditionalLibraryDirectories>../../DirectXTK/lib;</AdditionalLibraryDirectories>
     </Lib>
+    <PostBuildEvent>
+      <Command>copy "*.h" "..\\..\\TGameCore\\inc"
+copy "..\\..\\output\\TGameCore.lib" "..\\..\\TGameCore\\lib"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
