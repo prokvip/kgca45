@@ -28,6 +28,9 @@
     <ClCompile Include="TSprite.cpp">
       <Filter>NewFilter1</Filter>
     </ClCompile>
+    <ClCompile Include="TAssetManager.cpp" />
+    <ClCompile Include="TEngine.cpp" />
+    <ClCompile Include="AActorUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AActor.h" />
@@ -57,6 +60,9 @@
     <ClInclude Include="TSprite.h">
       <Filter>NewFilter1</Filter>
     </ClInclude>
+    <ClInclude Include="TAssetManager.h" />
+    <ClInclude Include="TEngine.h" />
+    <ClInclude Include="AActorUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\data\script\SpriteInfo.txt" />
@@ -66,5 +72,8 @@
     <Filter Include="NewFilter1">
       <UniqueIdentifier>{8e855153-3e8b-49f3-9c89-d347317c4225}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

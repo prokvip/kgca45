@@ -33,14 +33,15 @@ void Sample::GameRun()
 }
 void Sample::InitGame()
 {
+    // 한글 출력
+    std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
+
     P(L"%s\n", L"Create DirectX  : true");
     m_dxDevice.CreateDevice(GetHwnd());
     m_dxDevice.CreateRenderTargetView();
     m_dxDevice.SetViewPort();
 
-     // 한글 출력
-    std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
-
+    
     std::wstring name = L"Background";
     name += std::to_wstring(0);// 정수가 스크링이 된다.
     auto actor = std::make_shared<UBackground>(name);

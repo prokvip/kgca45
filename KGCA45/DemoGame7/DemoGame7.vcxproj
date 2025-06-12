@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AActor.cpp" />
+    <ClCompile Include="AActorUI.cpp" />
     <ClCompile Include="ACharacter.cpp" />
     <ClCompile Include="ANpcCharacter.cpp" />
     <ClCompile Include="APawn.cpp" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AActor.h" />
+    <ClInclude Include="AActorUI.h" />
     <ClInclude Include="ACharacter.h" />
     <ClInclude Include="ANpcCharacter.h" />
     <ClInclude Include="APawn.h" />
@@ -186,6 +188,9 @@
   <ItemGroup>
     <Text Include="..\..\data\script\SpriteInfo.txt" />
     <Text Include="..\..\data\shader\DefaultShader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

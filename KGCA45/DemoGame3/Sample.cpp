@@ -41,7 +41,6 @@ void Sample::InitGame()
     name += std::to_wstring(0);// 정수가 스크링이 된다.
     auto actor = std::make_shared<UBackground>(name);
     actor->SetRect({ 0.0f, 0.0f }, { 800.0f,600.0f });
-    actor->SetRect({ 0.0f, 0.0f }, { 800.0f,600.0f });
     actor->CreateVertexData();
     actor->CreateVertexBuffer();
 
@@ -50,45 +49,21 @@ void Sample::InitGame()
     actor->CreateVertexLayout();
     m_World.m_ActorList.insert(std::make_pair(name, actor));
 
-    for (int i = 0; i < 8; i++)
-    {
-        std::wstring name = L"UUI";
-        name += std::to_wstring(i);// 정수가 스크링이 된다.
-        auto actor = std::make_shared<UUI1>(name);
-        actor->SetRect({ i*100.0f+10.0f, 10.0f }, { 80.0f,50.0f });
-        
-        actor->CreateVertexData();
-        actor->CreateVertexBuffer();   
-
-        actor->CreateVertexShader();
-        actor->CreatePixelShader();
-        actor->CreateVertexLayout();
-        m_World.m_ActorList.insert(std::make_pair(name, actor));
-    }
-    //for (int i = 0; i < 1; i++)
+    //for (int i = 0; i < 8; i++)
     //{
-    //    std::wstring name = L"APawn";
+    //    std::wstring name = L"UUI";
     //    name += std::to_wstring(i);// 정수가 스크링이 된다.
-    //    auto pawn = std::make_shared<APawn>(name);
-    //    pawn->SetName(name);
-    //    pawn->SetRect({ 400.0f, 300.0f }, { 100.0f,100.0f });
-    //    m_World.m_ActorList.insert(std::make_pair(name, pawn));
-    //}
-    //for (int i = 0; i < 1; i++)
-    //{
-    //    std::wstring name = L"ACharacer";
-    //    name += std::to_wstring(i);// 정수가 스크링이 된다.
-    //    auto character = std::make_shared<ACharacter>(name);
-    //    character->SetName(name);
-    //    character->SetRect({ 400.0f, 0.0f }, { 100.0f,100.0f });
-    //    m_World.m_ActorList.insert( std::make_pair(name, character));
-    //}
+    //    auto actor = std::make_shared<UUI1>(name);
+    //    actor->SetRect({ i*100.0f+10.0f, 10.0f }, { 80.0f,50.0f });
+    //    
+    //    actor->CreateVertexData();
+    //    actor->CreateVertexBuffer();   
 
-    //std::wstring name = L"Player";    
-    //m_Player = std::make_shared<ACharacter>(name);
-    //m_Player->SetName(name);
-    //m_Player->SetRect({ 400.0f, 0.0f }, { 100.0f,100.0f });
-    //m_World.m_ActorList.insert(std::make_pair(name, m_Player));
+    //    actor->CreateVertexShader();
+    //    actor->CreatePixelShader();
+    //    actor->CreateVertexLayout();
+    //    m_World.m_ActorList.insert(std::make_pair(name, actor));
+    //}
 
     std::wcout << UActorComponent::GetNumInstance() << std::endl;
     // 게임생성

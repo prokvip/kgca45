@@ -23,9 +23,5 @@ float4 PS( VS_OUTPUT psInput ) : SV_Target
 	{
 		discard; // ÇØ´ç ÇÈ¼¿Àº Æó±âµÈ´Ù.
 	}
-	if(texColor.r == 0.0f && texColor.g == 0.0f, texColor.b == 0.0f)
-	{
-		discard; 
-	}
 	return texColor*psInput.color;
 }
