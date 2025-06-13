@@ -29,7 +29,7 @@ void   AActorUI::SetRect(TVector2 pos, TVector2 size)
 void   AActorUI::SetRect(float x, float y, float w, float h)
 {
 	m_rt.SetRect(x, y, w, h);
-	m_Position = m_rt.GetPos();
+	m_Position = m_rt.GetStart();
 	UpdatePositionVertexData();
 }
 void   AActorUI::Move(float x, float y)
@@ -37,7 +37,7 @@ void   AActorUI::Move(float x, float y)
 	float moveX = x * g_fSPF * m_fSpeed;
 	float moveY = y * g_fSPF * m_fSpeed;
 	m_rt.Move(moveX, moveY);
-	m_Position = m_rt.GetPos();
+	m_Position = m_rt.GetStart();
 	UpdatePositionVertexData();
 	//m_rt.Show();
 }

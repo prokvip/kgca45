@@ -191,6 +191,9 @@ copy "..\\..\\output\\TGameCore.lib" "..\\..\\TGameCore\\lib"</Command>
     <ClInclude Include="UTimerComponent.h" />
     <ClInclude Include="UWorld.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\data\script\SpriteInfo.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

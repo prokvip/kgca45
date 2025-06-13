@@ -13,25 +13,26 @@ class TRect
 public:
 	mutable int m_iMutable;
 private:
-	// m_fTop=10, m_fLeft=10, m_fRight=100, m_fBottom=50
 	float     m_fTop;
 	float     m_fLeft;
 	float     m_fRight;
 	float     m_fBottom;
-	// m_fPos.x=10, m_fPos.y=10, m_fSize.x=90, m_fSize.y=40
-	TVector2    m_tPos; //  m_fLeft,m_fTop
-	TVector2    m_tSize;//  m_fWidth, m_fHeight
+	float     m_fWidth;
+	float     m_fHeight;
+	TVector2    m_tStart;	//  m_fLeft,m_fTop
+	TVector2    m_tSize;	//  m_fWidth,m_fHeight
+	TVector2    m_tCenter;
 public:
 	float    operator[] (int iIndex);
-	const TVector2 GetPos() { 
-		m_tPos = { m_fLeft, m_fTop };
-		return m_tPos; 
+	const TVector2 GetStart() { 		
+		return m_tStart; 
 	}
-	const TVector2 GetSize() {
-		m_tPos = { m_fRight-m_fLeft, m_fBottom-m_fTop };
+	const TVector2 GetSize() {		
 		return m_tSize; 
 	}
-
+	const TVector2 GetCenter() {		
+		return m_tCenter;
+	}
 	const TRect* Get() const { return this; }
 	const TRect& GetRef() const { return *this; }
 	/////////////////////////////////////////////////////////////

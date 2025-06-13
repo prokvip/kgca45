@@ -29,8 +29,8 @@ void UWorld::Tick()
 		if (rtCollision.IntersectRegion(rt, m_pPlayer->GetRect()))
 		{
 			npc.second->m_bDraw = false;
-			//AddEffectTex(rtCollision.GetPos());			
-			AddEffectUV(rtCollision.GetPos());
+			//AddEffectTex(rtCollision.GetCenter());			
+			AddEffectUV(rtCollision.GetCenter());
 		}
 	}
 	for (auto effect : m_EffectList)

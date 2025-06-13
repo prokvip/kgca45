@@ -104,10 +104,10 @@ void	TEngine::Init()
 			for (auto& data : sprite.m_uvArray)
 			{
 				TVector4 uv;
-				// p
-				uv.x = (float)data.left ;	uv.y = (float)data.top;
+				// p rt 영역 내부로 조정한다. +1 ~ -2 : 0~10->1~9 로 조정됨.
+				uv.x = (float)data.left+1 ;	uv.y = (float)data.top+1;
 				// s
-				uv.z = (float)data.right;	uv.w = (float)data.bottom;
+				uv.z = (float)data.right-2;	uv.w = (float)data.bottom-2;
 				asset->m_uvlist.emplace_back(uv);
 			}
 			gSpriteManager.AddAsset(sprite.m_Name, std::move(asset));
