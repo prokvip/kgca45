@@ -6,15 +6,16 @@ void   URenderComponent::Transform()
 {	
 	TRect  rt = GetOwner()->GetRect();
 	auto center = rt.GetCenter();
-	TMatrix matOriginTrans, matRotation, matTrans;
+	TMatrix matOriginTrans, matRotation, matTrans, matScale;
 	// 원점으로 이동 변환(transform)
 	matOriginTrans.Translaton(-center.x, -center.y);
 	// 원점에서 회전 변환(transform)
 	matRotation.Rotation(g_fGameTimer);
 	// 원위치로 이동 변환(transform)
 	matTrans.Translaton(center.x, center.y);
+	matScale.Scale( cosf(g_fGameTimer), cosf(g_fGameTimer));
 	// 결합행렬
-	TMatrix matWorld = matOriginTrans * matRotation * matTrans;
+	TMatrix matWorld = matOriginTrans * matScale * matRotation * matTrans;
 	std::vector<TVertex> list(m_InitVertexList.size());
 	for (size_t i = 0; i < m_InitVertexList.size(); ++i)
 	{
