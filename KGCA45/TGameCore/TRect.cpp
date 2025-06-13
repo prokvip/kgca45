@@ -7,6 +7,8 @@ float    TRect::operator[] (int iIndex)
 	if (iIndex == 1) fRet = m_fTop;
 	if (iIndex == 2) fRet = m_fRight;
 	if (iIndex == 3) fRet = m_fBottom;
+	if (iIndex == 4) fRet = m_fWidth;
+	if (iIndex == 5) fRet = m_fHeight;
 	return fRet;
 }
 TRect::TRect(void)
