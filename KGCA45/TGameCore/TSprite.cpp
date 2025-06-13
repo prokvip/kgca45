@@ -27,9 +27,15 @@ void   ASprite::Tick()
 			m_iCurrentIndex = 0;
 		}		
 	}
+	
 }
 void   ASprite::Render()
 {
+	SetRect(m_pInitPos, m_pInitSize);
+	UpdatePositionVertexData();
+	UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
+		{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
+	UpdateVertexBuffer();
 	UINT stride = sizeof(TVertex);
 	UINT offset = 0;
 	auto vb = m_pRenderComponent->GetVB();
@@ -38,14 +44,6 @@ void   ASprite::Render()
 	TDevice::m_pContext->IASetInputLayout(m_pRenderComponent->GetVL());
 	TDevice::m_pContext->VSSetShader(m_pRenderComponent->GetVS(), nullptr, 0);
 	TDevice::m_pContext->PSSetShader(m_pRenderComponent->GetPS(), nullptr, 0);
-
-	SetRect(m_pInitPos, m_pInitSize);
-	UpdatePositionVertexData();
-	if (m_uvlist.size())
-	{
-		UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
-			{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
-	}
 	if (m_texlist.size())
 	{
 		TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iCurrentIndex].m_pSRV);
@@ -74,9 +72,11 @@ void   ATimerEffect::Tick()
 			m_iSecond = 0;
 		}
 	}
+
+	
 }
 void   ATimerEffect::Render()
-{
+{	
 	UINT stride = sizeof(TVertex);
 	UINT offset = 0;
 	auto vb = m_pRenderComponent->GetVB();
@@ -88,57 +88,21 @@ void   ATimerEffect::Render()
 
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
-	m_pRenderComponent->Transform();
+	UpdateVertexBuffer();
 	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond / 10].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 
 	SetRect({ m_pInitPos.x + 50.0f, m_pInitPos.y }, m_pInitSize);
 	UpdatePositionVertexData();
-	m_pRenderComponent->Transform();
+	UpdateVertexBuffer();
 	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond % 10].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 }
 void   AEffectTex::Render()
 {
-	//ASprite::Render();
-	UINT stride = sizeof(TVertex);
-	UINT offset = 0;
-	auto vb = m_pRenderComponent->GetVB();
-	TDevice::m_pContext->IASetVertexBuffers(0, 1, &vb, &stride, &offset);
-	TDevice::m_pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	TDevice::m_pContext->IASetInputLayout(m_pRenderComponent->GetVL());
-	TDevice::m_pContext->VSSetShader(m_pRenderComponent->GetVS(), nullptr, 0);
-	TDevice::m_pContext->PSSetShader(m_pRenderComponent->GetPS(), nullptr, 0);
-
-	SetRect(m_pInitPos, m_pInitSize);
-	UpdatePositionVertexData();
-
-	m_pRenderComponent->Transform();
-
-	TDevice::m_pContext->PSSetShaderResources(0, 1,&m_texlist[m_iCurrentIndex].m_pSRV);
-	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
-	
+	ASprite::Render();
 }
-
 void   AEffectUV::Render()
 {
-	//ASprite::Render();
-	UINT stride = sizeof(TVertex);
-	UINT offset = 0;
-	auto vb = m_pRenderComponent->GetVB();
-	TDevice::m_pContext->IASetVertexBuffers(0, 1, &vb, &stride, &offset);
-	TDevice::m_pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	TDevice::m_pContext->IASetInputLayout(m_pRenderComponent->GetVL());
-	TDevice::m_pContext->VSSetShader(m_pRenderComponent->GetVS(), nullptr, 0);
-	TDevice::m_pContext->PSSetShader(m_pRenderComponent->GetPS(), nullptr, 0);
-
-	SetRect(m_pInitPos, m_pInitSize);
-	UpdatePositionVertexData();
-	m_pRenderComponent->Transform();
-	UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
-						{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
-	auto srv = m_pRenderComponent->GetSRV();
-	TDevice::m_pContext->PSSetShaderResources(0, 1, &srv);
-	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
-
+	ASprite::Render();
 }

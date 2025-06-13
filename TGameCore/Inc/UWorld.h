@@ -47,7 +47,8 @@ struct TEffect
 				m_iCurrentIndex = 0;
 			}
 		}
-		m_pEffect->AActor::Tick();
+		m_pEffect->m_fAngle = g_fGameTimer;
+		m_pEffect->m_vScale = { cosf(g_fGameTimer), cosf(g_fGameTimer) };
 	}
 };
 

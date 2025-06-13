@@ -2,63 +2,9 @@
 #include "TDevice.h"
 #include "AActor.h"
 #include "TEngine.h"
-void   URenderComponent::Transform()
-{	
-	TRect  rt = GetOwner()->GetRect();
-	auto center = rt.GetCenter();
-	TMatrix matOriginTrans, matRotation, matTrans, matScale;
-	// 원점으로 이동 변환(transform)
-	matOriginTrans.Translaton(-center.x, -center.y);
-	// 원점에서 회전 변환(transform)
-	matRotation.Rotation(g_fGameTimer);
-	// 원위치로 이동 변환(transform)
-	matTrans.Translaton(center.x, center.y);
-	matScale.Scale( cosf(g_fGameTimer), cosf(g_fGameTimer));
-	// 결합행렬
-	TMatrix matWorld = matOriginTrans * matScale * matRotation * matTrans;
-	std::vector<TVertex> list(m_InitVertexList.size());
-	for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	{
-		list[i].p = m_InitVertexList[i].p * matWorld;
-	}
-	// 원점에서 회전 변환된 정점을 복사한다.
-	for (size_t i = 0; i < m_VertexList.size(); ++i)
-	{
-		m_VertexList[i].p = list[i].p;
-	}
-	UpdateVertexBuffer();
 
-	//// 원점으로 이동 변환(transform)
-	//TRect  rt = GetOwner()->GetRect();
-	//auto center = rt.GetCenter();
-	//TMatrix matOriginTrans, matRotation, matTrans;
-	//matOriginTrans.Translaton(-center.x, -center.y);
-	//std::vector<TVertex> list(m_InitVertexList.size());
-	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	//{
-	//	list[i].p = m_InitVertexList[i].p * matOriginTrans;
-	//}
-	//// 원점에서 회전 변환(transform)
-	//matRotation.Rotation(g_fGameTimer);
-	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	//{
-	//	list[i].p = list[i].p * matRotation;
-	//}
-	//matTrans.Translaton(center.x, center.y);
-	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	//{
-	//	list[i].p = list[i].p * matTrans;
-	//}
-	//// 원점에서 회전 변환된 정점을 복사한다.
-	//for (size_t i = 0; i < m_VertexList.size(); ++i)
-	//{
-	//	m_VertexList[i].p = list[i].p;
-	//}
-	//UpdateVertexBuffer();
-}
 void   URenderComponent::TickComponent()
 {
-	Transform();
 }
 URenderComponent::URenderComponent()
 {
@@ -101,6 +47,7 @@ bool   URenderComponent::SetTexture(TString filename)
 }
 void   URenderComponent::UpdateVertexBuffer()
 {
+	GetOwner()->Transform();
 	if (m_pVertexBuffer)
 	{		
 		TDevice::m_pContext->UpdateSubresource(
@@ -227,27 +174,6 @@ void     URenderComponent::CreateVertexData()
 	m_VertexList[4] = m_VertexList[1];
 
 	m_InitVertexList = m_VertexList;
-	//// 원점으로 이동 변환(transform)
-	//auto center = rt.GetCenter();
-	//TMatrix matTrans, matRotation;
-	//matTrans.Translaton(-center.x, -center.y);
-	//std::vector<TVertex> list(m_VertexList.size());
-	//for( size_t i = 0; i < m_VertexList.size(); ++i)
-	//{
-	//	list[i].p = m_VertexList[i].p * matTrans;
-	//}
-	//// 원점에서 회전 변환(transform)
-	//matRotation.Rotation(g_fGameTimer);
-	//for (size_t i = 0; i < m_VertexList.size(); ++i)
-	//{
-	//	list[i].p = list[i].p * matRotation;
-	//}
-	//// 원점에서 회전 변환된 정점을 복사한다.
-	//for (size_t i = 0; i < m_VertexList.size(); ++i)
-	//{
-	//	m_VertexList[i].p = list[i].p;
-	//}
-
 	// NDC
 	/*for (auto& v : m_VertexList)
 	{
@@ -267,9 +193,6 @@ void     URenderComponent::UpdatePositionVertexData()
 	m_VertexList[3].p = { rt[0], rt[3] };
 	m_VertexList[4].p = { rt[2], rt[1] };
 	m_VertexList[5].p = { rt[2], rt[3] };
-
-	
-	UpdateVertexBuffer();
 }
 void   URenderComponent::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3)
 {
@@ -283,7 +206,6 @@ void   URenderComponent::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, 
 	m_VertexList[5].c = v3;
 	m_VertexList[3].c = m_VertexList[2].c;
 	m_VertexList[4].c = m_VertexList[1].c;
-	UpdateVertexBuffer();
 }
 void   URenderComponent::UpdateUVVertexData(TVector2 p, TVector2 s)
 {
@@ -297,7 +219,6 @@ void   URenderComponent::UpdateUVVertexData(TVector2 p, TVector2 s)
 	m_VertexList[5].t = { m_VertexList[1].t.x, m_VertexList[2].t.y };
 	m_VertexList[3].t = m_VertexList[2].t;
 	m_VertexList[4].t = m_VertexList[1].t;
-	UpdateVertexBuffer();
 }
 // GPU 메모리에 할당 및 저장한다.
 bool     URenderComponent::CreateVertexBuffer()
@@ -328,6 +249,7 @@ bool     URenderComponent::CreateVertexBuffer()
 
 void   URenderComponent::Render()
 {
+	UpdateVertexBuffer();
 	UINT stride = sizeof(TVertex);
 	UINT offset = 0;
 	TDevice::m_pContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);

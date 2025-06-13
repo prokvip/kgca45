@@ -14,6 +14,13 @@ protected:
 	TRect		m_rt;	
 	float 		m_fSpeed = 200.0f;
 public:
+	TMatrix		m_matOriginTrans;
+	TMatrix		m_matRotation;
+	TMatrix		m_matTrans;
+	TMatrix		m_matScale;
+	TMatrix		m_matWorld;
+	TVector2	m_vScale = { 1.0f,1.0f };
+	float		m_fAngle = 0.0f; // degree
 	bool		m_bDraw = true;
 	TVector2	m_vDirection = { 1,-1 };
 public:
@@ -39,6 +46,7 @@ public:
 		TVector2 size,
 		TString texfilepath,
 		TString shaderfilepath);
+	virtual void   Transform();
 public:
 	AActor(std::wstring name);
 	AActor();
