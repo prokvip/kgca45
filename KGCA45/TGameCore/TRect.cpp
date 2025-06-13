@@ -37,6 +37,8 @@ void TRect::SetRect(float l, float t, float r, float b)
 	m_tStart.y = t;
 	m_tSize.x = r-l;
 	m_tSize.y = b-t;
+	m_fWidth = m_tSize.x;
+	m_fHeight = m_tSize.y;
 	m_tCenter.x = (m_fLeft + m_fRight) / 2.0f;
 	m_tCenter.y = (m_fTop + m_fBottom) / 2.0f;
 }
@@ -79,6 +81,9 @@ void TRect::Move(float x, float y) {
 	m_tStart.y = m_fTop;
 	m_tSize.x = m_fRight - m_fLeft;
 	m_tSize.y = m_fBottom - m_fTop;
+
+	m_fWidth = m_tSize.x;
+	m_fHeight = m_tSize.y;
 
 	m_tCenter.x = (m_fLeft + m_fRight) / 2.0f;
 	m_tCenter.y = (m_fTop + m_fBottom) / 2.0f;

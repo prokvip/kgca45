@@ -47,6 +47,7 @@ struct TEffect
 				m_iCurrentIndex = 0;
 			}
 		}
+		m_pEffect->AActor::Tick();
 	}
 };
 

@@ -1,4 +1,12 @@
 #include "TVector.h"
+#include "TMatrix.h"
+TVector2 TVector2::operator * (const TMatrix& mat)
+{
+	TVector2 v;
+	v.x = x * mat._11 + y * mat._21 + 1.0f * mat._31;
+	v.y = x * mat._12 + y * mat._22 + 1.0f * mat._32;
+	return v;
+}
 float TVector2::length()// Å©±â
 {
 	return sqrt(x * x + y * y);

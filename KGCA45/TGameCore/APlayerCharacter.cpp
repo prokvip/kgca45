@@ -20,4 +20,5 @@ void APlayerCharacter::Tick()
     {
         Move(1.0f, 0.0f);
     }   
+	AActor::Tick();
 }

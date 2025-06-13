@@ -2,11 +2,66 @@
 #include "TDevice.h"
 #include "AActor.h"
 #include "TEngine.h"
+void   URenderComponent::Transform()
+{	
+	TRect  rt = GetOwner()->GetRect();
+	auto center = rt.GetCenter();
+	TMatrix matOriginTrans, matRotation, matTrans;
+	// 원점으로 이동 변환(transform)
+	matOriginTrans.Translaton(-center.x, -center.y);
+	// 원점에서 회전 변환(transform)
+	matRotation.Rotation(g_fGameTimer);
+	// 원위치로 이동 변환(transform)
+	matTrans.Translaton(center.x, center.y);
+	// 결합행렬
+	TMatrix matWorld = matOriginTrans * matRotation * matTrans;
+	std::vector<TVertex> list(m_InitVertexList.size());
+	for (size_t i = 0; i < m_InitVertexList.size(); ++i)
+	{
+		list[i].p = m_InitVertexList[i].p * matWorld;
+	}
+	// 원점에서 회전 변환된 정점을 복사한다.
+	for (size_t i = 0; i < m_VertexList.size(); ++i)
+	{
+		m_VertexList[i].p = list[i].p;
+	}
+	UpdateVertexBuffer();
 
+	//// 원점으로 이동 변환(transform)
+	//TRect  rt = GetOwner()->GetRect();
+	//auto center = rt.GetCenter();
+	//TMatrix matOriginTrans, matRotation, matTrans;
+	//matOriginTrans.Translaton(-center.x, -center.y);
+	//std::vector<TVertex> list(m_InitVertexList.size());
+	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
+	//{
+	//	list[i].p = m_InitVertexList[i].p * matOriginTrans;
+	//}
+	//// 원점에서 회전 변환(transform)
+	//matRotation.Rotation(g_fGameTimer);
+	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
+	//{
+	//	list[i].p = list[i].p * matRotation;
+	//}
+	//matTrans.Translaton(center.x, center.y);
+	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
+	//{
+	//	list[i].p = list[i].p * matTrans;
+	//}
+	//// 원점에서 회전 변환된 정점을 복사한다.
+	//for (size_t i = 0; i < m_VertexList.size(); ++i)
+	//{
+	//	m_VertexList[i].p = list[i].p;
+	//}
+	//UpdateVertexBuffer();
+}
+void   URenderComponent::TickComponent()
+{
+	Transform();
+}
 URenderComponent::URenderComponent()
 {
 }
-
 URenderComponent::URenderComponent(TString name) : UActorComponent(name)
 {
 }
@@ -46,7 +101,7 @@ bool   URenderComponent::SetTexture(TString filename)
 void   URenderComponent::UpdateVertexBuffer()
 {
 	if (m_pVertexBuffer)
-	{
+	{		
 		TDevice::m_pContext->UpdateSubresource(
 			m_pVertexBuffer, 0, nullptr,
 			&m_VertexList.at(0), 0, 0);
@@ -169,6 +224,29 @@ void     URenderComponent::CreateVertexData()
 	m_VertexList[5].t = TVector2(1.0f, 1.0f);
 	m_VertexList[3] = m_VertexList[2];
 	m_VertexList[4] = m_VertexList[1];
+
+	m_InitVertexList = m_VertexList;
+	//// 원점으로 이동 변환(transform)
+	//auto center = rt.GetCenter();
+	//TMatrix matTrans, matRotation;
+	//matTrans.Translaton(-center.x, -center.y);
+	//std::vector<TVertex> list(m_VertexList.size());
+	//for( size_t i = 0; i < m_VertexList.size(); ++i)
+	//{
+	//	list[i].p = m_VertexList[i].p * matTrans;
+	//}
+	//// 원점에서 회전 변환(transform)
+	//matRotation.Rotation(g_fGameTimer);
+	//for (size_t i = 0; i < m_VertexList.size(); ++i)
+	//{
+	//	list[i].p = list[i].p * matRotation;
+	//}
+	//// 원점에서 회전 변환된 정점을 복사한다.
+	//for (size_t i = 0; i < m_VertexList.size(); ++i)
+	//{
+	//	m_VertexList[i].p = list[i].p;
+	//}
+
 	// NDC
 	/*for (auto& v : m_VertexList)
 	{
@@ -188,6 +266,8 @@ void     URenderComponent::UpdatePositionVertexData()
 	m_VertexList[3].p = { rt[0], rt[3] };
 	m_VertexList[4].p = { rt[2], rt[1] };
 	m_VertexList[5].p = { rt[2], rt[3] };
+
+	
 	UpdateVertexBuffer();
 }
 void   URenderComponent::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3)

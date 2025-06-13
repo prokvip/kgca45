@@ -45,6 +45,7 @@ struct TVertex
 };
 
 extern float g_fSPF;
+extern float g_fGameTimer;
 static void ConsolePrintW(const wchar_t* fmt, ...)
 {
 	va_list ap;

@@ -23,4 +23,5 @@ void   ANpcCharacter::Tick()
 		m_vDirection.y *= -1.0f;
 	}
 	SetPosition(pos);
+	AActor::Tick();
 }

@@ -22,6 +22,7 @@ public:
 	ID3D11PixelShader*	GetPS() { return m_pPixelShader; }
 	ID3D11ShaderResourceView* GetSRV() { return m_pSRV; }
 public:
+	std::vector<TVertex>  m_InitVertexList;
 	std::vector<TVertex>  m_VertexList;
 	virtual bool   SetTexture(TString filename);
 	virtual void   UpdatePositionVertexData();
@@ -42,7 +43,8 @@ public:
 	virtual bool     CreatePixelShader(TString filename);
 	virtual void	 Render();
 
-	
+	virtual void	TickComponent();
+	void			Transform();
 public:
 	URenderComponent();
 	URenderComponent(TString name);

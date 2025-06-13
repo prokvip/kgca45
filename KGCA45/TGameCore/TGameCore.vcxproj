@@ -152,6 +152,7 @@ copy "..\\..\\output\\TGameCore.lib" "..\\..\\TGameCore\\lib"</Command>
     <ClCompile Include="TAssetManager.cpp" />
     <ClCompile Include="TDevice.cpp" />
     <ClCompile Include="TEngine.cpp" />
+    <ClCompile Include="TMatrix.cpp" />
     <ClCompile Include="TRect.cpp" />
     <ClCompile Include="TShader.cpp" />
     <ClCompile Include="TSprite.cpp" />
@@ -176,6 +177,7 @@ copy "..\\..\\output\\TGameCore.lib" "..\\..\\TGameCore\\lib"</Command>
     <ClInclude Include="TAssetManager.h" />
     <ClInclude Include="TDevice.h" />
     <ClInclude Include="TEngine.h" />
+    <ClInclude Include="TMatrix.h" />
     <ClInclude Include="TRect.h" />
     <ClInclude Include="TShader.h" />
     <ClInclude Include="TSprite.h" />

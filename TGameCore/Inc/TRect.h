@@ -1,5 +1,6 @@
 #pragma once
 #include "TVector.h"
+#include "TMatrix.h"
 // 화면상단좌측이 원점
 // [l,t]0,0        ->X축         [r,t]800,0
 // y축

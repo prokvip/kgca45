@@ -1,5 +1,6 @@
 #include "UTimerComponent.h"
 float g_fSPF = 0.0f;
+float g_fGameTimer = 0.0f;
 void   UTimerComponent::Reset()
 {
     m_Start = m_End = system_clock::now();
@@ -14,6 +15,7 @@ void    UTimerComponent::TickComponent()
     duration<float> sec = m_End - m_Start;
     g_fSPF = m_fSecondPerFrame = sec.count();
     m_fGameTimer += m_fSecondPerFrame;
+	g_fGameTimer = m_fGameTimer;
     m_Start = m_End;     
 }
 void UTimerComponent::operator=(const UTimerComponent& comp)

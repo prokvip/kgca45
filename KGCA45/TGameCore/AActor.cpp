@@ -49,6 +49,11 @@ void   AActor::UpdateVertexBuffer()
 void   AActor::UpdatePositionVertexData() 
 {
 	m_pRenderComponent->UpdatePositionVertexData();
+	for (int i = 0; i < m_pRenderComponent->m_InitVertexList.size(); i++)
+	{
+		m_pRenderComponent->m_InitVertexList[i].p =
+			m_pRenderComponent->m_VertexList[i].p;
+	}
 }
 void   AActor::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3) 
 {

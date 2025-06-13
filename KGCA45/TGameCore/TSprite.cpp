@@ -88,11 +88,13 @@ void   ATimerEffect::Render()
 
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
+	m_pRenderComponent->Transform();
 	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond / 10].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 
 	SetRect({ m_pInitPos.x + 50.0f, m_pInitPos.y }, m_pInitSize);
 	UpdatePositionVertexData();
+	m_pRenderComponent->Transform();
 	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond % 10].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 }
@@ -110,6 +112,9 @@ void   AEffectTex::Render()
 
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
+
+	m_pRenderComponent->Transform();
+
 	TDevice::m_pContext->PSSetShaderResources(0, 1,&m_texlist[m_iCurrentIndex].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 	
@@ -129,6 +134,7 @@ void   AEffectUV::Render()
 
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
+	m_pRenderComponent->Transform();
 	UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
 						{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
 	auto srv = m_pRenderComponent->GetSRV();

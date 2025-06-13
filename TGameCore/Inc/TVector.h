@@ -27,12 +27,15 @@ struct float4
 		float v[4];
 	};
 };
+class TMatrix;
 class TVector2 : public float2
 {
 public:
 	TVector2();
 	TVector2(float x, float y);
 	TVector2(const TVector2& v);
+public:
+	TVector2 operator * (const TMatrix& m);
 public:
 	TVector2 operator + (const TVector2& v);
 	TVector2 operator - (const TVector2& v);
