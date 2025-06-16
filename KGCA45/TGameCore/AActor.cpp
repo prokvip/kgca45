@@ -10,6 +10,16 @@ bool     AActor::Create(
 {	
 	return m_pRenderComponent->Create(pos, size, texfilepath, shaderfilepath);	
 }
+bool     AActor::Create(
+	TVector2 pos,
+	TVector2 size,
+	TString texfilepath,
+	TString texMaskfilepath,
+	TString shaderfilepath)
+{
+	return m_pRenderComponent->Create(pos, size, 
+		texfilepath, texMaskfilepath, shaderfilepath);
+}
 void   AActor::SetPosition(TVector2 pos)
 {
 	SetPosition(pos.x, pos.y);

@@ -45,6 +45,17 @@ bool   URenderComponent::SetTexture(TString filename)
 	}*/
 	return false;
 }
+bool   URenderComponent::SetTextureMask(TString filename)
+{
+	auto pPoint = TEngine::gTexManager.LoadPtr(filename);
+	if (pPoint != nullptr)
+	{
+		m_pTextureMask = pPoint->m_pTexture;
+		m_pSRVMask = pPoint->m_pSRV;
+		return true;
+	}
+	return false;
+}
 void   URenderComponent::UpdateVertexBuffer()
 {
 	GetOwner()->Transform();
@@ -66,6 +77,20 @@ bool     URenderComponent::Create(TVector2 pos, TVector2 size,
 	CreateShader(shaderfilepath);
 	//CreateVertexShader(shaderfilepath);
 	//CreatePixelShader(shaderfilepath);
+	CreateVertexLayout();
+	return true;
+}
+bool     URenderComponent::Create(TVector2 pos, TVector2 size,
+	TString texfilepath,
+	TString texMaskfilepath,
+	TString shaderfilepath)
+{
+	GetOwner()->SetRect(pos, size);
+	CreateVertexData();
+	CreateVertexBuffer();
+	SetTexture(texfilepath);
+	SetTextureMask(texMaskfilepath);
+	CreateShader(shaderfilepath);
 	CreateVertexLayout();
 	return true;
 }
@@ -258,5 +283,6 @@ void   URenderComponent::Render()
 	TDevice::m_pContext->VSSetShader(m_pVertexShader, nullptr, 0);
 	TDevice::m_pContext->PSSetShader(m_pPixelShader, nullptr, 0);
 	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_pSRV);
+	TDevice::m_pContext->PSSetShaderResources(1, 1, &m_pSRVMask);
 	TDevice::m_pContext->Draw(m_VertexList.size(), 0);
 }

@@ -1,5 +1,5 @@
 #SPRITE 
-lot_wik 25 1 ../../data/texture/lot_wik00.dds ../../data/texture/lot_wik00.dds ../../data/shader/DefaultShader.txt
+lot_wik 25 1 ../../data/texture/lot_wik00.dds nullptr ../../data/shader/EffectBlack.txt
 0 ../../data/texture/lot_wik00.dds
 1 ../../data/texture/lot_wik01.dds
 2 ../../data/texture/lot_wik02.dds
@@ -25,7 +25,7 @@ lot_wik 25 1 ../../data/texture/lot_wik00.dds ../../data/texture/lot_wik00.dds .
 22 ../../data/texture/lot_wik22.dds
 23 ../../data/texture/lot_wik23.dds
 24 ../../data/texture/lot_wik24.dds
-rtSmoke 16 0 ../../data/texture/smoke.dds ../../data/texture/smoke.dds ../../data/shader/DefaultShader.txt
+rtSmoke 16 0 ../../data/texture/smoke.dds nullptr ../../data/shader/DefaultShader.txt
 0	0	0 128 128 
 1	128	0 128 128  
 2	256	0 128 128  
@@ -42,7 +42,7 @@ rtSmoke 16 0 ../../data/texture/smoke.dds ../../data/texture/smoke.dds ../../dat
 13	128	384 128 128  
 14	256	384 128 128  
 15	384	384 128 128  
-GetIterm 16 0 ../../data/texture/get_item_03.dds ../../data/texture/get_item_03.dds ../../data/shader/DefaultShader.txt
+GetIterm 16 0 ../../data/texture/get_item_03.dds nullptr ../../data/shader/EffectBlack.txt
 0	0	0 128 128 
 1	128	0 128 128  
 2	256	0 128 128  
@@ -59,7 +59,7 @@ GetIterm 16 0 ../../data/texture/get_item_03.dds ../../data/texture/get_item_03.
 13	128	384 128 128  
 14	256	384 128 128  
 15	384	384 128 128  
-rtExplosion 12 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtExplosion 12 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0	1	142 41 40 
 1	43 142 38 42 
 2	82 142 35 42 
@@ -72,7 +72,7 @@ rtExplosion 12 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.
 9	321 142 27 25
 10	349 142 24 23
 11	374 142 22 18	
-DefalultNumber 10 1 ../../data/ui/0.png ../../data/ui/0.png ../../data/shader/DefaultShader.txt
+DefalultNumber 10 1 ../../data/ui/0.png nullptr ../../data/shader/Effect.txt
 0 ../../data/ui/0.png
 1 ../../data/ui/1.png
 2 ../../data/ui/2.png
@@ -83,7 +83,7 @@ DefalultNumber 10 1 ../../data/ui/0.png ../../data/ui/0.png ../../data/shader/De
 7 ../../data/ui/7.png
 8 ../../data/ui/8.png
 9 ../../data/ui/9.png
-rtBomb 9 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtBomb 9 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0	161 85 11 12
 1	173 85 22 20
 2	196 85 26 24
@@ -93,29 +93,29 @@ rtBomb 9 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ..
 6	313 85 22 20
 7	336 85 16 15
 8	353 85 4 6
-rtClash 6 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtClash 6 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0 161 62 12 11
 1 174 62 20 20
 2 195 62 22 21
 3 219 62 18 19
 4 238 62 14 13
 5 253 62 11 10
-rtProjectile 6 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtProjectile 6 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0 269 1 5 23
 1 276 1 8 23
 2 269 1 5 23
 3 276 1 8 23
 4 269 1 5 23
 5 276 1 8 23
-rtUserLeft 3 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtUserLeft 3 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0 1 1 28 60
 1 29 1 27 60
 2 56 1 36 60
-rtUserRight 3 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtUserRight 3 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0 219 62 18 19
 1 238 62 14 13
 2 253 62 11 10
-rtUserFrontBack 2 0 ../../data/texture/bitmap1Alpha.bmp ../../data/texture/bitmap2.bmp ../../data/shader/DefaultShader.txt
+rtUserFrontBack 2 0 ../../data/texture/bitmap1.bmp ../../data/texture/bitmap2.bmp ../../data/shader/EffectMask.txt
 0 219 62 18 19
 1 219 62 18 19
 #END

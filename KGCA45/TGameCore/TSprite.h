@@ -17,8 +17,14 @@ public:
 	virtual	bool     Create(
 		TVector2 pos,
 		TVector2 size,
-		TString texfilepath,
+		TString texfilepath,  // alpha 포함 텍스처
 		TString shaderfilepath) override;
+	virtual bool    Create(
+		TVector2 pos,
+		TVector2 size,
+		TString texfilepath,    
+		TString texMaskfilepath, // mask 사용
+		TString shaderfilepath);
 	virtual void   Tick()override;
 	virtual void   Render() override;
 public:

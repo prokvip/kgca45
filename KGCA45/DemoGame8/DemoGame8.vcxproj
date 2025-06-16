@@ -145,7 +145,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\data\script\SpriteInfo.txt" />
     <Text Include="..\..\data\shader\DefaultShader.txt" />
+    <Text Include="..\..\data\shader\Effect.txt" />
+    <Text Include="..\..\data\shader\EffectMask.txt" />
+    <Text Include="..\..\data\shader\EffectBlack.txt" />
+    <Text Include="..\..\data\shader\Map.txt" />
+    <Text Include="..\..\data\shader\Player.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

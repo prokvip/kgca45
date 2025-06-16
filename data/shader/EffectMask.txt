@@ -19,16 +19,8 @@ Texture2D      g_textureMask	: register(t1);
 SamplerState   g_Sample   : register(s0);
 float4 PS( VS_OUTPUT psInput ) : SV_Target
 {	
-	float4 texColor = g_texture.Sample(g_Sample,psInput.tex);	
-	return texColor;
+	float4 texRGB = g_texture.Sample(g_Sample,psInput.tex);	
+	float4 texAlpha= g_textureMask.Sample(g_Sample,psInput.tex);
+	texRGB.a = 1.0f-texAlpha.r; 	
+	return texRGB;
 }
-//float4 PS( VS_OUTPUT psInput ) : SV_Target
-//{	
-//	float4 texColor = g_texture.Sample(g_Sample,psInput.tex);
-	//if(texColor.a < 0.5f)
-	//{
-	//	discard; // ÇØ´ç ÇÈ¼¿Àº Æó±âµÈ´Ù.
-	//}
-	//clip(texColor.a-0.1f); //x <0.1fÀÌ¸é Æó±âµÈ´Ù.
-//	return texColor*psInput.color;
-//}

@@ -46,6 +46,12 @@ public:
 		TVector2 size,
 		TString texfilepath,
 		TString shaderfilepath);
+	virtual	bool     Create(
+		TVector2 pos,
+		TVector2 size,
+		TString texfilepath,
+		TString texMaskfilepath,
+		TString shaderfilepath);
 	virtual void   Transform();
 public:
 	AActor(std::wstring name);

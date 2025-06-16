@@ -15,6 +15,18 @@ bool    ASprite::Create(
 	m_pRenderComponent->Create(pos,size,texfilepath,shaderfilepath);
 	return true;
 }
+bool    ASprite::Create(
+	TVector2 pos,
+	TVector2 size,
+	TString texfilepath,
+	TString texMaskfilepath,
+	TString shaderfilepath)
+{
+	m_pInitPos = pos;
+	m_pInitSize = size;
+	m_pRenderComponent->Create(pos, size, texfilepath, texMaskfilepath,shaderfilepath);
+	return true;
+}
 void   ASprite::Tick()
 {	
 	m_fTimer += g_fSPF;
@@ -33,8 +45,11 @@ void   ASprite::Render()
 {
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
-	UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
-		{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
+	if (m_uvlist.size())
+	{
+		UpdateUVVertexData({ m_uvlist[m_iCurrentIndex].x, m_uvlist[m_iCurrentIndex].y },
+			{ m_uvlist[m_iCurrentIndex].z, m_uvlist[m_iCurrentIndex].w });
+	}
 	UpdateVertexBuffer();
 	UINT stride = sizeof(TVertex);
 	UINT offset = 0;

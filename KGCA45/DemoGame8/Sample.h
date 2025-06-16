@@ -31,6 +31,11 @@ class Sample :  public TWindow
 	
 	std::shared_ptr<APlayerCharacter>	m_Player = nullptr;
 
+	ID3D11BlendState* m_AlphaBlendState = nullptr;
+	TTexture* m_AlphaTexture = nullptr;
+public:
+	bool CreateBlendState();
+
 public:
 	void InitGame();
 	void ReleaseGame();

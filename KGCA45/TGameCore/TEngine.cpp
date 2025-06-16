@@ -94,12 +94,26 @@ void	TEngine::Init()
 			TVector2 pos = { 0.0f, 0.0f };
 			std::unique_ptr<ASprite> asset = std::make_unique<AEffectUV>();
 			asset->SetName(sprite.m_Name);
-			if (asset->Create(pos, { 50.0f,50.0f },
-				sprite.m_szTextureFilePath,
-				sprite.m_szShaderFilePath))
+			if (sprite.m_szMaskTextureFilePath == L"nullptr")
 			{
-				asset->m_fStep = 0.1f;
+				if (asset->Create(pos, { 50.0f,50.0f },
+					sprite.m_szTextureFilePath,
+					sprite.m_szShaderFilePath))
+				{
+					asset->m_fStep = 0.1f;
+				}
 			}
+			else
+			{
+				if (asset->Create(pos, { 50.0f,50.0f },
+					sprite.m_szTextureFilePath,
+					sprite.m_szMaskTextureFilePath,
+					sprite.m_szShaderFilePath))
+				{
+					asset->m_fStep = 0.1f;
+				}
+			}
+			
 			//auto texInfo = asset->m_pRenderComponent->m_TexDesc;
 			for (auto& data : sprite.m_uvArray)
 			{
@@ -122,12 +136,25 @@ void	TEngine::Init()
 			{
 				asset->m_texlist.emplace_back(tex);
 			}
-			if (asset->Create(pos, { 50.0f,50.0f },
-				sprite.m_szTextureFilePath,
-				sprite.m_szShaderFilePath))
+			if (sprite.m_szMaskTextureFilePath == L"nullptr")
 			{
-				asset->m_fStep = 0.1f;				
-			}			
+				if (asset->Create(pos, { 50.0f,50.0f },
+					sprite.m_szTextureFilePath,
+					sprite.m_szShaderFilePath))
+				{
+					asset->m_fStep = 0.1f;
+				}
+			}
+			else
+			{
+				if (asset->Create(pos, { 50.0f,50.0f },
+					sprite.m_szTextureFilePath,
+					sprite.m_szMaskTextureFilePath,
+					sprite.m_szShaderFilePath))
+				{
+					asset->m_fStep = 0.1f;
+				}
+			}
 			gSpriteManager.AddAsset(sprite.m_Name, std::move(asset));
 		}
 	}

@@ -37,14 +37,14 @@ struct TEffect
 			gTimer = gTimer - m_fStep;
 
 			UINT iMaxCounter = m_pEffect->m_texlist.size();
-			if (iMaxCounter <= 0)
+			if (iMaxCounter == 0)
 			{
 				iMaxCounter = m_pEffect->m_uvlist.size();
 				
 			}
 			if (m_iCurrentIndex >= iMaxCounter)
 			{
-				m_iCurrentIndex = 0;
+				m_iCurrentIndex = 0;				
 			}
 		}
 		m_pEffect->m_fAngle = g_fGameTimer;
@@ -57,7 +57,7 @@ class UWorld : public UObject
 {
 public:
 	std::shared_ptr<APlayerCharacter> m_pPlayer = nullptr;
-
+	std::vector<ASprite*>	m_Effects;
 	std::vector<ASprite*>	m_EffectListTex;
 	std::vector<ASprite*>	m_EffectListUV;
 	UINT			m_iCurrentIndex = 0;	
@@ -69,6 +69,7 @@ public:
 	void			Tick();
 	void			AddEffectTex(TVector2 pos);
 	void			AddEffectUV(TVector2 pos);
+	void			AddEffect(TVector2 pos);
 	void			Render();
 };
 

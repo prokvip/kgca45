@@ -4,6 +4,32 @@
 #include "TAssetManager.h"
 #include "UInputComponent.h"
 #include "UTimerComponent.h"
+
+bool Sample::CreateBlendState()
+{
+    D3D11_BLEND_DESC bd;
+	ZeroMemory(&bd, sizeof(bd));
+    bd.RenderTarget[0].BlendEnable = true;
+    // RGB 혼합
+	//RGB = SrcColor * SrcBlend OP DestColor * DestBlend;
+    //RGB = SrcColor * D3D11_BLEND_SRC_ALPHA D3D11_BLEND_OP_ADD DestColor * D3D11_BLEND_INV_SRC_ALPHA;
+    //RGB = SrcColor * arcalpha + DestColor * 1-arcalpha;
+    bd.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    bd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	// alpha 혼합
+    // A = SrcAlpha * 1 + DestAlpha * 0;
+    bd.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    bd.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	// RGB 채널을 모두 사용
+	bd.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, &m_AlphaBlendState)))
+    {
+        return false;
+    }
+    return true;
+}
 LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {   
     TWindow::MsgProc(hWnd, message, wParam, lParam);
@@ -17,7 +43,7 @@ void Sample::GameRun()
     }
     if (GameLoop())
     {  
-        m_dxDevice.PreRender();
+       
             m_MapObj->Tick();   
             m_TimerObj->Tick();
             m_EffectObj->Tick();
@@ -32,10 +58,12 @@ void Sample::GameRun()
             }
            
             m_World.Tick();
-
+          
+       m_dxDevice.PreRender();
             m_MapObj->Render();
             m_TimerObj->Render();
             m_EffectObj->Render();
+			
             m_Player->Render();
             for (auto& p : m_World.m_ActorList)
             {
@@ -44,8 +72,7 @@ void Sample::GameRun()
                     continue;
                 }
                 p.second->Render();
-            }        
-
+            }
             m_World.Render();
         m_dxDevice.PostRender();
     }	
@@ -59,6 +86,12 @@ void Sample::InitGame()
     m_dxDevice.CreateDevice(GetHwnd());
     m_dxDevice.CreateRenderTargetView();
     m_dxDevice.SetViewPort();    
+
+    if (CreateBlendState())
+    {
+		TDevice::m_pContext->OMSetBlendState(
+            m_AlphaBlendState, nullptr, -1);// 0xFFFFFFFF);
+    }
 
     m_Engine.Init();
 	m_World.Init();
@@ -83,31 +116,71 @@ void Sample::InitGame()
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
     if (m_EffectObj->Create({ 400.0f, 0.0f }, { 100.0f,100.0f },
         L"../../data/texture/get_item_03.dds",
-        L"../../data/shader/DefaultShader.txt"))
+        L"../../data/shader/EffectBlack.txt"))
     {
     }
         
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 5; i++)
     {
-        TString name = L"NPC";
+        TString name = L"NPC_A";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
-        auto npc = std::make_shared<ANpcCharacter>(name);
-        TString texPath = L"../../data/ui/";
-        texPath += std::to_wstring(i);
-        texPath += L".png";
-      /*  if (npc->Create(
-            { i * 80.0f + 5.0f, 500.0f },
-            { 70.0f,50.0f },*/
+        auto npc = std::make_shared<ANpcCharacter>(name);       
         float x = randstep(0.0f, 800.0f);
         float y = randstep(0.0f, 600.0f);
         npc->m_vDirection.x = randstep(-1.0f, +1.0f);
         npc->m_vDirection.y = randstep(-1.0f, +1.0f);
-        if (npc->Create({ x, y },{ 70.0f,50.0f },
-            texPath, L"../../data/shader/DefaultShader.txt"))
+        if (npc->Create({ x, y },{ 68.0f, 80.0f },
+            L"../../data/texture/bitmap1Alpha.bmp", 
+            L"../../data/shader/DefaultShader.txt"))
         {
+            TVector2 p = { 46.0f+1.0f, 62.0f + 1.0f };
+            TVector2 s = { 68.0f-2.0f, 79.0f-2.0f };
+            npc->UpdateUVVertexData(p, s);
+            npc->UpdateVertexBuffer();
             m_World.m_ActorList.insert(std::make_pair(name, npc));
         }
     }   
+    for (int i = 0; i < 5; i++)
+    {
+        TString name = L"NPC_B";
+        name += std::to_wstring(i);// 정수가 스크링이 된다.
+        auto npc = std::make_shared<ANpcCharacter>(name);
+        float x = randstep(0.0f, 800.0f);
+        float y = randstep(0.0f, 600.0f);
+        npc->m_vDirection.x = randstep(-1.0f, +1.0f);
+        npc->m_vDirection.y = randstep(-1.0f, +1.0f);
+        if (npc->Create({ x, y }, { 44.0f, 77.0f },
+            L"../../data/texture/bitmap1Alpha.bmp",
+            L"../../data/shader/DefaultShader.txt"))
+        {
+            TVector2 p = { 1.0f + 1.0f, 62.0f + 1.0f };
+            TVector2 s = { 44.0f - 2.0f, 76.0f - 2.0f };
+            npc->UpdateUVVertexData(p, s);
+            npc->UpdateVertexBuffer();
+            m_World.m_ActorList.insert(std::make_pair(name, npc));
+        }
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        TString name = L"NPC_C";
+        name += std::to_wstring(i);// 정수가 스크링이 된다.
+        auto npc = std::make_shared<ANpcCharacter>(name);
+        float x = randstep(0.0f, 800.0f);
+        float y = randstep(0.0f, 600.0f);
+        npc->m_vDirection.x = randstep(-1.0f, +1.0f);
+        npc->m_vDirection.y = randstep(-1.0f, +1.0f);
+        if (npc->Create({ x, y }, { 37.0f, 37.0f },
+            L"../../data/texture/bitmap1.bmp",
+            L"../../data/texture/bitmap2.bmp",
+            L"../../data/shader/Player.txt"))
+        {
+            TVector2 p = { 115.0f + 1.0f, 62.0f + 1.0f };
+            TVector2 s = { 37.0f - 2.0f, 37.0f - 2.0f };
+            npc->UpdateUVVertexData(p, s);
+            npc->UpdateVertexBuffer();
+            m_World.m_ActorList.insert(std::make_pair(name, npc));
+        }
+    }
 
     name.clear();
     name = L"Player";    
@@ -115,8 +188,9 @@ void Sample::InitGame()
     m_Player->SetName(name);
 
     if (m_Player->Create({ 400.0f, 300.0f }, { 43.0f,62.0f },
-        L"../../data/texture/bitmap1Alpha.bmp", 
-        L"../../data/shader/DefaultShader.txt"))
+        L"../../data/texture/bitmap1.bmp", 
+        L"../../data/texture/bitmap2.bmp",
+        L"../../data/shader/Player.txt"))
     {        
         TVector2 p = {91.0f, 2.0f};
         TVector2 s = {40.0f, 58.0f};
