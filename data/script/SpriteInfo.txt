@@ -1,5 +1,5 @@
 #SPRITE 
-lot_wik 25 1 ../../data/texture/lot_wik00.dds nullptr ../../data/shader/EffectBlack.txt
+lot_wik 25 1 ../../data/texture/lot_wik00.dds nullptr ../../data/shader/DualSourceBlend.txt
 0 ../../data/texture/lot_wik00.dds
 1 ../../data/texture/lot_wik01.dds
 2 ../../data/texture/lot_wik02.dds
@@ -42,7 +42,7 @@ rtSmoke 16 0 ../../data/texture/smoke.dds nullptr ../../data/shader/DefaultShade
 13	128	384 128 128  
 14	256	384 128 128  
 15	384	384 128 128  
-GetIterm 16 0 ../../data/texture/get_item_03.dds nullptr ../../data/shader/EffectBlack.txt
+GetIterm 16 0 ../../data/texture/get_item_03.dds nullptr ../../data/shader/DualSourceBlend.txt
 0	0	0 128 128 
 1	128	0 128 128  
 2	256	0 128 128  

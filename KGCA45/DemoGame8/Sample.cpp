@@ -24,7 +24,47 @@ bool Sample::CreateBlendState()
     bd.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	// RGB 채널을 모두 사용
 	bd.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, &m_AlphaBlendState)))
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_AlphaBlendState.GetAddressOf())))
+    {
+        return false;
+    }
+    // 가산블랜딩
+    bd.RenderTarget[0].SrcBlend     = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].DestBlend    = D3D11_BLEND_ZERO;
+    bd.RenderTarget[0].BlendOp  = D3D11_BLEND_OP_ADD;
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_AddBlendState.GetAddressOf())))
+    {
+        return false;
+    }
+	// 뺄셈블랜딩( 소스-대상 )
+    bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_SUBTRACT;
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_SubtrackBlendState.GetAddressOf())))
+    {
+        return false;
+    }
+    // 뺄셈블랜딩( 대상-소스 )
+    bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_REV_SUBTRACT;
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_RevSubtrackBlendState.GetAddressOf())))
+    {
+        return false;
+    }
+    // 곱셈블랜딩
+    bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ZERO;
+    bd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_COLOR;
+    bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_MultiplyBlendState.GetAddressOf())))
+    {
+        return false;
+    }
+    // 듀얼소스컬러 블랜딩
+    bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+    bd.RenderTarget[0].DestBlend = D3D11_BLEND_SRC1_COLOR;
+    bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_DualSourceBlendState.GetAddressOf())))
     {
         return false;
     }
@@ -42,28 +82,31 @@ void Sample::GameRun()
         (*pNode)->TickComponent();
     }
     if (GameLoop())
-    {  
-       
-            m_MapObj->Tick();   
-            m_TimerObj->Tick();
-            m_EffectObj->Tick();
-            m_Player->Tick();
-            for (auto& p : m_World.m_ActorList)
+    {         
+        m_MapObj->Tick();   
+        m_TimerObj->Tick();
+        m_EffectObj->Tick();
+        m_Player->Tick();
+        for (auto& p : m_World.m_ActorList)
+        {
+            if (p.second->m_bDraw == false)
             {
-                if (p.second->m_bDraw == false)
-                {
-                    continue;
-                }
-                p.second->Tick();
+                continue;
             }
+            p.second->Tick();
+        }
            
-            m_World.Tick();
+        m_World.Tick();
           
        m_dxDevice.PreRender();
+            TDevice::m_pContext->OMSetBlendState(m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
             m_MapObj->Render();
             m_TimerObj->Render();
+            TDevice::m_pContext->OMSetBlendState(m_DualSourceBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
             m_EffectObj->Render();
-			
+
+            TDevice::m_pContext->OMSetBlendState(m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
+
             m_Player->Render();
             for (auto& p : m_World.m_ActorList)
             {
@@ -90,7 +133,7 @@ void Sample::InitGame()
     if (CreateBlendState())
     {
 		TDevice::m_pContext->OMSetBlendState(
-            m_AlphaBlendState, nullptr, -1);// 0xFFFFFFFF);
+            m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     }
 
     m_Engine.Init();
@@ -100,7 +143,7 @@ void Sample::InitGame()
     name += std::to_wstring(0);// 정수가 스크링이 된다.
     m_MapObj = std::make_shared<AActor>(name);
     if (m_MapObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
-        L"../../data/ui/kgcabk.bmp",
+        L"../../data/texture/bg2.png",
         L"../../data/shader/DefaultShader.txt"))
     {       
     }    
@@ -114,13 +157,13 @@ void Sample::InitGame()
         m_TimerObj->SetTextureList(sprite->m_texlist);
     }
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
-    if (m_EffectObj->Create({ 400.0f, 0.0f }, { 100.0f,100.0f },
-        L"../../data/texture/get_item_03.dds",
-        L"../../data/shader/EffectBlack.txt"))
+    if (m_EffectObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
+        L"../../data/texture/lot_wik00.dds",//get_item_03.dds",
+        L"../../data/shader/DualSourceBlend.txt"))
     {
     }
         
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
         TString name = L"NPC_A";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
@@ -130,8 +173,9 @@ void Sample::InitGame()
         npc->m_vDirection.x = randstep(-1.0f, +1.0f);
         npc->m_vDirection.y = randstep(-1.0f, +1.0f);
         if (npc->Create({ x, y },{ 68.0f, 80.0f },
-            L"../../data/texture/bitmap1Alpha.bmp", 
-            L"../../data/shader/DefaultShader.txt"))
+            L"../../data/texture/bitmap1.bmp",
+            L"../../data/texture/bitmap2.bmp",
+            L"../../data/shader/Player.txt"))
         {
             TVector2 p = { 46.0f+1.0f, 62.0f + 1.0f };
             TVector2 s = { 68.0f-2.0f, 79.0f-2.0f };
@@ -140,7 +184,7 @@ void Sample::InitGame()
             m_World.m_ActorList.insert(std::make_pair(name, npc));
         }
     }   
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
         TString name = L"NPC_B";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
@@ -150,8 +194,9 @@ void Sample::InitGame()
         npc->m_vDirection.x = randstep(-1.0f, +1.0f);
         npc->m_vDirection.y = randstep(-1.0f, +1.0f);
         if (npc->Create({ x, y }, { 44.0f, 77.0f },
-            L"../../data/texture/bitmap1Alpha.bmp",
-            L"../../data/shader/DefaultShader.txt"))
+            L"../../data/texture/bitmap1.bmp",
+            L"../../data/texture/bitmap2.bmp",
+            L"../../data/shader/Player.txt"))
         {
             TVector2 p = { 1.0f + 1.0f, 62.0f + 1.0f };
             TVector2 s = { 44.0f - 2.0f, 76.0f - 2.0f };
@@ -160,7 +205,7 @@ void Sample::InitGame()
             m_World.m_ActorList.insert(std::make_pair(name, npc));
         }
     }
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
         TString name = L"NPC_C";
         name += std::to_wstring(i);// 정수가 스크링이 된다.

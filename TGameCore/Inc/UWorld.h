@@ -44,11 +44,13 @@ struct TEffect
 			}
 			if (m_iCurrentIndex >= iMaxCounter)
 			{
-				m_iCurrentIndex = 0;				
+				m_bDraw = false; 
+				m_iCurrentIndex = 0;	
+				gTimer = 0.0f;
 			}
 		}
-		m_pEffect->m_fAngle = g_fGameTimer;
-		m_pEffect->m_vScale = { cosf(g_fGameTimer), cosf(g_fGameTimer) };
+		//m_pEffect->m_fAngle = g_fGameTimer;
+		//m_pEffect->m_vScale = { cosf(g_fGameTimer), cosf(g_fGameTimer) };
 	}
 };
 
@@ -63,7 +65,8 @@ public:
 	UINT			m_iCurrentIndex = 0;	
 	TMap			m_ActorList;
 	std::vector<std::shared_ptr<TEffect>>	m_EffectList;
-
+	
+	// 0  ~  100;  [0]false ~ 10-> [10]true, 1 ~ 9, : [10]false
 public:
 	void			Init();
 	void			Tick();

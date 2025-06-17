@@ -47,21 +47,17 @@ void UWorld::Tick()
 }
 void   UWorld::AddEffect(TVector2 pos)
 {
-	if (m_iCurrentIndex >= m_Effects.size())
+	/*if (m_iCurrentIndex >= m_Effects.size())
 	{
 		m_iCurrentIndex = 0;
-	}
+	}*/
 	auto sprite = std::make_shared<TEffect>();
-	//auto sprite = TEngine::gSpriteManager.GetAsset(L"lot_wik");
-	sprite->m_pEffect = m_Effects[m_iCurrentIndex++];
+	auto effect = TEngine::gSpriteManager.GetAsset(L"rtExplosion");
+	sprite->m_pEffect = effect;// m_Effects[m_iCurrentIndex++];
 	sprite->m_szName = sprite->m_pEffect->GetName();
 	sprite->m_pInitPos = pos;
 	sprite->m_pInitSize = sprite->m_pEffect->m_pInitSize;
-	sprite->m_fStep = 0.1f;
-	if (m_iCurrentIndex == 1)
-	{
-		sprite->m_fStep = 1.0f;
-	}
+	sprite->m_fStep = 0.1f;	
 	m_EffectList.emplace_back(sprite);
 }
 void   UWorld::AddEffectTex(TVector2 pos)
@@ -109,4 +105,8 @@ void   UWorld::Render()
 		}
 		effect->Render();
 	}
+	/*auto effect = m_EffectList.back();
+	m_EffectList.pop_back();
+	m_EffectList[0] = effect;
+	m_iNumEffect--;*/
 }

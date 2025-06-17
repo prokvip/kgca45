@@ -31,7 +31,12 @@ class Sample :  public TWindow
 	
 	std::shared_ptr<APlayerCharacter>	m_Player = nullptr;
 
-	ID3D11BlendState* m_AlphaBlendState = nullptr;
+	ComPtr<ID3D11BlendState> m_AlphaBlendState = nullptr;
+	ComPtr<ID3D11BlendState> m_AddBlendState = nullptr;
+	ComPtr<ID3D11BlendState> m_SubtrackBlendState = nullptr;
+	ComPtr<ID3D11BlendState> m_RevSubtrackBlendState = nullptr;
+	ComPtr<ID3D11BlendState> m_MultiplyBlendState = nullptr;
+	ComPtr<ID3D11BlendState> m_DualSourceBlendState = nullptr;
 	TTexture* m_AlphaTexture = nullptr;
 public:
 	bool CreateBlendState();

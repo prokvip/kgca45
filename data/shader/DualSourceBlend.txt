@@ -1,0 +1,33 @@
+#include "ShaderHeader.txt"
+//--------------------------------------------------------------------------------------
+// Vertex Shader
+//--------------------------------------------------------------------------------------
+VS_OUTPUT VS( VS_INPUT vScreen ) 
+{
+	VS_OUTPUT ret = (VS_OUTPUT)0;	
+	float2 vNDC = ScreenToNDC(vScreen.p);
+	ret.pos		= float4(vNDC.x, vNDC.y, 0.0f, 1.0f);
+	ret.color	= vScreen.c;
+	ret.tex		= vScreen.t;
+    return ret;
+}
+struct PS_OUTPUT
+{
+	float4 add : SV_Target0;    // 더하기 2번
+	float4 mul : SV_Target1;    // 곱하기 1번
+};
+//--------------------------------------------------------------------------------------
+// 검정색 배경의 텍스처에서 활용된다.Pixel Shader
+//--------------------------------------------------------------------------------------
+Texture2D      g_texture		: register(t0);
+Texture2D      g_textureMask	: register(t1);
+SamplerState   g_Sample   : register(s0);
+PS_OUTPUT PS( VS_OUTPUT psInput ) // 시멘틱(의미구조)
+{	
+	PS_OUTPUT ret = (PS_OUTPUT)0;	
+	ret.add = g_texture.Sample(g_Sample,psInput.tex);
+	float color = max(max(ret.add.r,ret.add.g),ret.add.b); 
+	ret.mul = float4(1-color,1-color,1-color,1);
+	//ret.add = float4(0,0,0,1);
+	return ret;
+}

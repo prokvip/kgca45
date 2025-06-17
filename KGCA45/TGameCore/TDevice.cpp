@@ -96,7 +96,7 @@ void TDevice::SetViewPort()
 }
 void     TDevice::PreRender()
 {
-    float color[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+    float color[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
     m_pContext->ClearRenderTargetView(m_pRTV, color);
     m_pContext->RSSetViewports(1, &m_ViewPort);
     m_pContext->OMSetRenderTargets(1, &m_pRTV, NULL);

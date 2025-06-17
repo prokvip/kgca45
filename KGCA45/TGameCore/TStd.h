@@ -9,10 +9,12 @@
 #include <vector>
 #include <map>
 #include <memory> // smart point
+#include <wrl.h> 
 #include <WICTextureLoader.h>
 #include <DDSTextureLoader.h>
 #include "TRect.h"
 
+using namespace Microsoft::WRL;
 using namespace std;
 using TString = std::wstring;
 
