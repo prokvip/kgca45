@@ -74,6 +74,13 @@ public:
 	{
 		m_AssetMap.clear();
 	}
-
+	TAssetManager()
+	{
+		int i = 0;
+	}
+	virtual ~TAssetManager()
+	{		
+		m_AssetMap.clear(); // Clear the map
+	}
 };
 

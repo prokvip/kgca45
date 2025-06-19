@@ -22,10 +22,13 @@
 
 class Sample :  public TWindow
 {
+	TSound*	m_pBGSound = nullptr;
 public:
 	static TAssetManager<TSound> gSoundManager;
-	bool   CreateSoundLoad(TString filepath);
-
+	bool CreateFMOD();
+	TSound* LoadSound(TString filepath);
+	void TestFMOD();
+public:
 	TDevice m_dxDevice;
 	std::shared_ptr<AActor>				m_MapObj = nullptr;
 	std::shared_ptr<ATimerEffect>		m_TimerObj = nullptr;

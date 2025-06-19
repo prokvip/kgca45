@@ -6,23 +6,59 @@
 #include "UTimerComponent.h"
 
 TAssetManager<TSound> Sample::gSoundManager;
-bool Sample::CreateSoundLoad(TString filepath)
+
+void Sample::TestFMOD()
+{
+    /// 사운드 테스트
+    if (TEngine::gInput->GetKey(VK_LBUTTON) == KEY_PUSH)
+    {
+        auto bgSound =
+            Sample::gSoundManager.GetAsset(L"Gun1.wav");
+        if (bgSound != nullptr)
+        {
+            bgSound->PlayEffect();
+        }
+    }
+    if (TEngine::gInput->GetKey(VK_RBUTTON) == KEY_PUSH)
+    {
+        if (m_pBGSound != nullptr)
+        {
+            m_pBGSound->Play();
+        }
+    }
+    if (m_pBGSound && TEngine::gInput->GetKey('T') == KEY_PUSH)
+    {
+        m_pBGSound->PauseToggle();
+    }
+    if (m_pBGSound && TEngine::gInput->GetKey('S') == KEY_PUSH)
+    {
+        m_pBGSound->Stop();
+    }
+    if (m_pBGSound && TEngine::gInput->GetKey(VK_UP) == KEY_HOLD)
+    {
+        m_pBGSound->SetVolumeUp();
+    }
+    if (m_pBGSound && TEngine::gInput->GetKey(VK_DOWN) == KEY_HOLD)
+    {
+        m_pBGSound->SetVolumeDown();
+    }
+
+}
+bool Sample::CreateFMOD()
 {
     //Initialize 
     FMOD::System_Create(&TSound::m_pSystem);
-    if (TSound::m_pSystem == nullptr)
+    if (TSound::m_pSystem != nullptr)
     {
-        return false;
-    }
-    TSound::m_pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
-    //Load sound file
-    if (gSoundManager.LoadPtr(filepath)==nullptr)
-    {
-        return false;
-    }
-    return true;
+        TSound::m_pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
+        return true;
+    }      
+    return false;
 }
-
+TSound* Sample::LoadSound(TString filepath)
+{
+	return Sample::gSoundManager.LoadPtr(filepath);
+}
 bool Sample::CreateBlendState()
 {
     D3D11_BLEND_DESC bd;
@@ -95,14 +131,14 @@ LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 void Sample::GameRun()
 {
-	TSound::Update(); // 사운드 업데이트
-
     for (auto pNode = m_Engine.m_CompList.begin();pNode != m_Engine.m_CompList.end();pNode++)
     {
         (*pNode)->TickComponent();
     }
     if (GameLoop())
-    {         
+    {   
+		TestFMOD(); // FMOD 테스트      
+
         m_MapObj->Tick();   
         m_TimerObj->Tick();
         m_EffectObj->Tick();
@@ -139,6 +175,8 @@ void Sample::GameRun()
             m_World.Render();
         m_dxDevice.PostRender();
     }	
+
+    TSound::UpdateSystem(m_pBGSound); // 사운드 업데이트
 }
 void Sample::InitGame()
 {
@@ -149,10 +187,12 @@ void Sample::InitGame()
     m_dxDevice.CreateDevice(GetHwnd());
     m_dxDevice.CreateRenderTargetView();
     m_dxDevice.SetViewPort();    
-
-	CreateSoundLoad(L"../../data/sound/abel_leaf.asf");
+    
+    CreateFMOD();
+	m_pBGSound = LoadSound(L"../../data/sound/00_Menu.mp3");
+    auto effectsound = LoadSound(L"../../data/sound/Gun1.wav");
     auto bgSound = 
-        Sample::gSoundManager.GetAsset(L"abel_leaf.asf");
+        Sample::gSoundManager.GetAsset(L"00_Menu.mp3");
     if (bgSound != nullptr)
     {
         bgSound->Play(true);
@@ -283,13 +323,18 @@ bool Sample::GameLoop()
 void Sample::ReleaseGame()
 {
     P(L"\n%s", L"Release DirectX  : true");
+    TEngine::gTexManager.Clear();
+    TEngine::gShaderManager.Clear();
+    TEngine::gSpriteManager.Clear();
+    Sample::gSoundManager.Clear();
+    
     m_dxDevice.Release();
+   
+    m_Engine.m_CompList.clear();
+    m_World.m_ActorList.clear();
 
     std::wcout << std::endl;
     std::wcout << TEngine::gTimer->GetGameGlobalTimer() << std::endl;
-
-    m_Engine.m_CompList.clear();
-    m_World.m_ActorList.clear();
 
     std::wcout << L"현재 인스턴스 갯수 : " << UActorComponent::GetNumInstance() << std::endl;
 }
@@ -300,6 +345,5 @@ int main()
     game.SetWindow(GetModuleHandle(nullptr));
     game.InitGame();
     game.Run();
-    game.ReleaseGame();
-    _getch();
+    game.ReleaseGame();	
 }

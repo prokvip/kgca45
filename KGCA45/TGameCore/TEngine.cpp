@@ -174,3 +174,14 @@ void	TEngine::Init()
 		return;
 	}
 }
+void	TEngine::Release()
+{
+	m_CompList.clear();
+	TEngine::gTexManager.Clear();
+	TEngine::gShaderManager.Clear();
+	TEngine::gSpriteManager.Clear();
+}
+TEngine::~TEngine()
+{
+	Release();
+}

@@ -40,6 +40,9 @@ public:
 	static std::vector<TSpriteInfo>			g_Sprite;
 public:
 	void  Init();
+	void  Release();
 	bool  GameDataLoad(TString path);
+	TEngine() {};
+	virtual ~TEngine();
 };
 
