@@ -8,5 +8,4 @@ int main()
     game.SetWindow(GetModuleHandle(nullptr));
     game.Run();
     game.ReleaseGame();
-    _getch();
 }

@@ -5,5 +5,4 @@ int main()
     TWindow win;
     win.SetWindow(GetModuleHandle(nullptr));
     win.Run();    
-    _getch();
 }

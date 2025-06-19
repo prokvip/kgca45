@@ -9,5 +9,4 @@ int main()
     game.InitGame();
     game.Run();
     game.ReleaseGame();   
-    _getch();
 }
