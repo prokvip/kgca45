@@ -13,6 +13,7 @@
 #include <WICTextureLoader.h>
 #include <DDSTextureLoader.h>
 #include "TRect.h"
+#include <atlconv.h> // A2W
 
 using namespace Microsoft::WRL;
 using namespace std;
@@ -75,7 +76,17 @@ static void ConsolePrintA(const char* fmt, ...)
 	DWORD dwBytesWriten;
 	WriteConsoleA(handle, buf, (DWORD)strlen(buf), &dwBytesWriten, 0);
 }
+static std::wstring to_mw(const std::string& _src)
+{
+	USES_CONVERSION;
+	return std::wstring(A2W(_src.c_str()));
+};
 
+static std::string to_wm(const std::wstring& _src)
+{
+	USES_CONVERSION;
+	return std::string(W2A(_src.c_str()));
+};
 #define PrintA(fmt,...)         ConsolePrintA( fmt, __VA_ARGS__ )
 #define PrintDetailA(fmt,...)   ConsolePrintA( "[%s %d] : " fmt, __FILE__,__LINE__, ##__VA_ARGS__ )
 #define P(fmt,...)    ConsolePrintW( fmt, __VA_ARGS__ )
