@@ -4,7 +4,7 @@
 #include "TTexture.h"
 #include "TShader.h"
 #include "TSprite.h"
-
+#include "TSound.h"
 
 class UActorComponent;
 class UInputComponent;
@@ -34,11 +34,19 @@ public:
 	static TAssetManager<TTexture>			gTexManager;
 	static TAssetManager<TShader>			gShaderManager;	
 	static TAssetManager<ASprite>			gSpriteManager;
-
+	static TAssetManager<TSound>			gSoundManager;
 	static std::shared_ptr<UTimerComponent>	gTimer;
 	static std::shared_ptr<UInputComponent>	gInput;
 	static std::vector<TSpriteInfo>			g_Sprite;
+
+	static ComPtr<ID3D11BlendState> m_AlphaBlendState;
+	static ComPtr<ID3D11BlendState> m_AddBlendState;
+	static ComPtr<ID3D11BlendState> m_SubtrackBlendState;
+	static ComPtr<ID3D11BlendState> m_RevSubtrackBlendState;
+	static ComPtr<ID3D11BlendState> m_MultiplyBlendState;
+	static ComPtr<ID3D11BlendState> m_DualSourceBlendState;
 public:
+	bool  CreateBlendState();
 	void  Init();
 	void  Release();
 	bool  GameDataLoad(TString path);

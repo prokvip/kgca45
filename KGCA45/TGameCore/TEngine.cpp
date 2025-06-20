@@ -6,10 +6,84 @@
 TAssetManager<TTexture> TEngine::gTexManager;
 TAssetManager<TShader>  TEngine::gShaderManager;
 TAssetManager<ASprite>	TEngine::gSpriteManager;
+TAssetManager<TSound>	TEngine::gSoundManager;
+
 std::shared_ptr<UTimerComponent>	 TEngine::gTimer = nullptr;
 std::shared_ptr<UInputComponent>	 TEngine::gInput = nullptr;
 std::vector<TSpriteInfo>  TEngine::g_Sprite;
 
+ComPtr<ID3D11BlendState> TEngine::m_AlphaBlendState;
+ComPtr<ID3D11BlendState> TEngine::m_AddBlendState;
+ComPtr<ID3D11BlendState> TEngine::m_SubtrackBlendState;
+ComPtr<ID3D11BlendState> TEngine::m_RevSubtrackBlendState;
+ComPtr<ID3D11BlendState> TEngine::m_MultiplyBlendState;
+ComPtr<ID3D11BlendState> TEngine::m_DualSourceBlendState;
+
+bool TEngine::CreateBlendState()
+{
+	D3D11_BLEND_DESC bd;
+	ZeroMemory(&bd, sizeof(bd));
+	bd.RenderTarget[0].BlendEnable = true;
+	// RGB È¥ÇÕ
+	//RGB = SrcColor * SrcBlend OP DestColor * DestBlend;
+	//RGB = SrcColor * D3D11_BLEND_SRC_ALPHA D3D11_BLEND_OP_ADD DestColor * D3D11_BLEND_INV_SRC_ALPHA;
+	//RGB = SrcColor * arcalpha + DestColor * 1-arcalpha;
+	bd.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	// alpha È¥ÇÕ
+	// A = SrcAlpha * 1 + DestAlpha * 0;
+	bd.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bd.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	// RGB Ã¤³ÎÀ» ¸ðµÎ »ç¿ë
+	bd.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_AlphaBlendState.GetAddressOf())))
+	{
+		return false;
+	}
+	// °¡»êºí·£µù
+	bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
+	bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_AddBlendState.GetAddressOf())))
+	{
+		return false;
+	}
+	// »¬¼Àºí·£µù( ¼Ò½º-´ë»ó )
+	bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_SUBTRACT;
+	if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_SubtrackBlendState.GetAddressOf())))
+	{
+		return false;
+	}
+	// »¬¼Àºí·£µù( ´ë»ó-¼Ò½º )
+	bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_REV_SUBTRACT;
+	if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_RevSubtrackBlendState.GetAddressOf())))
+	{
+		return false;
+	}
+	// °ö¼Àºí·£µù
+	bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ZERO;
+	bd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_COLOR;
+	bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_MultiplyBlendState.GetAddressOf())))
+	{
+		return false;
+	}
+	// µà¾ó¼Ò½ºÄÃ·¯ ºí·£µù
+	bd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bd.RenderTarget[0].DestBlend = D3D11_BLEND_SRC1_COLOR;
+	bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	if (FAILED(TDevice::m_pd3dDevice->CreateBlendState(&bd, m_DualSourceBlendState.GetAddressOf())))
+	{
+		return false;
+	}
+	return true;
+}
 bool    TEngine::GameDataLoad(TString path)
 {
 	TCHAR pBuffer[256] = { 0 };
@@ -85,6 +159,12 @@ bool    TEngine::GameDataLoad(TString path)
 }
 void	TEngine::Init()
 {
+	if (CreateBlendState())
+	{
+		TDevice::m_pContext->OMSetBlendState(
+			m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
+	}
+
 	GameDataLoad(L"../../data/script/SpriteInfo.txt");
 	// 
 	for (auto sprite : g_Sprite)
@@ -180,6 +260,7 @@ void	TEngine::Release()
 	TEngine::gTexManager.Clear();
 	TEngine::gShaderManager.Clear();
 	TEngine::gSpriteManager.Clear();
+	TEngine::gSoundManager.Clear();
 }
 TEngine::~TEngine()
 {

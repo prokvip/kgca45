@@ -17,8 +17,16 @@ void	UWorld::Init()
 		m_Effects.emplace_back(sprite);
 	}
 }
-void UWorld::Tick()
+void	UWorld::Tick()
 {
+	for (auto& p : m_ActorList)
+	{
+		if (p.second->m_bDraw == false)
+		{
+			continue;
+		}
+		p.second->Tick();
+	}
 	TRect rtCollision;
 	for( auto npc : m_ActorList)
 	{
@@ -33,7 +41,7 @@ void UWorld::Tick()
 			npc.second->m_bDraw = false;
 			//AddEffectTex(rtCollision.GetCenter());			
 			//AddEffectUV(rtCollision.GetCenter());
-			AddEffect(rtCollision.GetCenter());
+			AddEffect(rtCollision.GetCenter());			
 		}
 	}
 	for (auto effect : m_EffectList)
@@ -44,15 +52,12 @@ void UWorld::Tick()
 		}
 		effect->Tick();
 	}
+	
 }
 void   UWorld::AddEffect(TVector2 pos)
 {
-	/*if (m_iCurrentIndex >= m_Effects.size())
-	{
-		m_iCurrentIndex = 0;
-	}*/
 	auto sprite = std::make_shared<TEffect>();
-	auto effect = TEngine::gSpriteManager.GetAsset(L"rtExplosion");
+	auto effect = TEngine::gSpriteManager.GetAsset(L"lot_wik");
 	sprite->m_pEffect = effect;// m_Effects[m_iCurrentIndex++];
 	sprite->m_szName = sprite->m_pEffect->GetName();
 	sprite->m_pInitPos = pos;
@@ -105,8 +110,28 @@ void   UWorld::Render()
 		}
 		effect->Render();
 	}
+	for (auto& p : m_ActorList)
+	{
+		if (p.second->m_bDraw == false)
+		{
+			continue;
+		}
+		p.second->Render();
+	}
 	/*auto effect = m_EffectList.back();
 	m_EffectList.pop_back();
 	m_EffectList[0] = effect;
 	m_iNumEffect--;*/
+}
+void   UWorld::Release()
+{
+	m_ActorList.clear();
+	m_EffectList.clear();
+	m_EffectListTex.clear();
+	m_EffectListUV.clear();
+	m_Effects.clear();
+}
+UWorld::~UWorld()
+{	
+	Release();
 }

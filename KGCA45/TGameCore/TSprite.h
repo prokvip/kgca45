@@ -11,9 +11,8 @@ public:
 	UINT				    m_iSecond = 0;
 	TVector2				m_pInitPos;
 	TVector2				m_pInitSize;
-	std::vector<std::shared_ptr<URenderComponent>> m_SecondObj;
 public:
-	void    SetTextureList(std::vector< TTexture>& list);
+	void    SetTextureList(std::vector<TTexture>& list);
 	virtual	bool     Create(
 		TVector2 pos,
 		TVector2 size,
@@ -30,7 +29,10 @@ public:
 public:
 	ASprite(std::wstring name) : APawn(name) {}
 	ASprite() {};
-	~ASprite() {};
+	virtual ~ASprite() {
+		m_texlist.clear();
+		m_uvlist.clear();
+	};
 };
 class ATimerEffect :  public ASprite
 {
@@ -41,7 +43,7 @@ public:
 public:
 	ATimerEffect(std::wstring name) : ASprite(name) {}
 	ATimerEffect() {};
-	~ATimerEffect() {};
+	virtual ~ATimerEffect() {};
 };
 
 class AEffectTex : public ASprite

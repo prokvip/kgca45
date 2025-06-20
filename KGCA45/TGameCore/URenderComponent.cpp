@@ -14,14 +14,8 @@ URenderComponent::URenderComponent(TString name) : UActorComponent(name)
 }
 URenderComponent::~URenderComponent()
 {
-	if (m_pTexture) m_pTexture->Release();
-	if (m_pSRV) m_pSRV->Release();
-	if (m_pVSBuf) m_pVSBuf->Release();
-	if (m_pPSBuf) m_pPSBuf->Release();
 	if (m_pVertexBuffer) m_pVertexBuffer->Release();
-	if (m_pVertexLayout) m_pVertexLayout->Release();
-	if (m_pVertexShader) m_pVertexShader->Release();
-	if (m_pPixelShader) m_pPixelShader->Release();
+	if (m_pVertexLayout) m_pVertexLayout->Release();	
 }
 bool   URenderComponent::SetTexture(TString filename)
 {

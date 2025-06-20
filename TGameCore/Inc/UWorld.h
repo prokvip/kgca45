@@ -64,8 +64,7 @@ public:
 	std::vector<ASprite*>	m_EffectListUV;
 	UINT			m_iCurrentIndex = 0;	
 	TMap			m_ActorList;
-	std::vector<std::shared_ptr<TEffect>>	m_EffectList;
-	
+	std::vector<std::shared_ptr<TEffect>>	m_EffectList;	
 	// 0  ~  100;  [0]false ~ 10-> [10]true, 1 ~ 9, : [10]false
 public:
 	void			Init();
@@ -74,5 +73,8 @@ public:
 	void			AddEffectUV(TVector2 pos);
 	void			AddEffect(TVector2 pos);
 	void			Render();
+	void			Release();
+public:
+	virtual ~UWorld();
 };
 
