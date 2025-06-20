@@ -24,7 +24,7 @@ class Sample :  public TWindow
 {
 	TSound*	m_pBGSound = nullptr;
 public:
-	static TAssetManager<TSound> gSoundManager;
+	static TAssetManager<TSound> g_SoundManager;
 	bool CreateFMOD();
 	TSound* LoadSound(TString filepath);
 	void TestFMOD();

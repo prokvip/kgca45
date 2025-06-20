@@ -5,7 +5,7 @@
 #include "UInputComponent.h"
 #include "UTimerComponent.h"
 
-TAssetManager<TSound> Sample::gSoundManager;
+TAssetManager<TSound> Sample::g_SoundManager;
 
 void Sample::TestFMOD()
 {
@@ -13,7 +13,7 @@ void Sample::TestFMOD()
     if (TEngine::gInput->GetKey(VK_LBUTTON) == KEY_PUSH)
     {
         auto bgSound =
-            Sample::gSoundManager.GetAsset(L"Gun1.wav");
+            Sample::g_SoundManager.GetAsset(L"Gun1.wav");
         if (bgSound != nullptr)
         {
             bgSound->PlayEffect();
@@ -57,7 +57,7 @@ bool Sample::CreateFMOD()
 }
 TSound* Sample::LoadSound(TString filepath)
 {
-	return Sample::gSoundManager.LoadPtr(filepath);
+	return Sample::g_SoundManager.LoadPtr(filepath);
 }
 bool Sample::CreateBlendState()
 {
@@ -175,8 +175,25 @@ void Sample::GameRun()
             m_World.Render();
         m_dxDevice.PostRender();
     }	
+    if (m_pBGSound->m_pChannel == nullptr)
+    {
+        return;
+    }
 
-    TSound::UpdateSystem(m_pBGSound); // 사운드 업데이트
+    if (m_pBGSound && m_pBGSound->IsPlaying())
+    {
+        m_pBGSound->m_pChannel->getPosition(&m_pBGSound->m_msPosition, FMOD_TIMEUNIT_MS);
+        wchar_t buffer[256];
+        swprintf(buffer, 256,
+            L" 경과시간[%02d:%02d], 길이[%02d:%02d]",
+            m_pBGSound->m_msPosition / 1000 / 60,
+            m_pBGSound->m_msPosition / 1000 % 60,
+            //m_msPosition / 10 % 60,
+            m_pBGSound->m_msSoundLength / 1000 / 60, // 분
+            m_pBGSound->m_msSoundLength / 1000 % 60);// 초
+    }
+
+    TSound::UpdateSystem(); // 사운드 업데이트
 }
 void Sample::InitGame()
 {
@@ -192,7 +209,7 @@ void Sample::InitGame()
 	m_pBGSound = LoadSound(L"../../data/sound/00_Menu.mp3");
     auto effectsound = LoadSound(L"../../data/sound/Gun1.wav");
     auto bgSound = 
-        Sample::gSoundManager.GetAsset(L"00_Menu.mp3");
+        Sample::g_SoundManager.GetAsset(L"00_Menu.mp3");
     if (bgSound != nullptr)
     {
         bgSound->Play(true);
@@ -222,7 +239,7 @@ void Sample::InitGame()
         L"../../data/shader/DefaultShader.txt"))
     {       
         auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
-        m_TimerObj->SetTextureList(sprite->m_texlist);
+        m_TimerObj->SetSprite(sprite);
     }
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
     if (m_EffectObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
@@ -326,7 +343,7 @@ void Sample::ReleaseGame()
     TEngine::gTexManager.Clear();
     TEngine::gShaderManager.Clear();
     TEngine::gSpriteManager.Clear();
-    Sample::gSoundManager.Clear();
+    Sample::g_SoundManager.Clear();
     
     m_dxDevice.Release();
    
