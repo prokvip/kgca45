@@ -8,6 +8,15 @@ void   TSound::UpdateSystem()
 	}
 	m_pSystem->update();
 }
+void   TSound::ReleaseSystem()
+{
+	if (m_pSystem != nullptr)
+	{
+		m_pSystem->close();
+		m_pSystem->release();
+		m_pSystem = nullptr;
+	}
+}
 void   TSound::Update()
 {
 	if (m_pChannel == nullptr)
@@ -186,12 +195,7 @@ void TSound::Release()
 		m_pSound->release();
 		m_pSound = nullptr;
 	}
-	if (m_pSystem != nullptr)
-	{
-		m_pSystem->close();
-		m_pSystem->release();
-		m_pSystem = nullptr;
-	}
+	
 }
 TSound::TSound(TString  path) : UObject(path)
 {

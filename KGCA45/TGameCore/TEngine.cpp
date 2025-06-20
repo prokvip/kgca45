@@ -261,6 +261,7 @@ void	TEngine::Release()
 	TEngine::gShaderManager.Clear();
 	TEngine::gSpriteManager.Clear();
 	TEngine::gSoundManager.Clear();
+	TSound::ReleaseSystem();
 }
 TEngine::~TEngine()
 {

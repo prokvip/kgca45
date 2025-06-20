@@ -33,8 +33,9 @@ void TGameScene::InitScene()
         L"../../data/shader/DefaultShader.txt"))
     {
         auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
-        m_TimerObj->SetTextureList(sprite->m_texlist);
+        m_TimerObj->SetSprite(sprite);
     }
+
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
     if (m_EffectObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
         L"../../data/texture/frgg.DDS",//get_item_03.dds",
@@ -128,8 +129,9 @@ void TGameScene::Frame()
     TestFMOD(); // FMOD Å×½ºÆ®      
 
     m_MapObj->Tick();
-    m_TimerObj->Tick();
     m_EffectObj->Tick();
+     //m_TimerObj->Tick();
+   m_EffectObj->Tick();
     m_Player->Tick();
     m_World->Tick();
 
@@ -145,7 +147,7 @@ void TGameScene::Render()
 {
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_MapObj->Render();
-    m_TimerObj->Render();
+    //m_TimerObj->Render();
     TDevice::m_pContext->OMSetBlendState(TEngine::m_DualSourceBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_EffectObj->Render();
 

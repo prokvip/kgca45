@@ -1,6 +1,6 @@
 #include "TSprite.h"
 #include "TDevice.h"
-void    ASprite::SetTextureList(std::vector< TTexture>& list)
+void    ASprite::SetTextureList(std::vector<TTexture>& list)
 {
 	m_texlist = list;
 }
@@ -77,7 +77,7 @@ void   ATimerEffect::Tick()
 	{
 		m_iCurrentIndex++;
 		m_fTimer = m_fTimer - 1.0f;
-		if (m_iCurrentIndex >= m_texlist.size())
+		if (m_iCurrentIndex >= m_pSprite->m_texlist.size())
 		{
 			m_iCurrentIndex = 0;
 		}
@@ -86,9 +86,7 @@ void   ATimerEffect::Tick()
 		{
 			m_iSecond = 0;
 		}
-	}
-
-	
+	}	
 }
 void   ATimerEffect::Render()
 {	
@@ -104,13 +102,13 @@ void   ATimerEffect::Render()
 	SetRect(m_pInitPos, m_pInitSize);
 	UpdatePositionVertexData();
 	UpdateVertexBuffer();
-	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond / 10].m_pSRV);
+	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_pSprite->m_texlist[m_iSecond / 10].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 
 	SetRect({ m_pInitPos.x + 50.0f, m_pInitPos.y }, m_pInitSize);
 	UpdatePositionVertexData();
 	UpdateVertexBuffer();
-	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_texlist[m_iSecond % 10].m_pSRV);
+	TDevice::m_pContext->PSSetShaderResources(0, 1, &m_pSprite->m_texlist[m_iSecond % 10].m_pSRV);
 	TDevice::m_pContext->Draw(m_pRenderComponent->m_VertexList.size(), 0);
 }
 void   AEffectTex::Render()

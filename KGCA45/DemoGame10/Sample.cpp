@@ -33,18 +33,30 @@ void Sample::GameRun()
     {
         if(m_pCurrentScene == m_pIntroScene.get())
         {
+			m_pLobbyScene->ReleaseScene();
+			m_pLobbyScene.reset(new TLobbyScene());
+			m_pLobbyScene->InitScene();
             m_pCurrentScene = m_pLobbyScene.get();
         }
         else if (m_pCurrentScene == m_pLobbyScene.get())
         {
+            m_pInGameScene->ReleaseScene();
+            m_pInGameScene.reset(new TGameScene());
+            m_pInGameScene->InitScene();
             m_pCurrentScene = m_pInGameScene.get();
         }
         else if (m_pCurrentScene == m_pInGameScene.get())
         {
+            m_pResultScene->ReleaseScene();
+            m_pResultScene.reset(new TResultScene());
+            m_pResultScene->InitScene();
             m_pCurrentScene = m_pResultScene.get();
         }
         else if (m_pCurrentScene == m_pResultScene.get())
         {
+            m_pLobbyScene->ReleaseScene();
+            m_pLobbyScene.reset(new TLobbyScene());
+            m_pLobbyScene->InitScene();
             m_pCurrentScene = m_pLobbyScene.get();
 		}        
     }

@@ -34,17 +34,7 @@ public:
 		m_uvlist.clear();
 	};
 };
-class ATimerEffect :  public ASprite
-{
-	UINT		m_iSecond =0;
-public:
-	virtual void   Tick()override;
-	virtual void   Render() override;
-public:
-	ATimerEffect(std::wstring name) : ASprite(name) {}
-	ATimerEffect() {};
-	virtual ~ATimerEffect() {};
-};
+
 
 class AEffectTex : public ASprite
 {
@@ -56,4 +46,24 @@ class AEffectUV : public ASprite
 {
 public:
 	virtual void   Render() override;
+};
+
+class ATimerEffect : public APawn
+{
+public:
+	float					m_fStep = 1.0f;
+	UINT					m_iCurrentIndex = 0;
+	float					m_fTimer = 0.0f;
+	UINT				    m_iSecond = 0;
+	TVector2				m_pInitPos;
+	TVector2				m_pInitSize;
+	ASprite*				m_pSprite = nullptr;
+public:
+	virtual void   Tick()override;
+	virtual void   Render() override;
+	virtual void   SetSprite(ASprite* sprite) { m_pSprite = sprite; }
+public:
+	ATimerEffect(std::wstring name) : APawn(name) {}
+	ATimerEffect() {};
+	virtual ~ATimerEffect() {};
 };

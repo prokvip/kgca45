@@ -18,6 +18,7 @@ public:
 	~TTexture()
 	{
 		if (m_pTexture)  m_pTexture->Release();
+
 		if (m_pSRV)  m_pSRV->Release();
 		m_pTexture = nullptr;
 		m_pSRV = nullptr;

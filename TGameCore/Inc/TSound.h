@@ -14,6 +14,7 @@ class TSound : public UObject
 public:
 	static FMOD::System*	m_pSystem;	// FMOD 시스템 객체
 	static  void   UpdateSystem();
+	static  void   ReleaseSystem();
 	// 사운드 파일단위로 1개	
 	FMOD::Sound*	m_pSound	= nullptr;	// 사운드 객체
 	// 플레이 단위(실행되야 반환됨.)로 1개가 반환된다.
