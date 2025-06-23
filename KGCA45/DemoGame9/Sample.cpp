@@ -142,16 +142,7 @@ void Sample::GameRun()
         m_MapObj->Tick();   
         m_TimerObj->Tick();
         m_EffectObj->Tick();
-        m_Player->Tick();
-        for (auto& p : m_World.m_ActorList)
-        {
-            if (p.second->m_bDraw == false)
-            {
-                continue;
-            }
-            p.second->Tick();
-        }
-           
+        m_Player->Tick();         
         m_World.Tick();
           
        m_dxDevice.PreRender();
@@ -160,18 +151,8 @@ void Sample::GameRun()
             m_TimerObj->Render();
             TDevice::m_pContext->OMSetBlendState(m_DualSourceBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
             m_EffectObj->Render();
-
             TDevice::m_pContext->OMSetBlendState(m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
-
             m_Player->Render();
-            for (auto& p : m_World.m_ActorList)
-            {
-                if (p.second->m_bDraw == false)
-                {
-                    continue;
-                }
-                p.second->Render();
-            }
             m_World.Render();
         m_dxDevice.PostRender();
     }	
@@ -243,7 +224,7 @@ void Sample::InitGame()
     }
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
     if (m_EffectObj->Create({ 0.0f, 0.0f }, { 100.0f,100.0f },
-        L"../../data/texture/frgg.DDS",//get_item_03.dds",
+        L"../../data/effect/frgg.DDS",//get_item_03.dds",
         L"../../data/shader/DualSourceBlend.txt"))
     {
     }
