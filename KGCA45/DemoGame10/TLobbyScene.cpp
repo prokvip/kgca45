@@ -4,6 +4,29 @@
 #include "TAssetManager.h"
 #include "UInputComponent.h"
 #include "UTimerComponent.h"
+
+#include "TIntroScene.h"
+#include "TLobbyScene.h"
+#include "TGameScene.h"
+#include "TResultScene.h"
+
+#include "TSceneFSM.h"
+void TLobbyScene::Process(UPawn* pPlayer)
+{
+    m_Timer += g_fSPF;
+    // 1번 이벤트 엔터키
+    if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
+    {
+        m_pOwner->m_pInGameScene->ReleaseScene();
+        m_pOwner->m_pInGameScene.reset(new TGameScene(m_pOwner));
+        m_pOwner->m_pInGameScene->InitScene();
+        int iOutput = IScene.GetTransition(
+            TSCENE_STATE_LOBBY,
+            ESceneEvent::TSCENE_EVENT_ENTER);
+        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+        //m_pOwner->m_pLobbyScene.get();
+    }
+}
 void TLobbyScene::InitScene()
 {
     P(L"\n%s", L"TIntroScene::InitScene()  : true");

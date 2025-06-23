@@ -1,18 +1,11 @@
 #pragma once
-#include "TIntroScene.h"
-#include "TLobbyScene.h"
-#include "TGameScene.h"
-#include "TResultScene.h"
+#include "TScene.h"
 
 class Sample :  public TWindow
 {
 	TDevice		m_dxDevice;
 	TEngine		m_Engine;
-	TScene*		m_pCurrentScene = nullptr;
-	std::shared_ptr<TScene> m_pIntroScene = nullptr;
-	std::shared_ptr<TScene> m_pLobbyScene = nullptr;
-	std::shared_ptr<TScene> m_pInGameScene = nullptr;
-	std::shared_ptr<TScene> m_pResultScene = nullptr;	
+	TSceneManager  m_SceneManager;
 public:
 	void InitGame();
 	void ReleaseGame();

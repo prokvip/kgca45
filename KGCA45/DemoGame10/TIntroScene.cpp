@@ -4,6 +4,41 @@
 #include "TAssetManager.h"
 #include "UInputComponent.h"
 #include "UTimerComponent.h"
+
+#include "TIntroScene.h"
+#include "TLobbyScene.h"
+#include "TGameScene.h"
+#include "TResultScene.h"
+#include "TSceneFSM.h"
+
+
+void TIntroScene::Process(UPawn* pPlayer)
+{
+    m_Timer += g_fSPF;
+    // 1번 이벤트 엔터키
+    if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
+    {
+        /*m_pLobbyScene->ReleaseScene();
+        m_pLobbyScene.reset(new TLobbyScene());
+        m_pLobbyScene->InitScene();*/
+        int iOutput = IScene.GetTransition(
+            TSCENE_STATE_INTRO,
+            ESceneEvent::TSCENE_EVENT_ENTER);
+        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+            //m_pOwner->m_pLobbyScene.get();
+    }
+	// 2번 아무키나 누르면 게임 시작
+    if (m_Timer > 5.0f)
+    {
+        m_Timer = 0.0f;
+        int iOutput = IScene.GetTransition(
+            TSCENE_STATE_INTRO,
+            ESceneEvent::TSCENE_EVENT_TIMEOUT);
+        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+
+    }
+}
+
 void TIntroScene::InitScene()
 {
     P(L"\n%s", L"TIntroScene::InitScene()  : true");
