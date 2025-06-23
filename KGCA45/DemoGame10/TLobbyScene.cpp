@@ -20,11 +20,13 @@ void TLobbyScene::Process(UPawn* pPlayer)
         m_pOwner->m_pInGameScene->ReleaseScene();
         m_pOwner->m_pInGameScene.reset(new TGameScene(m_pOwner));
         m_pOwner->m_pInGameScene->InitScene();
+        m_pOwner->m_SceneList[TSCENE_STATE_INGAME] =
+            m_pOwner->m_pInGameScene;
+
         int iOutput = IScene.GetTransition(
             TSCENE_STATE_LOBBY,
             ESceneEvent::TSCENE_EVENT_ENTER);
-        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
-        //m_pOwner->m_pLobbyScene.get();
+		m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }
 }
 void TLobbyScene::InitScene()

@@ -17,23 +17,20 @@ void TGameScene::Process(UPawn* pPlayer)
     // 1번 이벤트 엔터키
     if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
     {
-        //m_pOwner->m_pInGameScene->ReleaseScene();
-        //m_pOwner->m_pInGameScene.reset(new TGameScene(m_pOwner));
-        //m_pOwner->m_pInGameScene->InitScene();
         int iOutput = IScene.GetTransition(
             TSCENE_STATE_INGAME,
             ESceneEvent::TSCENE_EVENT_ENTER);
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }
     // 2번 아무키나 누르면 게임 시작
-    if (m_Timer > 10.0f)
+   /* if (m_Timer > 10.0f)
     {
         m_Timer = 0.0f;
         int iOutput = IScene.GetTransition(
             TSCENE_STATE_INGAME,
             ESceneEvent::TSCENE_EVENT_TIMEOUT);
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
-    }
+    }*/
 }
 
 void TGameScene::InitScene()
@@ -162,8 +159,7 @@ void TGameScene::Frame()
 
     m_MapObj->Tick();
     m_EffectObj->Tick();
-     //m_TimerObj->Tick();
-   m_EffectObj->Tick();
+    m_TimerObj->Tick();
     m_Player->Tick();
     m_World->Tick();
 
@@ -179,7 +175,7 @@ void TGameScene::Render()
 {
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_MapObj->Render();
-    //m_TimerObj->Render();
+    m_TimerObj->Render();
     TDevice::m_pContext->OMSetBlendState(TEngine::m_DualSourceBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_EffectObj->Render();
 

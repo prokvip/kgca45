@@ -12,7 +12,7 @@
 void TSceneManager::Frame()
 {
 	m_pCurrentScene->Process(nullptr);
-	m_pCurrentScene->Frame();
+	m_pCurrentScene->Frame();	
 }
 void TSceneManager::Render()
 {
