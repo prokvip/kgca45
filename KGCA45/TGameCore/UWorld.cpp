@@ -57,8 +57,16 @@ void	UWorld::Tick()
 void   UWorld::AddEffect(TVector2 pos)
 {
 	auto sprite = std::make_shared<TEffect>();
-	auto effect = TEngine::gSpriteManager.GetAsset(L"lot_wik");
-	sprite->m_pEffect = effect;// m_Effects[m_iCurrentIndex++];
+	if(rand() % 2 == 0)
+	{
+		auto effect = TEngine::gSpriteManager.GetAsset(L"lot_wik");
+		sprite->m_pEffect = effect;
+	}
+	else
+	{
+		auto effect = TEngine::gSpriteManager.GetAsset(L"firewall");
+		sprite->m_pEffect = effect;
+	}
 	sprite->m_szName = sprite->m_pEffect->GetName();
 	sprite->m_pInitPos = pos;
 	sprite->m_pInitSize = sprite->m_pEffect->m_pInitSize;
