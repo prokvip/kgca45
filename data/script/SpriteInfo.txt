@@ -1,5 +1,5 @@
 #SPRITE 
-lot_wik 25 1 ../../data/texture/lot_wik00.dds nullptr ../../data/shader/DualSourceBlend.txt
+lot_wik 25 1 ../../data/effect/lot_wik00.dds nullptr ../../data/shader/DualSourceBlend.txt
 0 ../../data/texture/lot_wik00.dds
 1 ../../data/texture/lot_wik01.dds
 2 ../../data/texture/lot_wik02.dds
@@ -25,7 +25,7 @@ lot_wik 25 1 ../../data/texture/lot_wik00.dds nullptr ../../data/shader/DualSour
 22 ../../data/texture/lot_wik22.dds
 23 ../../data/texture/lot_wik23.dds
 24 ../../data/texture/lot_wik24.dds
-rtSmoke 16 0 ../../data/texture/smoke.dds nullptr ../../data/shader/DefaultShader.txt
+rtSmoke 16 0 ../../data/effect/smoke.dds nullptr ../../data/shader/DefaultShader.txt
 0	0	0 128 128 
 1	128	0 128 128  
 2	256	0 128 128  
@@ -42,7 +42,7 @@ rtSmoke 16 0 ../../data/texture/smoke.dds nullptr ../../data/shader/DefaultShade
 13	128	384 128 128  
 14	256	384 128 128  
 15	384	384 128 128  
-GetIterm 16 0 ../../data/texture/get_item_03.dds nullptr ../../data/shader/DualSourceBlend.txt
+GetIterm 16 0 ../../data/effect/get_item_03.dds nullptr ../../data/shader/DualSourceBlend.txt
 0	0	0 128 128 
 1	128	0 128 128  
 2	256	0 128 128  

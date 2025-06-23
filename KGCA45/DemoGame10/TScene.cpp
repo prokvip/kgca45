@@ -9,10 +9,38 @@
 #include "TLobbyScene.h"
 #include "TGameScene.h"
 #include "TResultScene.h"
+
+
+LRESULT TScene::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    return 1;
+}
+void TScene::InitScene()
+{ 
+}
+void TScene::Frame()
+{   
+}
+void TScene::Render()
+{   
+}
+void TScene::ReleaseScene()
+{   
+}
+
+TScene::TScene(TSceneManager* pOwnder)
+{
+	m_pOwner = pOwnder;
+}
+TScene::~TScene()
+{
+
+}
+
 void TSceneManager::Frame()
 {
 	m_pCurrentScene->Process(nullptr);
-	m_pCurrentScene->Frame();	
+	m_pCurrentScene->Frame();
 }
 void TSceneManager::Render()
 {
@@ -41,35 +69,8 @@ TSceneManager::TSceneManager()
 }
 TSceneManager::~TSceneManager()
 {
-	if(m_pIntroScene)m_pIntroScene->ReleaseScene();
+	if (m_pIntroScene)m_pIntroScene->ReleaseScene();
 	if (m_pLobbyScene)m_pLobbyScene->ReleaseScene();
 	if (m_pInGameScene)m_pInGameScene->ReleaseScene();
 	if (m_pResultScene)m_pResultScene->ReleaseScene();
 }
-
-LRESULT TScene::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    return 1;
-}
-void TScene::InitScene()
-{ 
-}
-void TScene::Frame()
-{   
-}
-void TScene::Render()
-{   
-}
-void TScene::ReleaseScene()
-{   
-}
-
-TScene::TScene(TSceneManager* pOwnder)
-{
-	m_pOwner = pOwnder;
-}
-TScene::~TScene()
-{
-
-}
-

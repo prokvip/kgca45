@@ -66,7 +66,7 @@ void TGameScene::InitScene()
     }
 
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
-    if (m_EffectObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
+    if (m_EffectObj->Create({ 0.0f, 0.0f }, { 100.0f,100.0f },
         L"../../data/texture/frgg.DDS",//get_item_03.dds",
         L"../../data/shader/DualSourceBlend.txt"))
     {

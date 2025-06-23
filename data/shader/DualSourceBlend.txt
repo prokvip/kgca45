@@ -19,9 +19,9 @@ struct PS_OUTPUT
 //--------------------------------------------------------------------------------------
 // 검정색 배경의 텍스처에서 활용된다.Pixel Shader
 //--------------------------------------------------------------------------------------
-Texture2D      g_texture		: register(t0);
-Texture2D      g_textureMask	: register(t1);
+Texture2D      g_texture  : register(t0);
 SamplerState   g_Sample   : register(s0);
+
 PS_OUTPUT PS( VS_OUTPUT psInput ) // 시멘틱(의미구조)
 {	
 	PS_OUTPUT ret = (PS_OUTPUT)0;	

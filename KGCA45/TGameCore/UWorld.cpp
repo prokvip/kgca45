@@ -102,6 +102,7 @@ void   UWorld::AddEffectUV(TVector2 pos)
 }
 void   UWorld::Render()
 {
+	TDevice::m_pContext->OMSetBlendState(TEngine::m_DualSourceBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
 	for (auto effect : m_EffectList)
 	{
 		if (effect->m_bDraw == false)
@@ -110,6 +111,8 @@ void   UWorld::Render()
 		}
 		effect->Render();
 	}
+	TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
+
 	for (auto& p : m_ActorList)
 	{
 		if (p.second->m_bDraw == false)

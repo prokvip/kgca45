@@ -19,6 +19,8 @@ public:
 	TMatrix		m_matTrans;
 	TMatrix		m_matScale;
 	TMatrix		m_matWorld;
+	TVector2	m_pInitPos;
+	TVector2	m_pInitSize;
 	TVector2	m_vScale = { 1.0f,1.0f };
 	float		m_fAngle = 0.0f; // degree
 	bool		m_bDraw = true;

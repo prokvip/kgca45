@@ -9,8 +9,6 @@ public:
 	UINT					m_iCurrentIndex = 0;
 	float					m_fTimer = 0.0f;
 	UINT				    m_iSecond = 0;
-	TVector2				m_pInitPos;
-	TVector2				m_pInitSize;
 public:
 	void    SetTextureList(std::vector<TTexture>& list);
 	virtual	bool     Create(
@@ -54,9 +52,7 @@ public:
 	float					m_fStep = 1.0f;
 	UINT					m_iCurrentIndex = 0;
 	float					m_fTimer = 0.0f;
-	UINT				    m_iSecond = 0;
-	TVector2				m_pInitPos;
-	TVector2				m_pInitSize;
+	UINT				    m_iSecond = 0;	
 	ASprite*				m_pSprite = nullptr;
 public:
 	virtual void   Tick()override;

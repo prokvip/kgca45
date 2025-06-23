@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="TGameScene.cpp">
+      <Filter>sceneFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TIntroScene.cpp">
+      <Filter>sceneFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TLobbyScene.cpp">
+      <Filter>sceneFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TResultScene.cpp">
+      <Filter>sceneFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TScene.cpp">
+      <Filter>sceneFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TSceneFSM.cpp">
+      <Filter>sceneFSM</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sample.h" />
+    <ClInclude Include="TGameScene.h">
+      <Filter>sceneFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TIntroScene.h">
+      <Filter>sceneFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TLobbyScene.h">
+      <Filter>sceneFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TResultScene.h">
+      <Filter>sceneFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TScene.h">
+      <Filter>sceneFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TSceneFSM.h">
+      <Filter>sceneFSM</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\data\script\SpriteInfo.txt" />
+    <Text Include="..\..\data\shader\DefaultShader.txt" />
+    <Text Include="..\..\data\shader\DualSourceBlend.txt" />
+    <Text Include="..\..\data\shader\Effect.txt" />
+    <Text Include="..\..\data\shader\EffectMask.txt" />
+    <Text Include="..\..\data\shader\EffectBlack.txt" />
+    <Text Include="..\..\data\shader\Map.txt" />
+    <Text Include="..\..\data\shader\Player.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="sceneFSM">
+      <UniqueIdentifier>{b1ac75a2-c2c8-4812-ba40-78a013ecd608}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

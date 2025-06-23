@@ -8,6 +8,8 @@ bool     AActor::Create(
 	TString texfilepath,
 	TString shaderfilepath)
 {	
+	m_pInitPos = pos;
+	m_pInitSize = size;
 	return m_pRenderComponent->Create(pos, size, texfilepath, shaderfilepath);	
 }
 bool     AActor::Create(

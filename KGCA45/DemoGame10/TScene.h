@@ -4,24 +4,7 @@
 #include "TDevice.h"
 #include "TSound.h"
 class UPawn;
-class TScene;
-// fsm
-class TSceneManager : public UObject
-{
-public:
-	TScene* m_pCurrentScene = nullptr;
-	std::shared_ptr<TScene> m_pIntroScene = nullptr;
-	std::shared_ptr<TScene> m_pLobbyScene = nullptr;
-	std::shared_ptr<TScene> m_pInGameScene = nullptr;
-	std::shared_ptr<TScene> m_pResultScene = nullptr;
-	std::vector<std::shared_ptr<TScene>> m_SceneList;
-	virtual void Init();
-	virtual void Frame();
-	virtual void Render();
-	TSceneManager();
-	virtual ~TSceneManager();
-};
-
+class TSceneManager;
 class TScene : public UObject
 {
 public:
@@ -46,4 +29,21 @@ public:
 public:
 	TScene(TSceneManager* pOwnder);
 	virtual ~TScene();
+};
+
+// fsm
+class TSceneManager : public UObject
+{
+public:
+	TScene* m_pCurrentScene = nullptr;
+	std::shared_ptr<TScene> m_pIntroScene = nullptr;
+	std::shared_ptr<TScene> m_pLobbyScene = nullptr;
+	std::shared_ptr<TScene> m_pInGameScene = nullptr;
+	std::shared_ptr<TScene> m_pResultScene = nullptr;
+	std::vector<std::shared_ptr<TScene>> m_SceneList;
+	virtual void Init();
+	virtual void Frame();
+	virtual void Render();
+	TSceneManager();
+	virtual ~TSceneManager();
 };

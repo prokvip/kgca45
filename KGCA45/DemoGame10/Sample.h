@@ -1,6 +1,7 @@
 #pragma once
 #include "TScene.h"
 
+
 class Sample :  public TWindow
 {
 	TDevice		m_dxDevice;
