@@ -67,7 +67,7 @@ void TGameScene::InitScene()
 
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
     if (m_EffectObj->Create({ 0.0f, 0.0f }, { 100.0f,100.0f },
-        L"../../data/texture/frgg.DDS",//get_item_03.dds",
+        L"../../data/effect/frgg.DDS",//get_item_03.dds",
         L"../../data/shader/DualSourceBlend.txt"))
     {
     }
@@ -89,7 +89,6 @@ void TGameScene::InitScene()
             TVector2 p = { 46.0f + 1.0f, 62.0f + 1.0f };
             TVector2 s = { 68.0f - 2.0f, 79.0f - 2.0f };
             npc->UpdateUVVertexData(p, s);
-            npc->UpdateVertexBuffer();
             m_World->m_ActorList.insert(std::make_pair(name, npc));
         }
     }
@@ -110,7 +109,6 @@ void TGameScene::InitScene()
     //        TVector2 p = { 1.0f + 1.0f, 62.0f + 1.0f };
     //        TVector2 s = { 44.0f - 2.0f, 76.0f - 2.0f };
     //        npc->UpdateUVVertexData(p, s);
-    //        npc->UpdateVertexBuffer();
     //        m_World->m_ActorList.insert(std::make_pair(name, npc));
     //    }
     //}
@@ -131,7 +129,6 @@ void TGameScene::InitScene()
     //        TVector2 p = { 115.0f + 1.0f, 62.0f + 1.0f };
     //        TVector2 s = { 37.0f - 2.0f, 37.0f - 2.0f };
     //        npc->UpdateUVVertexData(p, s);
-    //        npc->UpdateVertexBuffer();
     //        m_World->m_ActorList.insert(std::make_pair(name, npc));
     //    }
     //}
@@ -149,7 +146,6 @@ void TGameScene::InitScene()
         TVector2 p = { 91.0f, 2.0f };
         TVector2 s = { 40.0f, 58.0f };
         m_Player->UpdateUVVertexData(p, s);
-        m_Player->UpdateVertexBuffer();
     }
     m_World->m_pPlayer = m_Player;
 }
@@ -159,30 +155,34 @@ void TGameScene::Frame()
     //TestFMOD(); // FMOD Å×½ºÆ®      
     if (TEngine::gInput->GetKey(VK_LBUTTON) == KEY_PUSH)
     {
-        auto bgSound =
-            TEngine::gSoundManager.GetAsset(L"Gun1.wav");
+        auto bgSound = TEngine::gSoundManager.GetAsset(L"Gun1.wav");
         if (bgSound != nullptr)
         {
             bgSound->PlayEffect();
         }
         auto projectile = std::make_shared<AActor>(L"");
-        if (projectile->Create(m_Player->GetPosition(), {20.0f,20.0f},
+        if (projectile->Create(m_Player->GetPosition(), {8.0f,22.0f},
             L"../../data/texture/bitmap1.bmp",
             L"../../data/texture/bitmap2.bmp",
             L"../../data/shader/Player.txt"))
         {
-            TVector2 p = { 91.0f, 2.0f };
-            TVector2 s = { 40.0f, 58.0f };
+            TVector2 p = { 276.0f, 2.0f };
+            TVector2 s = { 8.0f, 22.0f };
             projectile->UpdateUVVertexData(p, s);
-            projectile->UpdateVertexBuffer();
-            projectile->m_Timer = 1.0f;
+            projectile->m_fLifeTimer = 3.0f;
         }
         m_Projectile.push_back(projectile);
     }
+    
+    m_MapObj->Tick();
+    m_EffectObj->Tick();
+    m_TimerObj->Tick();
+    m_Player->Tick();
+    m_World->Tick();
     for (auto pro : m_Projectile)
     {
-        pro->m_Timer -= g_fSPF;
-        if (pro->m_Timer < 0.0f)
+        pro->m_fLifeTimer -= g_fSPF;
+        if (pro->m_fLifeTimer < 0.0f)
         {
             pro->m_bDraw = false;
             continue;
@@ -190,15 +190,14 @@ void TGameScene::Frame()
         TVector2 pos = pro->GetPosition();
         pro->m_vDirection = { 0.0f,-1.0f };
         pos = pos + pro->m_vDirection * 500.0f * g_fSPF;
+        //pro->m_fElapseTimer += g_fSPF;
+        //pro->m_vDirection = { 0.0f, -1.0f };
+       // pos = m_Player->GetPosition() + pro->m_vDirection * 100.0f * pro->m_fElapseTimer;
+        pos.x = m_Player->GetPosition().x;
+
         pro->SetPosition(pos);
         pro->Tick();
     }
-    m_MapObj->Tick();
-    m_EffectObj->Tick();
-    m_TimerObj->Tick();
-    m_Player->Tick();
-    m_World->Tick();
-
     for (auto sound : m_Soundlist)
     {
         if (sound->IsPlaying())
@@ -218,6 +217,25 @@ void TGameScene::Render()
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_Player->Render();
     
+    for (auto pro : m_Projectile)
+    {
+        pro->m_fLifeTimer -= g_fSPF;
+        if (pro->m_fLifeTimer < 0.0f)
+        {
+            pro->m_bDraw = false;
+            continue;
+        }
+        TVector2 pos = pro->GetPosition();
+        pro->m_vDirection = { 0.0f,-1.0f };
+        pos = pos + pro->m_vDirection * 10.0f * g_fSPF;
+        //pro->m_fElapseTimer += g_fSPF;
+        //pro->m_vDirection = { 0.0f, -1.0f };
+       // pos = m_Player->GetPosition() + pro->m_vDirection * 100.0f * pro->m_fElapseTimer;
+        pos.x = m_Player->GetPosition().x;
+
+        pro->SetPosition(pos);
+        pro->Tick();
+    }
     for (auto& pro : m_Projectile)
     {
         pro->Render();

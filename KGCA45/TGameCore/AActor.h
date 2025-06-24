@@ -14,7 +14,8 @@ protected:
 	TRect		m_rt;	
 public:
 	float 		m_fSpeed = 200.0f;
-	float		m_Timer = 0.0f;
+	float		m_fLifeTimer = 0.0f;
+	float		m_fElapseTimer = 0.0f;
 	TMatrix		m_matOriginTrans;
 	TMatrix		m_matRotation;
 	TMatrix		m_matTrans;
