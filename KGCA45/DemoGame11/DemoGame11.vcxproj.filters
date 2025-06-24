@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="TGameScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TIntroScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TLobbyScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TResultScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ANpc.cpp">
+      <Filter>Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TNpcManager.cpp">
+      <Filter>Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TAttackState.cpp">
+      <Filter>Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TStopState.cpp">
+      <Filter>Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TObjectState.cpp">
+      <Filter>Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TMoveState.cpp">
+      <Filter>Npc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sample.h" />
+    <ClInclude Include="TFsm.h" />
+    <ClInclude Include="TGameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TIntroScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TLobbyScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TResultScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ANpc.h">
+      <Filter>Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TNpcManager.h">
+      <Filter>Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TAttackState.h">
+      <Filter>Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TStopState.h">
+      <Filter>Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TObjectState.h">
+      <Filter>Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TMoveState.h">
+      <Filter>Npc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\data\script\SpriteInfo.txt" />
+    <Text Include="..\..\data\shader\DefaultShader.txt" />
+    <Text Include="..\..\data\shader\DualSourceBlend.txt" />
+    <Text Include="..\..\data\shader\Effect.txt" />
+    <Text Include="..\..\data\shader\EffectMask.txt" />
+    <Text Include="..\..\data\shader\EffectBlack.txt" />
+    <Text Include="..\..\data\shader\Map.txt" />
+    <Text Include="..\..\data\shader\Player.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{80c118d2-9f88-4ad7-807d-15d5af18ac4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Npc">
+      <UniqueIdentifier>{62d3bd16-b582-4528-9f1a-f53197da8923}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

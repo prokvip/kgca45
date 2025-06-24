@@ -2,7 +2,7 @@
 
 void   ANpcCharacter::Tick()
 {
-	TVector2 pos = GetPosition();
+	/*TVector2 pos = GetPosition();
 	m_vDirection.Normalized();
 	pos = pos + m_vDirection * m_fSpeed * g_fSPF;
 
@@ -22,6 +22,6 @@ void   ANpcCharacter::Tick()
 		pos.y = 0.0f;
 		m_vDirection.y *= -1.0f;
 	}
-	SetPosition(pos);
+	SetPosition(pos);*/
 	AActor::Tick();
 }

@@ -58,7 +58,7 @@ struct TEffect
 class UWorld : public UObject
 {
 public:
-	std::shared_ptr<APlayerCharacter> m_pPlayer = nullptr;
+	static std::shared_ptr<APlayerCharacter> m_pPlayer;
 	std::vector<ASprite*>	m_Effects;
 	std::vector<ASprite*>	m_EffectListTex;
 	std::vector<ASprite*>	m_EffectListUV;

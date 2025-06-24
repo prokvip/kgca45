@@ -10,6 +10,7 @@ bool     AActor::Create(
 {	
 	m_pInitPos = pos;
 	m_pInitSize = size;
+	Init();
 	return m_pRenderComponent->Create(pos, size, texfilepath, shaderfilepath);	
 }
 bool     AActor::Create(
@@ -19,6 +20,7 @@ bool     AActor::Create(
 	TString texMaskfilepath,
 	TString shaderfilepath)
 {
+	Init();
 	return m_pRenderComponent->Create(pos, size, 
 		texfilepath, texMaskfilepath, shaderfilepath);
 }
@@ -129,6 +131,10 @@ void   AActor::UpdateColorVertexData(TColor v0, TColor v1, TColor v2, TColor v3)
 void   AActor::UpdateUVVertexData(TVector2 p, TVector2 s) 
 {
 	m_pRenderComponent->UpdateUVVertexData(p,s);
+}
+void   AActor::Init()
+{
+	
 }
 void   AActor::Render()
 {

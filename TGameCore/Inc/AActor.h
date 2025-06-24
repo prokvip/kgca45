@@ -12,8 +12,9 @@ public:
 protected:
 	TVector2	m_Position;
 	TRect		m_rt;	
-	float 		m_fSpeed = 200.0f;
 public:
+	float 		m_fSpeed = 200.0f;
+	float		m_Timer = 0.0f;
 	TMatrix		m_matOriginTrans;
 	TMatrix		m_matRotation;
 	TMatrix		m_matTrans;
@@ -37,6 +38,7 @@ public:
 	virtual void   SetRect(TVector2 pos, TVector2 size);
 	virtual void   SetRect(float x, float y, float w, float h);
 	virtual void   Move(float x, float y);
+	virtual void   Init();
 	virtual void   Tick();
 	virtual void   Render();
 	virtual void   UpdateVertexBuffer();

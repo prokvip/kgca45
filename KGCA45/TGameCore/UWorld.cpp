@@ -3,7 +3,7 @@
 #include "APlayerCharacter.h"
 #include "TSprite.h"
 #include <tchar.h>
-
+std::shared_ptr<APlayerCharacter> UWorld::m_pPlayer = nullptr;
 void	UWorld::Init()
 {	
 	for (auto& data : TEngine::gSpriteManager.m_AssetMap)
