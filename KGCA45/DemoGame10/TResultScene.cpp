@@ -9,7 +9,7 @@
 #include "TLobbyScene.h"
 #include "TGameScene.h" 
 #include "TResultScene.h"
-#include "TSceneFSM.h"
+#include "TFsm.h"
 void TResultScene::Process(UPawn* pPlayer)
 {
     m_Timer += g_fSPF;
@@ -19,9 +19,9 @@ void TResultScene::Process(UPawn* pPlayer)
         /*m_pLobbyScene->ReleaseScene();
         m_pLobbyScene.reset(new TLobbyScene());
         m_pLobbyScene->InitScene();*/
-        int iOutput = IScene.GetTransition(
-            TSCENE_STATE_RESULT,
-            ESceneEvent::TSCENE_EVENT_ENTER);
+        int iOutput = m_pOwner->m_Fsm.GetTransition(
+            m_pOwner->GetDefinition().TSCENE_STATE_RESULT,
+            m_pOwner->GetDefinition().TSCENE_EVENT_ENTER);
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
         //m_pOwner->m_pLobbyScene.get();
     }

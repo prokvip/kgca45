@@ -4,7 +4,7 @@
 #include "TAssetManager.h"
 #include "UInputComponent.h"
 #include "UTimerComponent.h"
-#include "TSceneFSM.h"
+#include "TFsm.h"
 LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {   
     if (m_SceneManager.m_pCurrentScene)
@@ -71,40 +71,7 @@ void Sample::InitGame()
     m_dxDevice.CreateRenderTargetView();
     m_dxDevice.SetViewPort();      
     
-    // 상태 구조 초기화
-    // 현상태            -> 이벤트           -> 상태전환
-// TSCENE_STATE_INTRO->TSCENE_EVENT_ENTER   ->TSCENE_STATE_LOBBY
-// TSCENE_STATE_INTRO->TSCENE_EVENT_TIMEOUT ->TSCENE_STATE_LOBBY
-// 
-// TSCENE_STATE_LOBBY->TSCENE_EVENT_ENTER->TSCENE_STATE_INGAME
-// TSCENE_STATE_LOBBY->TSCENE_EVENT_START->TSCENE_STATE_INGAME
-// 
-// TSCENE_STATE_INGAME->TSCENE_EVENT_ENTER    ->TSCENE_STATE_RESULT
-// TSCENE_STATE_INGAME->TSCENE_EVENT_END      ->TSCENE_STATE_RESULT
-// TSCENE_STATE_INGAME->TSCENE_EVENT_RESTART  ->TSCENE_STATE_INGAME
-// TSCENE_STATE_INGAME->TSCENE_EVENT_EXIT     ->TSCENE_STATE_LOBBY
-
-// TSCENE_STATE_RESULT->TSCENE_EVENT_ENTER  ->TSCENE_STATE_LOBBY
-// TSCENE_STATE_RESULT->TSCENE_EVENT_RESTART->TSCENE_STATE_INGAME
-
-    IScene.AddStateTransition(  TSCENE_STATE_INTRO,
-                                ESceneEvent::TSCENE_EVENT_ENTER, 
-                                TSCENE_STATE_LOBBY);
-    IScene.AddStateTransition(TSCENE_STATE_INTRO,
-                                ESceneEvent::TSCENE_EVENT_TIMEOUT,
-                                TSCENE_STATE_LOBBY);
-    IScene.AddStateTransition(TSCENE_STATE_LOBBY,
-                                ESceneEvent::TSCENE_EVENT_ENTER,
-                                TSCENE_STATE_INGAME);
-    IScene.AddStateTransition(TSCENE_STATE_INGAME,
-                                ESceneEvent::TSCENE_EVENT_ENTER,
-                                TSCENE_STATE_RESULT);
-    IScene.AddStateTransition(TSCENE_STATE_INGAME,
-                                ESceneEvent::TSCENE_EVENT_TIMEOUT,
-                                TSCENE_STATE_RESULT);
-    IScene.AddStateTransition(TSCENE_STATE_RESULT,
-                                ESceneEvent::TSCENE_EVENT_ENTER,
-                                TSCENE_STATE_LOBBY);
+  
     m_Engine.Init();	
     m_SceneManager.Init();
 }

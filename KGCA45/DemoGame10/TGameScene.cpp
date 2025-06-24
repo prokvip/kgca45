@@ -10,25 +10,25 @@
 #include "TGameScene.h"
 #include "TResultScene.h"
 
-#include "TSceneFSM.h"
+#include "TFsm.h"
 void TGameScene::Process(UPawn* pPlayer)
 {
     m_Timer += g_fSPF;
     // 1번 이벤트 엔터키
     if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
     {
-        int iOutput = IScene.GetTransition(
-            TSCENE_STATE_INGAME,
-            ESceneEvent::TSCENE_EVENT_ENTER);
+        int iOutput = m_pOwner->m_Fsm.GetTransition(
+            m_pOwner->GetDefinition().TSCENE_STATE_INGAME,
+            m_pOwner->GetDefinition().TSCENE_EVENT_ENTER);
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }
     // 2번 아무키나 누르면 게임 시작
    /* if (m_Timer > 10.0f)
     {
         m_Timer = 0.0f;
-        int iOutput = IScene.GetTransition(
-            TSCENE_STATE_INGAME,
-            ESceneEvent::TSCENE_EVENT_TIMEOUT);
+        int iOutput = m_pOwner->m_Fsm.GetTransition(
+            m_pOwner->GetDefinition().TSCENE_STATE_INGAME,
+            m_pOwner->GetDefinition().TSCENE_EVENT_TIMEOUT);
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }*/
 }

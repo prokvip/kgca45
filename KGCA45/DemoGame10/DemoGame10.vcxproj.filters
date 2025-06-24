@@ -17,9 +17,6 @@
     <ClCompile Include="TScene.cpp">
       <Filter>sceneFSM</Filter>
     </ClCompile>
-    <ClCompile Include="TSceneFSM.cpp">
-      <Filter>sceneFSM</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sample.h" />
@@ -38,7 +35,7 @@
     <ClInclude Include="TScene.h">
       <Filter>sceneFSM</Filter>
     </ClInclude>
-    <ClInclude Include="TSceneFSM.h">
+    <ClInclude Include="TFsm.h">
       <Filter>sceneFSM</Filter>
     </ClInclude>
   </ItemGroup>

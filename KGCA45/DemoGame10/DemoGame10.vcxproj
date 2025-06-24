@@ -140,7 +140,6 @@
     <ClCompile Include="TLobbyScene.cpp" />
     <ClCompile Include="TResultScene.cpp" />
     <ClCompile Include="TScene.cpp" />
-    <ClCompile Include="TSceneFSM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sample.h" />
@@ -149,7 +148,7 @@
     <ClInclude Include="TLobbyScene.h" />
     <ClInclude Include="TResultScene.h" />
     <ClInclude Include="TScene.h" />
-    <ClInclude Include="TSceneFSM.h" />
+    <ClInclude Include="TFsm.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGameCore\TGameCore.vcxproj">

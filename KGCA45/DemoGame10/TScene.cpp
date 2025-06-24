@@ -63,6 +63,41 @@ void TSceneManager::Init()
 	m_pResultScene->InitScene();
 
 	m_pCurrentScene = m_pIntroScene.get();
+
+	// 상태 구조 초기화
+  // 현상태            -> 이벤트           -> 상태전환
+// TSCENE_STATE_INTRO->TSCENE_EVENT_ENTER   ->TSCENE_STATE_LOBBY
+// TSCENE_STATE_INTRO->TSCENE_EVENT_TIMEOUT ->TSCENE_STATE_LOBBY
+// 
+// TSCENE_STATE_LOBBY->TSCENE_EVENT_ENTER->TSCENE_STATE_INGAME
+// TSCENE_STATE_LOBBY->TSCENE_EVENT_START->TSCENE_STATE_INGAME
+// 
+// TSCENE_STATE_INGAME->TSCENE_EVENT_ENTER    ->TSCENE_STATE_RESULT
+// TSCENE_STATE_INGAME->TSCENE_EVENT_END      ->TSCENE_STATE_RESULT
+// TSCENE_STATE_INGAME->TSCENE_EVENT_RESTART  ->TSCENE_STATE_INGAME
+// TSCENE_STATE_INGAME->TSCENE_EVENT_EXIT     ->TSCENE_STATE_LOBBY
+
+// TSCENE_STATE_RESULT->TSCENE_EVENT_ENTER  ->TSCENE_STATE_LOBBY
+// TSCENE_STATE_RESULT->TSCENE_EVENT_RESTART->TSCENE_STATE_INGAME
+
+	m_Fsm.AddStateTransition(m_Fsm.Definition.TSCENE_STATE_INTRO,
+		m_Fsm.Definition.TSCENE_EVENT_ENTER,
+		m_Fsm.Definition.TSCENE_STATE_LOBBY);
+	m_Fsm.AddStateTransition(m_Fsm.Definition.TSCENE_STATE_INTRO,
+		m_Fsm.Definition.TSCENE_EVENT_TIMEOUT,
+		m_Fsm.Definition.TSCENE_STATE_LOBBY);
+	m_Fsm.AddStateTransition(m_Fsm.Definition.TSCENE_STATE_LOBBY,
+		m_Fsm.Definition.TSCENE_EVENT_ENTER,
+		m_Fsm.Definition.TSCENE_STATE_INGAME);
+	m_Fsm.AddStateTransition(m_Fsm.Definition.TSCENE_STATE_INGAME,
+		m_Fsm.Definition.TSCENE_EVENT_ENTER,
+		m_Fsm.Definition.TSCENE_STATE_RESULT);
+	m_Fsm.AddStateTransition(m_Fsm.Definition.TSCENE_STATE_INGAME,
+		m_Fsm.Definition.TSCENE_EVENT_TIMEOUT,
+		m_Fsm.Definition.TSCENE_STATE_RESULT);
+	m_Fsm.AddStateTransition(m_Fsm.Definition.TSCENE_STATE_RESULT,
+		m_Fsm.Definition.TSCENE_EVENT_ENTER,
+		m_Fsm.Definition.TSCENE_STATE_LOBBY);
 }
 TSceneManager::TSceneManager()
 {
