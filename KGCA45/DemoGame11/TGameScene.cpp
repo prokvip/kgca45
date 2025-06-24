@@ -165,7 +165,7 @@ void TGameScene::Frame()
         {
             bgSound->PlayEffect();
         }
-        auto projectile = std::make_shared<APlayerCharacter>(L"");
+        auto projectile = std::make_shared<AActor>(L"");
         if (projectile->Create(m_Player->GetPosition(), {20.0f,20.0f},
             L"../../data/texture/bitmap1.bmp",
             L"../../data/texture/bitmap2.bmp",
@@ -179,7 +179,7 @@ void TGameScene::Frame()
         }
         m_Projectile.push_back(projectile);
     }
-    for (auto& pro : m_Projectile)
+    for (auto pro : m_Projectile)
     {
         pro->m_Timer -= g_fSPF;
         if (pro->m_Timer < 0.0f)
@@ -189,7 +189,7 @@ void TGameScene::Frame()
         }
         TVector2 pos = pro->GetPosition();
         pro->m_vDirection = { 0.0f,-1.0f };
-        pos = pos + pro->m_vDirection * 300.0f * g_fSPF;
+        pos = pos + pro->m_vDirection * 500.0f * g_fSPF;
         pro->SetPosition(pos);
         pro->Tick();
     }
