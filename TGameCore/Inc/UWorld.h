@@ -64,6 +64,7 @@ public:
 	std::vector<ASprite*>	m_EffectListUV;
 	UINT			m_iCurrentIndex = 0;	
 	TMap			m_ActorList;
+	std::list<std::shared_ptr<AActor>>	m_Projectile;
 	std::vector<std::shared_ptr<TEffect>>	m_EffectList;	
 	// 0  ~  100;  [0]false ~ 10-> [10]true, 1 ~ 9, : [10]false
 public:

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="TGameScene.cpp" />
+    <ClCompile Include="TIntroScene.cpp" />
+    <ClCompile Include="TLobbyScene.cpp" />
+    <ClCompile Include="TResultScene.cpp" />
+    <ClCompile Include="TScene.cpp" />
+    <ClCompile Include="TStopState.cpp">
+      <Filter>npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TObjectState.cpp">
+      <Filter>npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TMoveState.cpp">
+      <Filter>npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TAttackState.cpp">
+      <Filter>npc</Filter>
+    </ClCompile>
+    <ClCompile Include="ANpc.cpp">
+      <Filter>npc</Filter>
+    </ClCompile>
+    <ClCompile Include="TNpcManager.cpp">
+      <Filter>npc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sample.h" />
+    <ClInclude Include="TGameScene.h" />
+    <ClInclude Include="TIntroScene.h" />
+    <ClInclude Include="TLobbyScene.h" />
+    <ClInclude Include="TResultScene.h" />
+    <ClInclude Include="TScene.h" />
+    <ClInclude Include="TFsm.h" />
+    <ClInclude Include="TStopState.h">
+      <Filter>npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TMoveState.h">
+      <Filter>npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TObjectState.h">
+      <Filter>npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TAttackState.h">
+      <Filter>npc</Filter>
+    </ClInclude>
+    <ClInclude Include="TNpcManager.h">
+      <Filter>npc</Filter>
+    </ClInclude>
+    <ClInclude Include="ANpc.h">
+      <Filter>npc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\data\script\SpriteInfo.txt" />
+    <Text Include="..\..\data\shader\DefaultShader.txt" />
+    <Text Include="..\..\data\shader\DualSourceBlend.txt" />
+    <Text Include="..\..\data\shader\Effect.txt" />
+    <Text Include="..\..\data\shader\EffectMask.txt" />
+    <Text Include="..\..\data\shader\EffectBlack.txt" />
+    <Text Include="..\..\data\shader\Map.txt" />
+    <Text Include="..\..\data\shader\Player.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="npc">
+      <UniqueIdentifier>{1ace86aa-0d5c-4e7a-8b76-793d0814a8b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

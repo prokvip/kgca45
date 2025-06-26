@@ -8,7 +8,7 @@ class TStateFsm
 public:
 	void AddTransition(int event, int outState)
 	{
-		this->m_events.insert(std::make_pair(event, outState));
+		m_events.insert(std::make_pair(event, outState));
 	}
 	int GetTransition(int event)
 	{
@@ -40,8 +40,7 @@ public:
 			pState = new TStateFsm(inState);
 		}
 		pState->AddTransition(event, outState);
-		m_states.insert(
-			std::make_pair(inState, pState));
+		m_states.insert(std::make_pair(inState, pState));
 	}
 	// 현재 이벤트에 대한 상태전환을 반환
 	int GetTransition(int currentState, int event)
