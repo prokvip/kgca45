@@ -1,5 +1,6 @@
 #include "TWindow.h"
 TWindow* g_pWindow = nullptr;
+HWND   g_hWnd;
 void TestMessageBox()
 {
     int iRet = MessageBox(NULL, L"처음 시작하는 윈도우",
@@ -114,7 +115,7 @@ BOOL TWindow::InitInstance()
     {
         return FALSE;
     }
-    m_hWnd = hWnd;
+    g_hWnd = m_hWnd = hWnd;
     ShowWindow(m_hWnd, SW_SHOW);
     UpdateWindow(m_hWnd);
 

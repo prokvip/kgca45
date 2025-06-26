@@ -11,11 +11,36 @@
 #include "TResultScene.h"
 
 #include "TFsm.h"
+
+void   TButton::Tick()
+{
+    auto mouse = TEngine::gInput->GetPos();
+
+    if (GetRect().IsPointInRegion(mouse.x, mouse.y))
+    {
+        m_iCurrentIndex = T_STATE_MOUSEOVER;
+        if (TEngine::gInput->GetKey(VK_LBUTTON) == KEY_PUSH ||
+            TEngine::gInput->GetKey(VK_LBUTTON) == KEY_HOLD)
+        {
+            m_iCurrentIndex = T_STATE_PRESSED;
+        }
+        if (TEngine::gInput->GetKey(VK_LBUTTON) == KEY_UP)
+        {
+            m_iCurrentIndex = T_STATE_SELECT;
+        } 
+    }
+    else
+    {
+        m_iCurrentIndex = 0;
+    }
+
+}
 void TLobbyScene::Process(APawn* pPlayer)
 {
     m_Timer += g_fSPF;
     // 1번 이벤트 엔터키
-    if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
+    //if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
+    if(m_StartBtn->m_iCurrentIndex == T_STATE_SELECT)
     {
         m_pOwner->m_pInGameScene->ReleaseScene();
         m_pOwner->m_pInGameScene.reset(new TGameScene(m_pOwner));
@@ -25,7 +50,7 @@ void TLobbyScene::Process(APawn* pPlayer)
 
         int iOutput = m_pOwner->m_pFsm.GetTransition(
             TSCENE_STATE_LOBBY,
-            TSCENE_EVENT_ENTER);
+            TSCENE_EVENT_START);
 		m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }
 }
@@ -52,15 +77,33 @@ void TLobbyScene::InitScene()
         L"../../data/shader/DefaultShader.txt"))
     {
     }
+
+    
+
+    std::wstring namebtn = L"StartBtn";
+    namebtn += std::to_wstring(0);// 정수가 스크링이 된다.
+    m_StartBtn = std::make_shared<TButton>(namebtn);
+    auto pos = TVector2(400.0f - 334.0f * 0.5f, 300.0f - 41.0f);
+    if (m_StartBtn->Create(pos, { 334.0f,82.0f },
+        L"../../data/ui/main_start_nor.png",
+        L"../../data/shader/DefaultShader.txt"))
+    {
+        auto effect = TEngine::gSpriteManager.GetAsset(L"startbtn");
+        m_StartBtn->m_pEffect = effect;
+        m_StartBtn->m_pInitPos = pos;
+        m_StartBtn->m_pInitSize = m_StartBtn->GetRect().GetSize();
+    }
 }
 void TLobbyScene::Frame()
 {
     m_MapObj->Tick();
+    m_StartBtn->Tick();
 }
 void TLobbyScene::Render()
 {
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_MapObj->Render();
+    m_StartBtn->Render();
 
 }
 void TLobbyScene::ReleaseScene()

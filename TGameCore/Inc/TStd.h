@@ -46,7 +46,7 @@ struct TVertex
 		t.x = u; t.y = v;
 	}
 };
-
+extern HWND   g_hWnd;
 extern float g_fSPF;
 extern float g_fGameTimer;
 static void ConsolePrintW(const wchar_t* fmt, ...)

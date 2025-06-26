@@ -9,6 +9,21 @@
 class APawn;
 class TSceneManager;
 
+enum T_CONTROL_STATE
+{
+	T_STATE_NORMAL = 0,
+	T_STATE_MOUSEOVER,// HOVER
+	T_STATE_PRESSED,  // PUSH
+	T_STATE_SELECT,   // PUSH+UP
+
+	T_STATE_DISABLED,
+	T_STATE_HIDDEN,
+	T_STATE_FOCUS,
+	T_STATE_HOLD,       // HOLD
+	
+	T_STATE_MAXSTATE,
+};
+
 enum  ESceneState
 {
 	TSCENE_STATE_INTRO = 0,

@@ -8,10 +8,12 @@ class UInputComponent : public UActorComponent
 {
 private:
 	DWORD			m_dwKeyState[255];
+	POINT			m_MousePos;
 private:
 	bool			GetKeyState(int key);
 public:	
 	DWORD			GetKey(int ikey) const;
+	POINT			GetPos() { return m_MousePos; };
 public:
 	virtual std::wstring	GetName()  const override;
 	virtual void			SetName(std::wstring name) override;

@@ -41,6 +41,8 @@ DWORD	UInputComponent::GetKey(int ikey) const
 }
 void UInputComponent::TickComponent()
 {
+	::GetCursorPos(&m_MousePos);
+	::ScreenToClient(g_hWnd, &m_MousePos);
 	for (int ikey = 0; ikey < 255; ikey++)
 	{
 		GetKeyState(ikey);

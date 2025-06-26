@@ -1,4 +1,9 @@
 #SPRITE 
+startbtn 4 1 ../../data/ui/main_start_nor.png nullptr ../../data/shader/DefaultShader.txt
+0 ../../data/ui/main_start_nor.png
+1 ../../data/ui/main_start_pus.png
+2 ../../data/ui/main_start_sel.png
+3 ../../data/ui/main_start_dis.png
 lot_wik 25 1 ../../data/effect/lot_wik00.dds nullptr ../../data/shader/DualSourceBlend.txt
 0 ../../data/effect/lot_wik00.dds
 1 ../../data/effect/lot_wik01.dds
