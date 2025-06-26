@@ -65,7 +65,7 @@ void	UWorld::Tick()
 		if (rtCollision.IntersectRegion(rt, m_pPlayer->GetRect()))
 		{
 			npc.second->m_bDraw = false;
-			m_pPlayer->m_bDraw = false;
+			//m_pPlayer->m_bDraw = false;
 			//AddEffectTex(rtCollision.GetCenter());			
 			//AddEffectUV(rtCollision.GetCenter());
 			AddEffect(rtCollision.GetCenter());

@@ -170,7 +170,9 @@ void TGameScene::Frame()
             bgSound->PlayEffect();
         }
         auto left = std::make_shared<AActor>(L"");
-        if (left->Create(m_Player->GetPosition(), {8.0f,22.0f},
+        auto start = m_Player->GetPosition();        
+        auto end = start + TVector2(m_Player->GetRect().GetSize().x- 8.0f, 0);
+        if (left->Create(start, {8.0f,22.0f},
             L"../../data/texture/bitmap1.bmp",
             L"../../data/texture/bitmap2.bmp",
             L"../../data/shader/Player.txt"))
@@ -183,8 +185,7 @@ void TGameScene::Frame()
         m_World->m_Projectile.push_back(left);
 
         auto right = std::make_shared<AActor>(L"");
-        auto pos = m_Player->GetPosition() + TVector2( 20.0f, 0.0f) ;
-        if (right->Create(pos, { 8.0f,22.0f },
+        if (right->Create(end, { 8.0f,22.0f },
             L"../../data/texture/bitmap1.bmp",
             L"../../data/texture/bitmap2.bmp",
             L"../../data/shader/Player.txt"))
