@@ -54,6 +54,10 @@ void	UWorld::Tick()
 			auto rt = npc.second->GetRect();
 			if (rtCollision.IntersectRegion(rt, pro->GetRect()))
 			{
+				if (npc.second->m_bDraw == true)
+				{
+					m_iNumMissionClear--;
+				}
 				npc.second->m_bDraw = false;
 				pro->m_bDraw = false;
 				AddEffect(rtCollision.GetCenter());
@@ -65,7 +69,7 @@ void	UWorld::Tick()
 		if (rtCollision.IntersectRegion(rt, m_pPlayer->GetRect()))
 		{
 			npc.second->m_bDraw = false;
-			//m_pPlayer->m_bDraw = false;
+			m_pPlayer->m_bDraw = false;
 			//AddEffectTex(rtCollision.GetCenter());			
 			//AddEffectUV(rtCollision.GetCenter());
 			AddEffect(rtCollision.GetCenter());
@@ -152,7 +156,7 @@ void   UWorld::Render()
 	for (auto& p : m_ActorList)
 	{
 		if (p.second->m_bDraw == false)
-		{
+		{			
 			continue;
 		}
 		p.second->Render();

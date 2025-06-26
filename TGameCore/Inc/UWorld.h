@@ -58,6 +58,7 @@ struct TEffect
 class UWorld : public UObject
 {
 public:
+	int				m_iNumMissionClear = 0;
 	static std::shared_ptr<APlayerCharacter> m_pPlayer;
 	std::vector<ASprite*>	m_Effects;
 	std::vector<ASprite*>	m_EffectListTex;

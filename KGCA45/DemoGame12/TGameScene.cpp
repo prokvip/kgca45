@@ -11,15 +11,20 @@
 #include "TResultScene.h"
 
 #include "TFsm.h"
+
+int  TGameScene::g_iNumNpc=1;
+
 void TGameScene::Process(APawn* pPlayer)
 {
     m_Timer += g_fSPF;
-    // 1번 이벤트 엔터키
-    if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
+    m_NpcKillObj->m_iSecond = m_World->m_iNumMissionClear;
+    if(m_World->m_iNumMissionClear==0)
+    //if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
     {
         int iOutput = m_pOwner->m_pFsm.GetTransition(
             TSCENE_STATE_INGAME,
             TSCENE_EVENT_ENTER);
+        g_iNumNpc++;
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }
     // 2번 아무키나 누르면 게임 시작
@@ -29,7 +34,7 @@ void TGameScene::Process(APawn* pPlayer)
         int iOutput = m_pOwner->m_pFsm.GetTransition(
             TSCENE_STATE_INGAME,
             TSCENE_EVENT_END);
-        Sleep(1000);
+        Sleep(1000);        
         m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
     }
 }
@@ -60,12 +65,20 @@ void TGameScene::InitScene()
     }
 
     m_TimerObj = std::make_shared<ATimerEffect>(L"GameTimer");
-    if (m_TimerObj->Create({ 700.0f, 0.0f }, { 50.0f,50.0f },
+    if (m_TimerObj->Create({ 370.0f, 0.0f }, { 50.0f,50.0f },
         L"../../data/ui/0.png",
         L"../../data/shader/DefaultShader.txt"))
     {
         auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
         m_TimerObj->SetSprite(sprite);
+    }
+    m_NpcKillObj = std::make_shared<ATimerEffect>(L"NpcKill");
+    if (m_NpcKillObj->Create({ 700.0f, 0.0f }, { 50.0f,50.0f },
+        L"../../data/ui/0.png",
+        L"../../data/shader/DefaultShader.txt"))
+    {
+        auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
+        m_NpcKillObj->SetSprite(sprite);
     }
 
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
@@ -75,7 +88,7 @@ void TGameScene::InitScene()
     {
     }
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < g_iNumNpc; i++)
     {
         TString name = L"NPC_A";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
@@ -97,7 +110,7 @@ void TGameScene::InitScene()
             m_World->m_ActorList.insert(std::make_pair(name, npc));
         }
     }
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < g_iNumNpc; i++)
     {
         TString name = L"NPC_B";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
@@ -119,7 +132,7 @@ void TGameScene::InitScene()
             m_World->m_ActorList.insert(std::make_pair(name, npc));
         }
     }
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < g_iNumNpc; i++)
     {
         TString name = L"NPC_C";
         name += std::to_wstring(i);// 정수가 스크링이 된다.
@@ -141,6 +154,7 @@ void TGameScene::InitScene()
             m_World->m_ActorList.insert(std::make_pair(name, npc));
         }
     }
+    m_World->m_iNumMissionClear = m_World->m_ActorList.size();
 
     name.clear();
     name = L"Player";
@@ -201,6 +215,7 @@ void TGameScene::Frame()
     m_MapObj->Tick();
     m_EffectObj->Tick();
     m_TimerObj->Tick();
+    m_NpcKillObj->Tick();
     m_Player->Tick();
     m_World->Tick();
     
@@ -217,8 +232,10 @@ void TGameScene::Render()
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_MapObj->Render();
     m_TimerObj->Render();
+    m_NpcKillObj->Render();
+
     TDevice::m_pContext->OMSetBlendState(TEngine::m_DualSourceBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
-    m_EffectObj->Render();
+    m_EffectObj->Render();    
 
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);
     m_Player->Render();    
