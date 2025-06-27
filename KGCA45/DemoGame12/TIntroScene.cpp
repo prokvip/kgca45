@@ -15,27 +15,15 @@
 void TIntroScene::Process(APawn* pPlayer)
 {
     m_Timer += g_fSPF;
-    // 1번 이벤트 엔터키
     if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
     {
-        /*m_pLobbyScene->ReleaseScene();
-        m_pLobbyScene.reset(new TLobbyScene());
-        m_pLobbyScene->InitScene();*/
-        int iOutput = m_pOwner->m_pFsm.GetTransition(
-            TSCENE_STATE_INTRO,
-            TSCENE_EVENT_ENTER);
-        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
-            //m_pOwner->m_pLobbyScene.get();
+        m_Timer = 0.0f;
+        SceneChange(TSCENE_STATE_INTRO, TSCENE_EVENT_ENTER);
     }
-	// 2번 아무키나 누르면 게임 시작
     if (m_Timer > 5.0f)
     {
         m_Timer = 0.0f;
-        int iOutput = m_pOwner->m_pFsm.GetTransition(
-            TSCENE_STATE_INTRO,
-            TSCENE_EVENT_TIMEOUT);
-        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
-
+        SceneChange(TSCENE_STATE_INTRO, TSCENE_EVENT_TIMEOUT);
     }
 }
 
@@ -61,10 +49,32 @@ void TIntroScene::InitScene()
         L"../../data/texture/introbg.png",
         L"../../data/shader/DefaultShader.txt"))
     {
-    }
+    }    
 }
 void TIntroScene::Tick()
 {
+    //TVector2 cam = { 400.0f, 300.0f };
+    //cam.x += cosf(g_fGameTimer) * 400.0f;
+   
+    TVector2 cam = UWorld::m_vCameraPos;
+    cam.x += g_fSPF * 50.0f;
+    if (TEngine::gInput->GetKey('D') == KEY_HOLD)
+    {
+        cam.x += g_fSPF * 100.0f;
+    }
+    if (TEngine::gInput->GetKey('A') == KEY_HOLD)
+    {
+        cam.x -= g_fSPF * 100.0f;
+    }
+    if (TEngine::gInput->GetKey('W') == KEY_HOLD)
+    {
+        cam.y -= g_fSPF * 100.0f;
+    }
+    if (TEngine::gInput->GetKey('S') == KEY_HOLD)
+    {
+        cam.y += g_fSPF * 100.0f;
+    }
+    m_World->m_vCameraPos = cam;
     m_MapObj->Tick();
 }
 void TIntroScene::Render()

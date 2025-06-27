@@ -47,11 +47,7 @@ void TLobbyScene::Process(APawn* pPlayer)
         m_pOwner->m_pInGameScene->InitScene();
         m_pOwner->m_SceneList[TSCENE_STATE_INGAME] =
             m_pOwner->m_pInGameScene;
-
-        int iOutput = m_pOwner->m_pFsm.GetTransition(
-            TSCENE_STATE_LOBBY,
-            TSCENE_EVENT_START);
-		m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+        SceneChange(TSCENE_STATE_LOBBY, TSCENE_EVENT_START);
     }
 }
 void TLobbyScene::InitScene()
@@ -93,6 +89,8 @@ void TLobbyScene::InitScene()
         m_StartBtn->m_pInitPos = pos;
         m_StartBtn->m_pInitSize = m_StartBtn->GetRect().GetSize();
     }
+
+    UWorld::m_vCameraPos = { 400.0f, 300.0f };
 }
 void TLobbyScene::Tick()
 {

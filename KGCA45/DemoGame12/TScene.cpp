@@ -27,7 +27,17 @@ void TScene::Render()
 void TScene::ReleaseScene()
 {   
 }
-
+void TScene::SceneChange(int iScene, int iEvent )
+{
+	/*m_pLobbyScene->ReleaseScene();
+	m_pLobbyScene.reset(new TLobbyScene());
+	m_pLobbyScene->InitScene();*/
+	UWorld::m_vCameraPos = { 400.0f, 300.0f };
+	int iOutput = m_pOwner->m_pFsm.GetTransition(
+		iScene,
+		iEvent);
+	m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+}
 TScene::TScene(TSceneManager* pOwnder)
 {
 	m_pOwner = pOwnder;

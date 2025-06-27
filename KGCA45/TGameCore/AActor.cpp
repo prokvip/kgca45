@@ -1,6 +1,7 @@
 #include "AActor.h"
 #include "TDevice.h"
 #include "URenderComponent.h"
+#include "UWorld.h"
 
 bool     AActor::Create(
 	TVector2 pos,
@@ -62,9 +63,6 @@ void   AActor::UpdateVertexBuffer()
 }
 void   AActor::Transform()
 {
-	//m_fAngle = g_fGameTimer;
-	//m_vScale = TVector2(cosf(g_fGameTimer), cosf(g_fGameTimer));
-	
 	TRect  rt = GetRect();
 	auto center = rt.GetCenter();
 	// 원점으로 이동 변환(transform)
@@ -75,45 +73,30 @@ void   AActor::Transform()
 	m_matTrans.Translaton(center.x, center.y);
 	m_matScale.Scale(m_vScale.x, m_vScale.y);
 	// 결합행렬
-	m_matWorld = m_matOriginTrans * m_matScale *
-		m_matRotation * m_matTrans;
+	m_matWorld = m_matOriginTrans * m_matScale * m_matRotation * m_matTrans;
 	std::vector<TVertex> list(m_pRenderComponent->m_InitVertexList.size());
 	for (size_t i = 0; i < m_pRenderComponent->m_InitVertexList.size(); ++i)
 	{
 		list[i].p = m_pRenderComponent->m_InitVertexList[i].p * m_matWorld;
 	}
-	// 원점에서 회전 변환된 정점을 복사한다.
-	for (size_t i = 0; i < m_pRenderComponent->m_VertexList.size(); ++i)
+	// 카메라 변환(카메라 좌표계 변환)
+	// 카메라 위치가 원점이 되도록 변환하는 작업이다.
+	for (size_t i = 0; i < m_pRenderComponent->m_InitVertexList.size(); ++i)
+	{
+		m_pRenderComponent->m_VertexList[i].p = list[i].p - UWorld::m_vCameraPos;
+	}
+	// 화면(0,0)  ->   -400, -300
+	// 화면(800,0)->   +400, -300
+	// 중점(400,300) -> 0,0
+	// 화면(0,600) ->   -400, +300
+	// 화면(800,600) -> +400, +300
+
+
+	/*for (size_t i = 0; i < m_pRenderComponent->m_VertexList.size(); ++i)
 	{
 		m_pRenderComponent->m_VertexList[i].p = list[i].p;
-	}
-	//// 원점으로 이동 변환(transform)
-	//TRect  rt = GetOwner()->GetRect();
-	//auto center = rt.GetCenter();
-	//TMatrix matOriginTrans, matRotation, matTrans;
-	//matOriginTrans.Translaton(-center.x, -center.y);
-	//std::vector<TVertex> list(m_InitVertexList.size());
-	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	//{
-	//	list[i].p = m_InitVertexList[i].p * matOriginTrans;
-	//}
-	//// 원점에서 회전 변환(transform)
-	//matRotation.Rotation(g_fGameTimer);
-	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	//{
-	//	list[i].p = list[i].p * matRotation;
-	//}
-	//matTrans.Translaton(center.x, center.y);
-	//for (size_t i = 0; i < m_InitVertexList.size(); ++i)
-	//{
-	//	list[i].p = list[i].p * matTrans;
-	//}
-	//// 원점에서 회전 변환된 정점을 복사한다.
-	//for (size_t i = 0; i < m_VertexList.size(); ++i)
-	//{
-	//	m_VertexList[i].p = list[i].p;
-	//}
-	//UpdateVertexBuffer();
+	}	*/
+	// 이후 쉐이더에서 NDC 변환 및  출력
 }
 void   AActor::UpdatePositionVertexData() 
 {

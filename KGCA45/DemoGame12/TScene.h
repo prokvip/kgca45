@@ -60,6 +60,7 @@ public:
 	std::shared_ptr<UWorld>				m_World;
 	std::shared_ptr<APlayerCharacter>	m_Player = nullptr;
 public:
+	virtual void SceneChange(int iScene, int iEvent);
 	virtual void InitScene();
 	virtual void ReleaseScene();
 	// 상태전환 프레임

@@ -58,6 +58,7 @@ struct TEffect
 class UWorld : public UObject
 {
 public:
+	static TVector2		m_vCameraPos;
 	int				m_iNumMissionClear = 0;
 	static std::shared_ptr<APlayerCharacter> m_pPlayer;
 	std::vector<ASprite*>	m_Effects;

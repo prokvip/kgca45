@@ -16,14 +16,7 @@ void TResultScene::Process(APawn* pPlayer)
     // 1번 이벤트 엔터키
     if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
     {
-        /*m_pLobbyScene->ReleaseScene();
-        m_pLobbyScene.reset(new TLobbyScene());
-        m_pLobbyScene->InitScene();*/
-        int iOutput = m_pOwner->m_pFsm.GetTransition(
-            TSCENE_STATE_RESULT,
-            TSCENE_EVENT_ENTER);
-        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
-        //m_pOwner->m_pLobbyScene.get();
+        SceneChange(TSCENE_STATE_RESULT, TSCENE_EVENT_ENTER);   
     }
 }
 void TResultScene::InitScene()
@@ -49,6 +42,8 @@ void TResultScene::InitScene()
         L"../../data/shader/DefaultShader.txt"))
     {
     }
+
+    UWorld::m_vCameraPos = { 400.0f, 300.0f };
 }
 void TResultScene::Tick()
 {

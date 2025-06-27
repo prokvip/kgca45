@@ -5,7 +5,7 @@
 VS_OUTPUT VS( VS_INPUT vScreen ) 
 {
 	VS_OUTPUT ret = (VS_OUTPUT)0;	
-	float2 vNDC = ScreenToNDC(vScreen.p);
+	float2 vNDC =  CameraToNDC(vScreen.p);//ScreenToNDC(vScreen.p);
 	ret.pos		= float4(vNDC.x, vNDC.y, 0.0f, 1.0f);
 	ret.color	= vScreen.c;
 	ret.tex		= vScreen.t;

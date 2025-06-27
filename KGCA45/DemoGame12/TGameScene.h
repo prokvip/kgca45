@@ -17,8 +17,7 @@ public:
 	TNpcManager    m_NpcManager;
 	std::shared_ptr<ATimerEffect>		m_NpcKillObj = nullptr;
 	TSound* m_pBGSound = nullptr;
-	void	TestFMOD();
-	
+	void	TestFMOD();	
 public:
 	virtual void Process(APawn* pPlayer);
 	virtual void InitScene() override;

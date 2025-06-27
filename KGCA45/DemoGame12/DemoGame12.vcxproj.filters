@@ -96,6 +96,9 @@
     <Text Include="..\..\data\shader\Player.txt">
       <Filter>shader</Filter>
     </Text>
+    <Text Include="..\..\data\shader\ShaderHeader.txt">
+      <Filter>shader</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="npc">

@@ -18,24 +18,16 @@ void TGameScene::Process(APawn* pPlayer)
 {
     m_Timer += g_fSPF;
     m_NpcKillObj->m_iSecond = m_World->m_iNumMissionClear;
-    if(m_World->m_iNumMissionClear==0)
-    //if (TEngine::gInput->GetKey(VK_RETURN) == KEY_PUSH)
+    if(m_World->m_iNumMissionClear==0)    
     {
-        int iOutput = m_pOwner->m_pFsm.GetTransition(
-            TSCENE_STATE_INGAME,
-            TSCENE_EVENT_ENTER);
         g_iNumNpc++;
-        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+        SceneChange(TSCENE_STATE_INGAME, TSCENE_EVENT_ENTER);       
     }
-    // 2번 아무키나 누르면 게임 시작
     if (m_Player.get()->m_bDraw == false)
     {
         m_Timer = 0.0f;
-        int iOutput = m_pOwner->m_pFsm.GetTransition(
-            TSCENE_STATE_INGAME,
-            TSCENE_EVENT_END);
-        Sleep(1000);        
-        m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
+        SceneChange(TSCENE_STATE_INGAME, TSCENE_EVENT_END);
+        Sleep(1000);                
     }
 }
 
@@ -58,7 +50,7 @@ void TGameScene::InitScene()
     std::wstring name = L"Background";
     name += std::to_wstring(0);// 정수가 스크링이 된다.
     m_MapObj = std::make_shared<AActor>(name);
-    if (m_MapObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
+    if (m_MapObj->Create({ -1000.0f, -1000.0f }, { 2000.0f, 2000.0f },
         L"../../data/texture/bg2.png",
         L"../../data/shader/DefaultShader.txt"))
     {
@@ -171,10 +163,13 @@ void TGameScene::InitScene()
         m_Player->UpdateUVVertexData(p, s);
     }
     m_World->m_pPlayer = m_Player;
+    UWorld::m_vCameraPos = { 400.0f, 300.0f };
 }
 
 void TGameScene::Tick()
 {
+    m_World->m_vCameraPos = m_Player->GetPosition();
+    //m_World->m_vCameraPos.y -= 200.0f;
     //TestFMOD(); // FMOD 테스트      
     if (TEngine::gInput->GetKey(VK_LBUTTON) == KEY_PUSH)
     {
