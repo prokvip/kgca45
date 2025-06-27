@@ -3,7 +3,7 @@ float   UTimerComponent::GetGameGlobalTimer() const
 {
     return m_fGameTimer;
 }
-void    UTimerComponent::Frame()
+void    UTimerComponent::Tick()
 {    
     m_End = system_clock::now();
     duration<float> sec = m_End - m_Start;

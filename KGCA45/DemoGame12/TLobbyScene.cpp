@@ -94,7 +94,7 @@ void TLobbyScene::InitScene()
         m_StartBtn->m_pInitSize = m_StartBtn->GetRect().GetSize();
     }
 }
-void TLobbyScene::Frame()
+void TLobbyScene::Tick()
 {
     m_MapObj->Tick();
     m_StartBtn->Tick();

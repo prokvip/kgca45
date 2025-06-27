@@ -63,7 +63,7 @@ void TIntroScene::InitScene()
     {
     }
 }
-void TIntroScene::Frame()
+void TIntroScene::Tick()
 {
     m_MapObj->Tick();
 }

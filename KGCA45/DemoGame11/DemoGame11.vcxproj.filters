@@ -91,8 +91,4 @@
       <UniqueIdentifier>{62d3bd16-b582-4528-9f1a-f53197da8923}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
 </Project>

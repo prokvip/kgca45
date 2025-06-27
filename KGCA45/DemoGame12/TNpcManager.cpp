@@ -2,7 +2,7 @@
 #include "TAttackState.h"
 #include "TStopState.h"
 #include "TMoveState.h"
-void TNpcManager::Frame()
+void TNpcManager::Tick()
 {
 
 }

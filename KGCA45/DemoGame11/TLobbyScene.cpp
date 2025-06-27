@@ -53,7 +53,7 @@ void TLobbyScene::InitScene()
     {
     }
 }
-void TLobbyScene::Frame()
+void TLobbyScene::Tick()
 {
     m_MapObj->Tick();
 }

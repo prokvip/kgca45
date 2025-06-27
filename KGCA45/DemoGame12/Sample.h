@@ -4,10 +4,9 @@
 
 class Sample :  public TWindow
 {
-	TDevice		m_dxDevice;
-	TEngine		m_Engine;
-	TSceneManager  m_SceneManager;
-	
+	TDevice			m_dxDevice;
+	TEngine			m_Engine;
+	TSceneManager	m_SceneManager;	
 public:
 	void InitGame();
 	void ReleaseGame();

@@ -16,32 +16,24 @@ LRESULT Sample::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 void Sample::GameRun()
 {
-    for (auto pNode = m_Engine.m_CompList.begin(); pNode != m_Engine.m_CompList.end(); pNode++)
-    {
-        (*pNode)->TickComponent();
-    }
-
-    m_SceneManager.Frame();
+    m_Engine.Tick();
+    m_SceneManager.Tick();
 
 	m_dxDevice.PreRender(); // 렌더링 준비
         m_SceneManager.Render();
-    m_dxDevice.PostRender(); // 렌더링 준비
-
-    TSound::UpdateSystem(); // 사운드 업데이트
+    m_dxDevice.PostRender(); // 렌더링 준비    
 }
 void Sample::InitGame()
 {
-   // 한글 출력
+    // 한글 출력
     std::wcout.imbue(std::locale("kor"));//setlocale(LC_ALL, "korean");
     P(L"%s\n", L"Create DirectX  : true");
     m_dxDevice.CreateDevice(GetHwnd());
     m_dxDevice.CreateRenderTargetView();
     m_dxDevice.SetViewPort();      
-    
   
     m_Engine.Init();	
-    m_SceneManager.Init();
-    
+    m_SceneManager.Init();    
 }
 void Sample::ReleaseGame()
 {

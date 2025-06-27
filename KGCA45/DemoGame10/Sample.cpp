@@ -21,7 +21,7 @@ void Sample::GameRun()
         (*pNode)->TickComponent();
     }
 
-    m_SceneManager.Frame();
+    m_SceneManager.Tick();
 
 	m_dxDevice.PreRender(); // ∑ª¥ı∏µ ¡ÿ∫Ò
         m_SceneManager.Render();

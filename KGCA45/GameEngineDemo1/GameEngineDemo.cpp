@@ -30,7 +30,7 @@ int main()
 
     while (timer.GetGameGlobalTimer() < 60.0f)
     {
-        timer.Frame();
+        timer.Tick();
         std::wcout << timer.GetGameGlobalTimer() << std::endl;
     }
     std::wcout << timer.GetGameGlobalTimer() << std::endl;

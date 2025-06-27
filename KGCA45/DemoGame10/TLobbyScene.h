@@ -6,7 +6,7 @@ public:
 	virtual void Process(UPawn* pPlayer);
 	virtual void InitScene() override;
 	virtual void ReleaseScene()override;
-	virtual void Frame()override;
+	virtual void Tick()override;
 	virtual void Render()override;
 	TLobbyScene(TSceneManager* pOwnder) : TScene(pOwnder)
 	{

@@ -50,7 +50,7 @@ void TResultScene::InitScene()
     {
     }
 }
-void TResultScene::Frame()
+void TResultScene::Tick()
 {
     m_MapObj->Tick();
 }

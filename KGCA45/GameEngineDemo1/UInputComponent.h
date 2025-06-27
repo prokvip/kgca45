@@ -5,7 +5,7 @@ class UInputComponent : public UActorComponent
 public:
 	std::wstring GetName() const;
 	void		 SetName(std::wstring name);
-	virtual  void Frame() {}
+	virtual  void Tick() {}
 public:
 	UInputComponent(std::wstring name);
 	UInputComponent();

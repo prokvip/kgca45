@@ -18,7 +18,7 @@ LRESULT TScene::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void TScene::InitScene()
 { 
 }
-void TScene::Frame()
+void TScene::Tick()
 {   
 }
 void TScene::Render()
@@ -37,10 +37,10 @@ TScene::~TScene()
 
 }
 
-void TSceneManager::Frame()
+void TSceneManager::Tick()
 {
 	m_pCurrentScene->Process(nullptr);
-	m_pCurrentScene->Frame();
+	m_pCurrentScene->Tick();
 }
 void TSceneManager::Render()
 {
@@ -81,30 +81,14 @@ void TSceneManager::Init()
 // TSCENE_STATE_RESULT->TSCENE_EVENT_ENTER  ->TSCENE_STATE_LOBBY
 // TSCENE_STATE_RESULT->TSCENE_EVENT_RESTART->TSCENE_STATE_INGAME
 
-	m_pFsm.AddStateTransition(TSCENE_STATE_INTRO,
-		TSCENE_EVENT_ENTER,
-		TSCENE_STATE_LOBBY);
-	m_pFsm.AddStateTransition(TSCENE_STATE_INTRO,
-		TSCENE_EVENT_TIMEOUT,
-		TSCENE_STATE_LOBBY);
-	m_pFsm.AddStateTransition(TSCENE_STATE_LOBBY,
-		TSCENE_EVENT_ENTER,
-		TSCENE_STATE_INGAME);
-	m_pFsm.AddStateTransition(TSCENE_STATE_LOBBY,
-		TSCENE_EVENT_START,
-		TSCENE_STATE_INGAME);
-	m_pFsm.AddStateTransition(TSCENE_STATE_INGAME,
-		TSCENE_EVENT_ENTER,
-		TSCENE_STATE_RESULT);
-	m_pFsm.AddStateTransition(TSCENE_STATE_INGAME,
-		TSCENE_EVENT_TIMEOUT,
-		TSCENE_STATE_RESULT);
-	m_pFsm.AddStateTransition(TSCENE_STATE_INGAME,
-		TSCENE_EVENT_END,
-		TSCENE_STATE_RESULT);
-	m_pFsm.AddStateTransition(TSCENE_STATE_RESULT,
-		TSCENE_EVENT_ENTER,
-		TSCENE_STATE_LOBBY);
+	m_pFsm.AddStateTransition(TSCENE_STATE_INTRO,TSCENE_EVENT_ENTER,TSCENE_STATE_LOBBY);
+	m_pFsm.AddStateTransition(TSCENE_STATE_INTRO,TSCENE_EVENT_TIMEOUT,TSCENE_STATE_LOBBY);
+	m_pFsm.AddStateTransition(TSCENE_STATE_LOBBY,TSCENE_EVENT_ENTER,TSCENE_STATE_INGAME);
+	m_pFsm.AddStateTransition(TSCENE_STATE_LOBBY,TSCENE_EVENT_START,TSCENE_STATE_INGAME);
+	m_pFsm.AddStateTransition(TSCENE_STATE_INGAME,TSCENE_EVENT_ENTER,TSCENE_STATE_RESULT);
+	m_pFsm.AddStateTransition(TSCENE_STATE_INGAME,TSCENE_EVENT_TIMEOUT,	TSCENE_STATE_RESULT);
+	m_pFsm.AddStateTransition(TSCENE_STATE_INGAME,TSCENE_EVENT_END,	TSCENE_STATE_RESULT);
+	m_pFsm.AddStateTransition(TSCENE_STATE_RESULT,TSCENE_EVENT_ENTER,TSCENE_STATE_LOBBY);
 }
 TSceneManager::TSceneManager()
 {

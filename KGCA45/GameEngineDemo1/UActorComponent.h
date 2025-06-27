@@ -8,7 +8,7 @@ private:
 	std::wstring  m_szName;
 	static int    m_iNumInstance;
 public:
-	virtual void   Frame()=0;
+	virtual void   Tick()=0;
 public:
 	std::wstring GetName() const;
 	void		 SetName(std::wstring name);

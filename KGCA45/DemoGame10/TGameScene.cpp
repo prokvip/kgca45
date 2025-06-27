@@ -153,7 +153,7 @@ void TGameScene::InitScene()
     }
     m_World->m_pPlayer = m_Player;
 }
-void TGameScene::Frame()
+void TGameScene::Tick()
 {
     TestFMOD(); // FMOD Å×½ºÆ®      
 

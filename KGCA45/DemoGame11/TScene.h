@@ -65,7 +65,7 @@ public:
 	// 상태전환 프레임
 	virtual void Process(APawn* pPlayer) = 0;
 	virtual void Init() {};
-	virtual void Frame();
+	virtual void Tick();
 	virtual void Render();
 	virtual LRESULT MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 public:
@@ -93,7 +93,7 @@ public:
 	std::shared_ptr<TScene> m_pResultScene = nullptr;
 	std::vector<std::shared_ptr<TScene>> m_SceneList;
 	virtual void Init();
-	virtual void Frame();
+	virtual void Tick();
 	virtual void Render();
 	TSceneManager();
 	virtual ~TSceneManager();

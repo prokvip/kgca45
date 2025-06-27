@@ -30,7 +30,7 @@ public:
 	}
 public:
 	virtual void Init();
-	virtual void Frame();
+	virtual void Tick();
 	virtual void Render();
 public:
 	TNpcManager();

@@ -18,7 +18,7 @@ LRESULT TScene::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void TScene::InitScene()
 { 
 }
-void TScene::Frame()
+void TScene::Tick()
 {   
 }
 void TScene::Render()
@@ -37,10 +37,10 @@ TScene::~TScene()
 
 }
 
-void TSceneManager::Frame()
+void TSceneManager::Tick()
 {
 	m_pCurrentScene->Process(nullptr);
-	m_pCurrentScene->Frame();
+	m_pCurrentScene->Tick();
 }
 void TSceneManager::Render()
 {

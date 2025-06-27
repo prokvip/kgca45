@@ -48,6 +48,7 @@ public:
 public:
 	bool  CreateBlendState();
 	void  Init();
+	void  Tick();
 	void  Release();
 	bool  GameDataLoad(TString path);
 	TEngine() {};

@@ -254,6 +254,14 @@ void	TEngine::Init()
 		return;
 	}
 }
+void	TEngine::Tick()
+{
+	TSound::UpdateSystem(); 
+	for (auto pNode = m_CompList.begin(); pNode != m_CompList.end(); pNode++)
+	{
+		(*pNode)->TickComponent();
+	}
+}
 void	TEngine::Release()
 {
 	m_CompList.clear();

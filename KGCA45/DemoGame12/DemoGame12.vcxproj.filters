@@ -2,11 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Sample.cpp" />
-    <ClCompile Include="TGameScene.cpp" />
-    <ClCompile Include="TIntroScene.cpp" />
-    <ClCompile Include="TLobbyScene.cpp" />
-    <ClCompile Include="TResultScene.cpp" />
-    <ClCompile Include="TScene.cpp" />
     <ClCompile Include="TStopState.cpp">
       <Filter>npc</Filter>
     </ClCompile>
@@ -25,14 +20,24 @@
     <ClCompile Include="TNpcManager.cpp">
       <Filter>npc</Filter>
     </ClCompile>
+    <ClCompile Include="TGameScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TIntroScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TLobbyScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TResultScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sample.h" />
-    <ClInclude Include="TGameScene.h" />
-    <ClInclude Include="TIntroScene.h" />
-    <ClInclude Include="TLobbyScene.h" />
-    <ClInclude Include="TResultScene.h" />
-    <ClInclude Include="TScene.h" />
     <ClInclude Include="TFsm.h" />
     <ClInclude Include="TStopState.h">
       <Filter>npc</Filter>
@@ -52,20 +57,55 @@
     <ClInclude Include="ANpc.h">
       <Filter>npc</Filter>
     </ClInclude>
+    <ClInclude Include="TGameScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TIntroScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TLobbyScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TResultScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\data\script\SpriteInfo.txt" />
-    <Text Include="..\..\data\shader\DefaultShader.txt" />
-    <Text Include="..\..\data\shader\DualSourceBlend.txt" />
-    <Text Include="..\..\data\shader\Effect.txt" />
-    <Text Include="..\..\data\shader\EffectMask.txt" />
-    <Text Include="..\..\data\shader\EffectBlack.txt" />
-    <Text Include="..\..\data\shader\Map.txt" />
-    <Text Include="..\..\data\shader\Player.txt" />
+    <Text Include="..\..\data\shader\DefaultShader.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="..\..\data\shader\DualSourceBlend.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="..\..\data\shader\Effect.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="..\..\data\shader\EffectBlack.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="..\..\data\shader\EffectMask.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="..\..\data\shader\Map.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="..\..\data\shader\Player.txt">
+      <Filter>shader</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="npc">
       <UniqueIdentifier>{1ace86aa-0d5c-4e7a-8b76-793d0814a8b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{afb61f27-9d13-416b-a27b-4a97a5b98ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{dae7ecb9-7327-4ca7-b3ba-850323897c4e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
