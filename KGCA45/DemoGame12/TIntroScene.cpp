@@ -20,7 +20,7 @@ void TIntroScene::Process(APawn* pPlayer)
         m_Timer = 0.0f;
         SceneChange(TSCENE_STATE_INTRO, TSCENE_EVENT_ENTER);
     }
-    if (m_Timer > 5.0f)
+    if (m_Timer > 3.0f)
     {
         m_Timer = 0.0f;
         SceneChange(TSCENE_STATE_INTRO, TSCENE_EVENT_TIMEOUT);
@@ -53,30 +53,11 @@ void TIntroScene::InitScene()
 }
 void TIntroScene::Tick()
 {
-    //TVector2 cam = { 400.0f, 300.0f };
-    //cam.x += cosf(g_fGameTimer) * 400.0f;
-   
-    TVector2 cam = UWorld::m_vCameraPos;
-    cam.x += g_fSPF * 50.0f;
-    if (TEngine::gInput->GetKey('D') == KEY_HOLD)
-    {
-        cam.x += g_fSPF * 100.0f;
-    }
-    if (TEngine::gInput->GetKey('A') == KEY_HOLD)
-    {
-        cam.x -= g_fSPF * 100.0f;
-    }
-    if (TEngine::gInput->GetKey('W') == KEY_HOLD)
-    {
-        cam.y -= g_fSPF * 100.0f;
-    }
-    if (TEngine::gInput->GetKey('S') == KEY_HOLD)
-    {
-        cam.y += g_fSPF * 100.0f;
-    }
-    m_World->m_vCameraPos = cam;
+    //Scroll();
+    FadeOut(m_MapObj.get());
     m_MapObj->Tick();
 }
+
 void TIntroScene::Render()
 {
     TDevice::m_pContext->OMSetBlendState(TEngine::m_AlphaBlendState.Get(), nullptr, -1);// 0xFFFFFFFF);

@@ -54,7 +54,11 @@ void   URenderComponent::UpdateVertexBuffer()
 {
 	GetOwner()->Transform();
 	if (m_pVertexBuffer)
-	{		
+	{			
+		for (auto& v : m_VertexList)
+		{
+			v.c.a = m_pOwner->m_fAlpha;
+		}
 		TDevice::m_pContext->UpdateSubresource(
 			m_pVertexBuffer, 0, nullptr,
 			&m_VertexList.at(0), 0, 0);

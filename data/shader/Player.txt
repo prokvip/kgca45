@@ -21,6 +21,7 @@ float4 PS( VS_OUTPUT psInput ) : SV_Target
 {	
 	float4 texRGB = g_texture.Sample(g_Sample,psInput.tex);	
 	float4 texAlpha= g_textureMask.Sample(g_Sample,psInput.tex);
-	texRGB.a = 1.0f-texAlpha.r; 	
+	texRGB.a = 1.0f-texAlpha.r; 
+	texRGB.a *= psInput.color.a;
 	return texRGB;
 }

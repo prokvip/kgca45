@@ -20,7 +20,7 @@ SamplerState   g_Sample   : register(s0);
 float4 PS( VS_OUTPUT psInput ) : SV_Target
 {	
 	float4 texColor = g_texture.Sample(g_Sample,psInput.tex);	
-	return texColor;
+	return texColor*psInput.color;
 }
 //float4 PS( VS_OUTPUT psInput ) : SV_Target
 //{	

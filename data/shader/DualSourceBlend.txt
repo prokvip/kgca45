@@ -25,7 +25,7 @@ SamplerState   g_Sample   : register(s0);
 PS_OUTPUT PS( VS_OUTPUT psInput ) // Ω√∏‡∆Ω(¿«πÃ±∏¡∂)
 {	
 	PS_OUTPUT ret = (PS_OUTPUT)0;	
-	ret.add = g_texture.Sample(g_Sample,psInput.tex);
+	ret.add = g_texture.Sample(g_Sample,psInput.tex)*psInput.color;
 	float color = max(max(ret.add.r,ret.add.g),ret.add.b); 
 	ret.mul = float4(1-color,1-color,1-color,1);
 	//ret.add = float4(0,0,0,1);

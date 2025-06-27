@@ -61,6 +61,9 @@ public:
 	std::shared_ptr<APlayerCharacter>	m_Player = nullptr;
 public:
 	virtual void SceneChange(int iScene, int iEvent);
+	virtual void Scroll();
+	virtual void FadeIn(AActor* actor);
+	virtual void FadeOut(AActor* actor);
 	virtual void InitScene();
 	virtual void ReleaseScene();
 	// 상태전환 프레임

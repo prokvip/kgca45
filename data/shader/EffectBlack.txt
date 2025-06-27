@@ -22,6 +22,6 @@ float4 PS( VS_OUTPUT psInput ) : SV_Target
 	float alpha = 0.0f;
 	alpha = texRGB.r + texRGB.g + texRGB.b;
 	alpha = alpha / 3.0f;
-	texRGB.a = texRGB.g;	
+	texRGB.a = alpha;	
 	return texRGB;
 }

@@ -38,6 +38,41 @@ void TScene::SceneChange(int iScene, int iEvent )
 		iEvent);
 	m_pOwner->m_pCurrentScene = m_pOwner->m_SceneList[iOutput].get();
 }
+void TScene::Scroll()
+{
+	//TVector2 cam = { 400.0f, 300.0f };
+	//cam.x += cosf(g_fGameTimer) * 400.0f;
+
+	TVector2 cam = UWorld::m_vCameraPos;
+	cam.x += g_fSPF * 50.0f;
+	if (TEngine::gInput->GetKey('D') == KEY_HOLD)
+	{
+		cam.x += g_fSPF * 100.0f;
+	}
+	if (TEngine::gInput->GetKey('A') == KEY_HOLD)
+	{
+		cam.x -= g_fSPF * 100.0f;
+	}
+	if (TEngine::gInput->GetKey('W') == KEY_HOLD)
+	{
+		cam.y -= g_fSPF * 100.0f;
+	}
+	if (TEngine::gInput->GetKey('S') == KEY_HOLD)
+	{
+		cam.y += g_fSPF * 100.0f;
+	}
+	m_World->m_vCameraPos = cam;	
+}
+void TScene::FadeOut(AActor* actor)
+{
+	actor->m_fAlpha -= g_fSPF * 0.33f;
+	if (actor->m_fAlpha < 0.0f) actor->m_fAlpha = 0.0f;
+}
+void TScene::FadeIn(AActor* actor)
+{
+	actor->m_fAlpha += g_fSPF*0.33f;
+	if (actor->m_fAlpha > 1.0f) actor->m_fAlpha = 1.0f;
+}
 TScene::TScene(TSceneManager* pOwnder)
 {
 	m_pOwner = pOwnder;

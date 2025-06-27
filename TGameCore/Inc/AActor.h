@@ -27,6 +27,7 @@ public:
 	float		m_fAngle = 0.0f; // degree
 	bool		m_bDraw = true;
 	TVector2	m_vDirection = { 1,-1 };
+	float		m_fAlpha = 1.0f;
 public:
 	virtual TVector2 GetPosition() {
 		return m_Position;
