@@ -32,7 +32,7 @@ void TScene::SceneChange(int iScene, int iEvent )
 	/*m_pLobbyScene->ReleaseScene();
 	m_pLobbyScene.reset(new TLobbyScene());
 	m_pLobbyScene->InitScene();*/
-	UWorld::m_vCameraPos = { 400.0f, 300.0f };
+	UWorld::m_vCameraPos = { g_rtClient.right * 0.5f, g_rtClient.bottom * 0.5f };
 	int iOutput = m_pOwner->m_pFsm.GetTransition(
 		iScene,
 		iEvent);

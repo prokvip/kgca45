@@ -81,9 +81,12 @@ void   AActor::Transform()
 	}
 	// 카메라 변환(카메라 좌표계 변환)
 	// 카메라 위치가 원점이 되도록 변환하는 작업이다.
-	for (size_t i = 0; i < m_pRenderComponent->m_InitVertexList.size(); ++i)
+	if (m_bCameraTransform)
 	{
-		m_pRenderComponent->m_VertexList[i].p = list[i].p - UWorld::m_vCameraPos;
+		for (size_t i = 0; i < m_pRenderComponent->m_InitVertexList.size(); ++i)
+		{
+			m_pRenderComponent->m_VertexList[i].p = list[i].p - UWorld::m_vCameraPos;
+		}
 	}
 	// 화면(0,0)  ->   -400, -300
 	// 화면(800,0)->   +400, -300
@@ -91,11 +94,13 @@ void   AActor::Transform()
 	// 화면(0,600) ->   -400, +300
 	// 화면(800,600) -> +400, +300
 
-
-	/*for (size_t i = 0; i < m_pRenderComponent->m_VertexList.size(); ++i)
+	if (m_bCameraTransform == false)
 	{
-		m_pRenderComponent->m_VertexList[i].p = list[i].p;
-	}	*/
+		for (size_t i = 0; i < m_pRenderComponent->m_VertexList.size(); ++i)
+		{
+			m_pRenderComponent->m_VertexList[i].p = list[i].p;
+		}
+	}
 	// 이후 쉐이더에서 NDC 변환 및  출력
 }
 void   AActor::UpdatePositionVertexData() 

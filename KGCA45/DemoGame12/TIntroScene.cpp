@@ -45,7 +45,8 @@ void TIntroScene::InitScene()
     std::wstring name = L"Background";
     name += std::to_wstring(0);// 정수가 스크링이 된다.
     m_MapObj = std::make_shared<AActor>(name);
-    if (m_MapObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
+    if (m_MapObj->Create({ 0.0f, 0.0f }, 
+        { (float)g_rtClient.right, (float)g_rtClient.bottom },
         L"../../data/texture/introbg.png",
         L"../../data/shader/DefaultShader.txt"))
     {

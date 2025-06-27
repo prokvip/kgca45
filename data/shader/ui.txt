@@ -1,0 +1,34 @@
+#include "ShaderHeader.txt"
+//--------------------------------------------------------------------------------------
+// Vertex Shader
+//--------------------------------------------------------------------------------------
+VS_OUTPUT VS( VS_INPUT vScreen ) 
+{
+	VS_OUTPUT ret = (VS_OUTPUT)0;	
+	float2 vNDC = ScreenToNDC(vScreen.p);
+	ret.pos		= float4(vNDC.x, vNDC.y, 0.0f, 1.0f);
+	ret.color	= vScreen.c;
+	ret.tex		= vScreen.t;
+    return ret;
+}
+//--------------------------------------------------------------------------------------
+// Pixel Shader
+//--------------------------------------------------------------------------------------
+Texture2D      g_texture		: register(t0);
+Texture2D      g_textureMask	: register(t1);
+SamplerState   g_Sample   : register(s0);
+float4 PS( VS_OUTPUT psInput ) : SV_Target
+{	
+	float4 texColor = g_texture.Sample(g_Sample,psInput.tex);	
+	return texColor*psInput.color;
+}
+//float4 PS( VS_OUTPUT psInput ) : SV_Target
+//{	
+//	float4 texColor = g_texture.Sample(g_Sample,psInput.tex);
+	//if(texColor.a < 0.5f)
+	//{
+	//	discard; // ÇØ´ç ÇÈ¼¿Àº Æó±âµÈ´Ù.
+	//}
+	//clip(texColor.a-0.1f); //x <0.1fÀÌ¸é Æó±âµÈ´Ù.
+//	return texColor*psInput.color;
+//}

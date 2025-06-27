@@ -35,8 +35,8 @@ bool     TDevice::CreateDevice(HWND hWnd)
     DXGI_SWAP_CHAIN_DESC scd;
     ZeroMemory(&scd, sizeof(scd));
     scd.BufferCount = 1;
-    scd.BufferDesc.Width = 800;
-    scd.BufferDesc.Height = 600;
+    scd.BufferDesc.Width = g_rtClient.right;
+    scd.BufferDesc.Height = g_rtClient.bottom;
     scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     scd.BufferDesc.RefreshRate.Numerator = 60;
     scd.BufferDesc.RefreshRate.Denominator = 1;

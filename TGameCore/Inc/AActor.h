@@ -26,6 +26,7 @@ public:
 	TVector2	m_vScale = { 1.0f,1.0f };
 	float		m_fAngle = 0.0f; // degree
 	bool		m_bDraw = true;
+	bool		m_bCameraTransform = true;
 	TVector2	m_vDirection = { 1,-1 };
 	float		m_fAlpha = 1.0f;
 public:

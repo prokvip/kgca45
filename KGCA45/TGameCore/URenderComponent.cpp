@@ -158,8 +158,8 @@ TVector2 URenderComponent::ScreenToNDC(TVector2& p)
 	// 
 	// ndc    x:-1 ~ +1, y=-1 ~ +1
 	TVector2 tRet;
-	tRet.x = p.x / 800.0f;
-	tRet.y = p.y / 600.0f;
+	tRet.x = p.x / g_rtClient.right;
+	tRet.y = p.y / g_rtClient.bottom;
 	tRet.x = tRet.x * 2.0f - 1.0f;
 	tRet.y = (tRet.y * 2.0f - 1.0f) * -1.0f;
 	return tRet;

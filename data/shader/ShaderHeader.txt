@@ -1,3 +1,6 @@
+#define SW 800.0f
+#define SH 600.0f
+
 struct VS_INPUT
 {
 	float2 p   : POS;
@@ -17,8 +20,8 @@ float2 ScreenToNDC(float2 p)
 	// screen x:0 ~ 1,   y=0 ~ 1
 	// ndc    x:-1 ~ +1, y=-1 ~ +1	
 	float2 vNDC;
-	vNDC.x = p.x / 800.0f;
-	vNDC.y = p.y / 600.0f;
+	vNDC.x = p.x / SW;
+	vNDC.y = p.y / SH;
 	// ndc    x:-1 ~ +1, y= 1 ~ -1
 	vNDC.x = vNDC.x * 2.0f - 1.0f;
 	vNDC.y = (vNDC.y * 2.0f - 1.0f) * -1.0f;
@@ -34,7 +37,7 @@ float2 CameraToNDC(float2 p)
 	
 	float2 vNDC;
 	// ndc    x:-1 ~ +1,   y= 1 ~ -1
-	vNDC.x = p.x / 400.0f;	
-	vNDC.y = (p.y / 300.0f)* -1.0f;	
+	vNDC.x = p.x / ( SW*0.5f);	
+	vNDC.y = (p.y / (SH*0.5f))* -1.0f;	
 	return vNDC;
 }

@@ -1,6 +1,7 @@
 #include "TWindow.h"
 TWindow* g_pWindow = nullptr;
 HWND   g_hWnd;
+RECT   g_rtClient;
 void TestMessageBox()
 {
     int iRet = MessageBox(NULL, L"처음 시작하는 윈도우",
@@ -105,10 +106,13 @@ ATOM TWindow::MyRegisterClass()
 //   용도: 인스턴스 핸들을 저장하고 주 창을 만듭니다.
 BOOL TWindow::InitInstance()
 {
+    RECT rt = { 0,0, 800, 600 };
+    AdjustWindowRect(&rt, 
+        WS_OVERLAPPEDWINDOW, FALSE);
     HWND hWnd = CreateWindowW(
         m_szClassName.c_str(), L"DemoGame Title",
         WS_OVERLAPPEDWINDOW,
-        0, 0, 800, 600, 
+        0, 0, rt.right-rt.left, rt.bottom-rt.top,
         nullptr, nullptr, m_hInstance, nullptr);
 
     if (!hWnd)
@@ -116,6 +120,8 @@ BOOL TWindow::InitInstance()
         return FALSE;
     }
     g_hWnd = m_hWnd = hWnd;
+    ::GetClientRect(m_hWnd, &m_rtClient);
+    g_rtClient = m_rtClient;
     ShowWindow(m_hWnd, SW_SHOW);
     UpdateWindow(m_hWnd);
 

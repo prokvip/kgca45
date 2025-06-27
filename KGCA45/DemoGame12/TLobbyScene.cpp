@@ -68,7 +68,8 @@ void TLobbyScene::InitScene()
     std::wstring name = L"Background";
     name += std::to_wstring(0);// 정수가 스크링이 된다.
     m_MapObj = std::make_shared<AActor>(name);
-    if (m_MapObj->Create({ 0.0f, 0.0f }, { 800.0f,600.0f },
+    if (m_MapObj->Create({ 0.0f, 0.0f }, 
+        { (float)g_rtClient.right, (float)g_rtClient.bottom },
         L"../../data/texture/lobbybg.png",
         L"../../data/shader/DefaultShader.txt"))
     {
@@ -79,7 +80,8 @@ void TLobbyScene::InitScene()
     std::wstring namebtn = L"StartBtn";
     namebtn += std::to_wstring(0);// 정수가 스크링이 된다.
     m_StartBtn = std::make_shared<TButton>(namebtn);
-    auto pos = TVector2(400.0f - 334.0f * 0.5f, 300.0f - 41.0f);
+    auto pos = TVector2((g_rtClient.right * 0.5f) - 334.0f * 0.5f,
+                        (g_rtClient.bottom * 0.5f) - 41.0f);
     if (m_StartBtn->Create(pos, { 334.0f,82.0f },
         L"../../data/ui/main_start_nor.png",
         L"../../data/shader/DefaultShader.txt"))
@@ -89,8 +91,6 @@ void TLobbyScene::InitScene()
         m_StartBtn->m_pInitPos = pos;
         m_StartBtn->m_pInitSize = m_StartBtn->GetRect().GetSize();
     }
-
-    UWorld::m_vCameraPos = { 400.0f, 300.0f };
 }
 void TLobbyScene::Tick()
 {

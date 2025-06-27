@@ -5,6 +5,7 @@ class TWindow
 	bool			m_bActive = false;
 	HINSTANCE		m_hInstance;
 	HWND			m_hWnd;
+	RECT			m_rtClient;
 	std::wstring	m_szClassName= L"KGCAWindow";
 public:
 	HWND    GetHwnd() { return m_hWnd; }

@@ -99,6 +99,9 @@
     <Text Include="..\..\data\shader\ShaderHeader.txt">
       <Filter>shader</Filter>
     </Text>
+    <Text Include="..\..\data\shader\ui.txt">
+      <Filter>shader</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="npc">

@@ -177,6 +177,7 @@
     <Text Include="..\..\data\shader\Map.txt" />
     <Text Include="..\..\data\shader\Player.txt" />
     <Text Include="..\..\data\shader\ShaderHeader.txt" />
+    <Text Include="..\..\data\shader\ui.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

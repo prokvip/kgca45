@@ -59,18 +59,20 @@ void TGameScene::InitScene()
     m_TimerObj = std::make_shared<ATimerEffect>(L"GameTimer");
     if (m_TimerObj->Create({ 370.0f, 0.0f }, { 50.0f,50.0f },
         L"../../data/ui/0.png",
-        L"../../data/shader/DefaultShader.txt"))
+        L"../../data/shader/ui.txt"))
     {
         auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
         m_TimerObj->SetSprite(sprite);
+        m_TimerObj->m_bCameraTransform = false;
     }
     m_NpcKillObj = std::make_shared<ATimerEffect>(L"NpcKill");
     if (m_NpcKillObj->Create({ 700.0f, 0.0f }, { 50.0f,50.0f },
         L"../../data/ui/0.png",
-        L"../../data/shader/DefaultShader.txt"))
+        L"../../data/shader/ui.txt"))
     {
         auto sprite = TEngine::gSpriteManager.GetAsset(L"DefalultNumber");
         m_NpcKillObj->SetSprite(sprite);
+        m_NpcKillObj->m_bCameraTransform = false;
     }
 
     m_EffectObj = std::make_shared<AActor>(L"GameEffect");
@@ -78,6 +80,7 @@ void TGameScene::InitScene()
         L"../../data/effect/frgg.DDS",//get_item_03.dds",
         L"../../data/shader/DualSourceBlend.txt"))
     {
+        //m_EffectObj->m_bCameraTransform = false;
     }
 
     for (int i = 0; i < g_iNumNpc; i++)
@@ -87,8 +90,8 @@ void TGameScene::InitScene()
         auto npc = std::make_shared<ANpc>(name);    
         npc->m_pMgr = &m_NpcManager;
         npc->m_iPatternType = 0;
-        float x = randstep(0.0f, 800.0f);
-        float y = randstep(0.0f, 600.0f);
+        float x = randstep(0.0f, (float)g_rtClient.right);
+        float y = randstep(0.0f, (float)g_rtClient.bottom);
         npc->m_vDirection.x = randstep(-1.0f, +1.0f);
         npc->m_vDirection.y = randstep(-1.0f, +1.0f);
         if (npc->Create({ 400.0f, 40.0f }, { 68.0f, 80.0f },
@@ -109,8 +112,8 @@ void TGameScene::InitScene()
         auto npc = std::make_shared<ANpc>(name);
         npc->m_pMgr = &m_NpcManager;
         npc->m_iPatternType = 1;
-        float x = randstep(0.0f, 800.0f);
-        float y = randstep(0.0f, 600.0f);
+        float x = randstep(0.0f, (float)g_rtClient.right);
+        float y = randstep(0.0f, (float)g_rtClient.bottom);
         npc->m_vDirection.x = randstep(-1.0f, +1.0f);
         npc->m_vDirection.y = randstep(-1.0f, +1.0f);
         if (npc->Create({ x, 40 }, { 44.0f, 77.0f },
@@ -131,8 +134,8 @@ void TGameScene::InitScene()
         auto npc = std::make_shared<ANpc>(name);
         npc->m_pMgr = &m_NpcManager;
         npc->m_iPatternType = 2;
-        float x = randstep(0.0f, 800.0f);
-        float y = randstep(0.0f, 600.0f);
+        float x = randstep(0.0f, (float)g_rtClient.right);
+        float y = randstep(0.0f, (float)g_rtClient.bottom);
         npc->m_vDirection.x = randstep(-1.0f, +1.0f);
         npc->m_vDirection.y = randstep(-1.0f, +1.0f);
         if (npc->Create({ x, 40 }, { 37.0f, 37.0f },
@@ -163,7 +166,8 @@ void TGameScene::InitScene()
         m_Player->UpdateUVVertexData(p, s);
     }
     m_World->m_pPlayer = m_Player;
-    UWorld::m_vCameraPos = { 400.0f, 300.0f };
+    UWorld::m_vCameraPos = { g_rtClient.right * 0.5f, 
+                             g_rtClient.bottom * 0.5f };
 }
 
 void TGameScene::Tick()

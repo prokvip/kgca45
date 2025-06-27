@@ -7,7 +7,7 @@ TVector2		UWorld::m_vCameraPos = { 0,0, };
 std::shared_ptr<APlayerCharacter> UWorld::m_pPlayer = nullptr;
 void	UWorld::Init()
 {	
-	m_vCameraPos = { 400.0f, 300.0f };
+	m_vCameraPos = { (float)g_rtClient.right, (float)g_rtClient.bottom };
 	for (auto& data : TEngine::gSpriteManager.m_AssetMap)
 	{
 		auto sprite = data.second.get();	
